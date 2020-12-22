@@ -1,0 +1,13 @@
+{
+  "region": "us-east-1",
+  "privateZone": false,
+  "domain": "sggplayoffs.com",
+  "subdomains": [
+    {
+      "domain": "www.sggplayoffs.com",
+      "distributionId": "EPCFBQ7U800N",
+      "url": "https://d133gpoynuo9t8.cloudfront.net",
+      "type": "awsCloudFront"
+    }
+  ]
+}

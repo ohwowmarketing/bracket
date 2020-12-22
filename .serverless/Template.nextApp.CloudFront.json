@@ -1,0 +1,77 @@
+{
+  "id": "EPCFBQ7U800N",
+  "arn": "arn:aws:cloudfront::916715046787:distribution/EPCFBQ7U800N",
+  "url": "https://d133gpoynuo9t8.cloudfront.net",
+  "region": "us-east-1",
+  "enabled": true,
+  "comment": "",
+  "priceClass": "PriceClass_All",
+  "origins": [
+    {
+      "url": "http://7vgh3t8-o74awmc.s3.us-east-1.amazonaws.com",
+      "private": true,
+      "pathPatterns": {
+        "_next/static/*": {
+          "minTTL": 0,
+          "defaultTTL": 86400,
+          "maxTTL": 31536000,
+          "forward": {
+            "headers": "none",
+            "cookies": "none",
+            "queryString": false
+          }
+        },
+        "static/*": {
+          "minTTL": 0,
+          "defaultTTL": 86400,
+          "maxTTL": 31536000,
+          "forward": {
+            "headers": "none",
+            "cookies": "none",
+            "queryString": false
+          }
+        },
+        "_next/data/*": {
+          "minTTL": 0,
+          "defaultTTL": 0,
+          "maxTTL": 31536000,
+          "allowedHttpMethods": [
+            "HEAD",
+            "GET"
+          ],
+          "lambda@edge": {
+            "origin-response": "arn:aws:lambda:us-east-1:916715046787:function:7vgh3t8-6t2js4r:1",
+            "origin-request": "arn:aws:lambda:us-east-1:916715046787:function:7vgh3t8-6t2js4r:1"
+          }
+        }
+      }
+    }
+  ],
+  "errorPages": [],
+  "defaults": {
+    "minTTL": 0,
+    "defaultTTL": 0,
+    "maxTTL": 31536000,
+    "forward": {
+      "cookies": "all",
+      "queryString": true,
+      "headers": [
+        "Host"
+      ]
+    },
+    "allowedHttpMethods": [
+      "HEAD",
+      "DELETE",
+      "POST",
+      "GET",
+      "OPTIONS",
+      "PUT",
+      "PATCH"
+    ],
+    "lambda@edge": {
+      "origin-request": "arn:aws:lambda:us-east-1:916715046787:function:7vgh3t8-6t2js4r:1",
+      "origin-response": "arn:aws:lambda:us-east-1:916715046787:function:7vgh3t8-6t2js4r:1"
+    },
+    "compress": true
+  }
+}
