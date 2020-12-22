@@ -1,2 +1,11 @@
-myNextApp:
-  component: "@sls-next/serverless-component@1.17.0"
+nextApp:
+  component: "@sls-next/serverless-component@1.18.0"
+  inputs:
+    cloudfront:
+      defaults:
+        forward:
+          headers: [Host]
+    domain: ["sggplayoffs.com"]
+    domainType: "both"
+    domainRedirects:
+      www.sggplayoffs.com: https://sggplayoffs.com
