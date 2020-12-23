@@ -1,6 +1,10 @@
 nextApp:
-  component: "@sls-next/serverless-component@1.18.0"
+  component: "@sls-next/serverless-component@1.19.0-alpha.0"
   inputs:
+    env:
+      MAILCHIMP_API_KEY: ${env.MAILCHIMP_API_KEY}
+      MAILCHIMP_SERVER_PREFIX: ${env.MAILCHIMP_SERVER_PREFIX}
+      MAILCHIMP_AUDIENCE_ID: ${env.MAILCHIMP_AUDIENCE_ID}
     cloudfront:
       defaults:
         forward:

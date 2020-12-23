@@ -75,7 +75,9 @@ const AppBar = () => {
         </IconButton>
         <H6 color='primary' className={classes.title} noWrap>
           <Link href='/'>
-            <img src='/logo.png' width={225} height={40} />
+            <a>
+              <img src='/logo.png' width={225} height={40} alt='Sports Gambling Guide Logo' />
+            </a>
           </Link>
         </H6>
         <nav>
