@@ -42,7 +42,7 @@ const StateForm = () => {
     if (!loading && user && values.state !== '' && confirmed) {
       await Auth.updateUserAttributes(user, { 'custom:state': values.state })
       await axios.post(endpoint, {
-        email: user.email,
+        email: user.attributes.email,
         state: values.state
       })
       // Save user state and send MailChimp API
