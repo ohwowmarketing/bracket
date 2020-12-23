@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Image from 'next/image'
 import { Auth } from 'aws-amplify'
 import { makeStyles } from '@material-ui/core/styles'
 import MuiAppBar from '@material-ui/core/AppBar'
@@ -76,7 +75,7 @@ const AppBar = () => {
         </IconButton>
         <H6 color='primary' className={classes.title} noWrap>
           <Link href='/'>
-            <Image src='/logo.png' width={225} height={40} />
+            <img src='/logo.png' width={225} height={40} />
           </Link>
         </H6>
         <nav>
@@ -95,7 +94,7 @@ const AppBar = () => {
                   <ListItem button key='home' component={Link} href='/'>
                     <>
                       <ListItemIcon>
-                        <Image src='/logo-alt.png' width={169} height={30} />
+                        <img src='/logo-alt.png' width={169} height={30} />
                       </ListItemIcon>
                     </>
                   </ListItem>

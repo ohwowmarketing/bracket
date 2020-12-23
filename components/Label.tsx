@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -10,10 +9,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '0.8em'
   },
   imgContainer: {
-    position: 'relative',
     width: '24px',
     height: '24px',
     marginRight: theme.spacing(1)
+  },
+  img: {
+    width: '24px',
+    height: '24px',
+    objectFit: 'fill'
   }
 }))
 
@@ -27,7 +30,7 @@ const Label = ({ name, logo }: TeamProps) => {
   return (
     <div className={classes.row}>
       <div className={classes.imgContainer}>
-        <Image alt={name} src={logo} layout='fill' objectFit='contain' />
+        <img alt={name} src={logo} className={classes.img} />
       </div>
       {name}
     </div>
