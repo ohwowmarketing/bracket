@@ -36,7 +36,7 @@ const Hero = () => {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet volutpat ligula.
       </H5>
       <Box mt={2}>
-        <Contained component={Link} href='/' color='primary' align='center'>
+        <Contained component={Link} href='/auth/signup' color='primary' align='center'>
           Create your bracket!
         </Contained>
       </Box>

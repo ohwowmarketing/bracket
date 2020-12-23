@@ -5,8 +5,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import MuiAppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
-// import Menu from '@material-ui/core/Menu'
-// import MenuItem from '@material-ui/core/MenuItem'
 import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
 import List from '@material-ui/core/List'
@@ -15,11 +13,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import Icon from '@material-ui/core/Icon'
-// import MuiLink from '@material-ui/core/Link'
+import MuiLink from '@material-ui/core/Link'
 import { H6 } from 'mui/Typography'
 import Link from './Link'
-// import SignIn from './SignIn'
-// import useUser from 'hooks/useUser'
+import useUser from 'hooks/useUser'
 
 const drawerWidth = 240
 
@@ -60,7 +57,7 @@ const useStyles = makeStyles(theme => ({
 
 const AppBar = () => {
   const classes = useStyles()
-  // const { loading, user } = useUser()
+  const { loading, user } = useUser()
   const [mobileOpen, setMobileOpen] = useState(false)
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -102,14 +99,14 @@ const AppBar = () => {
                       </ListItemIcon>
                     </>
                   </ListItem>
-                  {/* {!loading && user ? (
+                  {!loading && user ? (
                     <>
                       <ListItem button key='entry' component={Link} href='/entry'>
                         <>
                           <ListItemIcon>
                             <Icon className='fas fa-ticket-alt fa-xs' color='primary' />
                           </ListItemIcon>
-                          <ListItemText primary='Entry' />
+                          <ListItemText primary='Your Entry' />
                         </>
                       </ListItem>
                       <ListItem button key='signOut' onClick={() => Auth.signOut()}>
@@ -119,26 +116,26 @@ const AppBar = () => {
                         <ListItemText primary='Sign Out' />
                       </ListItem>
                     </>
-                  ) : ( */}
-                  <ListItem button key='profile' component={Link} href='/'>
-                    <>
-                      <ListItemIcon>
-                        <Icon className='fas fa-user-lock' color='primary' />
-                      </ListItemIcon>
-                      <ListItemText primary='Sign In' />
-                    </>
-                  </ListItem>
-                  {/* )}   */}
+                  ) : (
+                    <ListItem button key='profile' component={Link} href='/auth/signin'>
+                      <>
+                        <ListItemIcon>
+                          <Icon className='fas fa-user-lock' color='primary' />
+                        </ListItemIcon>
+                        <ListItemText primary='Sign In' />
+                      </>
+                    </ListItem>
+                  )}
                 </>
               </List>
             </Drawer>
           </Hidden>
           <Hidden xsDown implementation='css'>
             <>
-              {/* {!loading && user ? (
+              {!loading && user ? (
                 <>
                   <Link variant='button' href='/entry' className={classes.link}>
-                    Entry
+                    Your Entry
                   </Link>
                   <Link
                     variant='button'
@@ -148,13 +145,13 @@ const AppBar = () => {
                     Sign Out
                   </Link>
                 </>
-              ) : ( */}
-              <>
-                <Link variant='button' href='/' className={classes.link}>
-                  Sign In
-                </Link>
-              </>
-              {/* )} */}
+              ) : (
+                <>
+                  <Link variant='button' href='/auth/signin' className={classes.link}>
+                    Sign In
+                  </Link>
+                </>
+              )}
             </>
           </Hidden>
         </nav>

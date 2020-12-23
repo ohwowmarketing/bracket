@@ -11,7 +11,7 @@ import Footer from 'components/Footer'
 import AmplifyTheme from 'components/AmplifyTheme'
 import '@aws-amplify/ui/dist/style.css'
 import Amplify from 'aws-amplify'
-import config from '../aws-exports'
+import config from 'src/aws-exports'
 Amplify.configure({
   ...config,
   ssr: true

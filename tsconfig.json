@@ -19,7 +19,7 @@
       "@hooks/*": ["hooks/*"],
       "@lib/*": ["lib/*"],
       "@mui/*": ["mui/*"],
-      "models": ["models"]
+      "@src/*": ["src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
