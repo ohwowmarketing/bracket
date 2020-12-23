@@ -49,7 +49,6 @@ const Bracket = () => {
     const entryData = {
       ...values,
       username: user.username,
-      owner: user.username,
       tieBreaker: parseInt(values.tieBreaker)
     }
     await DataStore.save(new Entry(entryData))
