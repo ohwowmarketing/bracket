@@ -12,7 +12,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import Icon from '@material-ui/core/Icon'
-// import MuiLink from '@material-ui/core/Link'
+import MuiLink from '@material-ui/core/Link'
 import { H6 } from 'mui/Typography'
 import Link from './Link'
 import useUser from 'hooks/useUser'
@@ -74,9 +74,9 @@ const AppBar = () => {
           <Icon className='fas fa-bars' />
         </IconButton>
         <H6 color='primary' className={classes.title} noWrap>
-          <Link href='/'>
+          <MuiLink href='https://sportsgamblingguides.com'>
             <img src='/logo.png' width={225} height={40} alt='Sports Gambling Guide Logo' />
-          </Link>
+          </MuiLink>
         </H6>
         <nav>
           <Hidden smUp implementation='css'>

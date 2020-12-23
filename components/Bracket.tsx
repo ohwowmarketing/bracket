@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import { API, graphqlOperation } from 'aws-amplify'
+import { API } from 'aws-amplify'
+import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -68,14 +69,14 @@ const Bracket = () => {
       await API.graphql({
         query: updateEntry,
         variables: { input: updateData },
-        authMode: 'AMAZON_COGNITO_USER_POOLS'
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
       })
       setWaiting(false)
     } else {
-      const { data } = await API.graphql({
+      const { data }: any = await API.graphql({
         query: createEntry,
         variables: { input: entryData },
-        authMode: 'AMAZON_COGNITO_USER_POOLS'
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
       })
       setEntryId(data.createEntry.id)
       setWaiting(false)
@@ -92,7 +93,7 @@ const Bracket = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const { data } = await API.graphql({
+      const { data }: any = await API.graphql({
         query: listEntrys
       })
       const userEntry = data.listEntrys.items.find(entry => entry.username === user.username)
