@@ -67,7 +67,7 @@ const StateForm = () => {
             />
             <Checkbox
               name='confirm'
-              label='Do you agree to abide by all applicable state laws?'
+              label='This contest is open to US Residents as applicable by your state. No purchase necessary.'
               onChange={handleConfirm}
               value={confirmed}
             />

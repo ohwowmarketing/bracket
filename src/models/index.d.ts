@@ -35,8 +35,6 @@ export enum Team {
   WAS = "WAS"
 }
 
-
-
 export declare class Result {
   readonly id: string;
   readonly superBowl?: Team | keyof typeof Team;
@@ -74,6 +72,7 @@ export declare class Entry {
   readonly nfcWildCard1?: Team | keyof typeof Team;
   readonly nfcWildCard2?: Team | keyof typeof Team;
   readonly nfcWildCard3?: Team | keyof typeof Team;
+  readonly owner?: string;
   constructor(init: ModelInit<Entry>);
   static copyOf(source: Entry, mutator: (draft: MutableModel<Entry>) => MutableModel<Entry> | void): Entry;
 }

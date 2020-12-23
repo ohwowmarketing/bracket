@@ -41,6 +41,9 @@ interface GameProps {
 const Game = ({ name, label, home, away, value = '', onChange }: GameProps) => {
   const classes = useStyles()
   const [pick, setPick] = React.useState<string>(value)
+  React.useEffect(() => {
+    setPick(value)
+  }, [value])
   const homeTeam: TeamParams = home ? teamById(home) : null
   const awayTeam: TeamParams = away ? teamById(away) : null
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {

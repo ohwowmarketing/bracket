@@ -33,7 +33,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <title>Playoff Content | Sports Gambling Guides</title>
+        <title>Playoff Contest | Sports Gambling Guides</title>
         <link rel='icon' href='/favicon.ico' />
         <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width' />
         <meta name='description' content='Create your NFL playoff bracket.' />

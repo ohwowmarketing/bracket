@@ -19,7 +19,11 @@ const useForm = (callback: () => void, initialFormFields: FormFields) => {
       [event.target.name]: event.target.value
     }))
   }
-  return { handleChange, handleSubmit, values }
+  const handleUpdateFields = (fields: FormFields) => {
+    console.log(fields)
+    setValues(fields)
+  }
+  return { handleChange, handleSubmit, values, handleUpdateFields }
 }
 
 export default useForm

@@ -1,15 +1,20 @@
+import * as React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
+import { API, graphqlOperation } from 'aws-amplify'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import useForm from '@hooks/useForm'
 import { Contained } from '@mui/Button'
 import { XS } from '@mui/Layout'
 import Game from '@components/Game'
 import { MiniHero } from '@components/Hero'
 import { seeds } from '@lib/teams'
-import { DataStore } from '@aws-amplify/datastore'
-import { Entry } from 'src/models'
+// import { DataStore } from '@aws-amplify/datastore'
+// import { Entry } from 'src/models'
 import useUser from 'hooks/useUser'
+import { createEntry, updateEntry } from 'src/graphql/mutations'
+import { listEntrys } from 'src/graphql/queries'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -27,7 +32,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Bracket = () => {
   const classes = useStyles()
-  const { user } = useUser()
+  const { user, loading } = useUser()
+  const [entryId, setEntryId] = React.useState<string | null>(null)
+  const [waiting, setWaiting] = React.useState<boolean>(false)
+
   const initialFormFields = {
     tieBreaker: 0,
     superBowl: null,
@@ -44,15 +52,73 @@ const Bracket = () => {
     nfcWildCard2: null,
     nfcWildCard3: null
   }
-
-  const { values, handleChange, handleSubmit } = useForm(async () => {
+  const { values, handleChange, handleSubmit, handleUpdateFields } = useForm(async () => {
+    setWaiting(true)
     const entryData = {
       ...values,
       username: user.username,
       tieBreaker: parseInt(values.tieBreaker)
     }
-    await DataStore.save(new Entry(entryData))
+    // console.log(entryData)
+    if (entryId !== '') {
+      const updateData = {
+        ...entryData,
+        id: entryId
+      }
+      await API.graphql({
+        query: updateEntry,
+        variables: { input: updateData },
+        authMode: 'AMAZON_COGNITO_USER_POOLS'
+      })
+      setWaiting(false)
+    } else {
+      const { data } = await API.graphql({
+        query: createEntry,
+        variables: { input: entryData },
+        authMode: 'AMAZON_COGNITO_USER_POOLS'
+      })
+      setEntryId(data.createEntry.id)
+      setWaiting(false)
+    }
+
+    // await DataStore.save(
+    //   new Entry({
+    //     tieBreaker: 0,
+    //     username: 'test6'
+    //   })
+    // )
+    // await DataStore.save(new Entry(entryData))
   }, initialFormFields)
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await API.graphql({
+        query: listEntrys
+      })
+      const userEntry = data.listEntrys.items.find(entry => entry.username === user.username)
+      if (userEntry) {
+        const validFields = Object.keys(initialFormFields)
+        let updatedValues = {}
+        for (let key in userEntry) {
+          if (userEntry.hasOwnProperty(key)) {
+            if (key === 'id') {
+              setEntryId(key)
+            } else if (validFields.includes(key)) {
+              updatedValues[key] = userEntry[key]
+            }
+          }
+        }
+        handleUpdateFields(updatedValues)
+        setEntryId(userEntry.id)
+      } else {
+        setEntryId('')
+      }
+    }
+    if (!loading && user) {
+      fetchData()
+    }
+  }, [loading, user])
+
   return (
     <>
       <MiniHero />
@@ -199,7 +265,13 @@ const Bracket = () => {
 
         <XS align='center'>
           <Contained type='submit' color='primary'>
-            Submit Entry
+            <>
+              {waiting ? (
+                <CircularProgress color='inherit' size={20} />
+              ) : (
+                <>{entryId ? 'Update Entry' : 'Submit Entry'}</>
+              )}
+            </>
           </Contained>
         </XS>
       </form>
