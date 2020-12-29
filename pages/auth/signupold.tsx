@@ -49,9 +49,13 @@ const SignUpPage = () => {
   }, [])
 
   const handleAuthStateChange = stateChange => {
-    console.log('handleAuthStateChange', stateChange)
+    console.log('handleAuthStateChange:', stateChange)
     // 1. signUp 2. confirmSignUp 3. signedUp
     setAuthState(stateChange)
+  }
+
+  const handleAuthEvent = evt => {
+    console.log('handleAuthEvent:', evt)
   }
 
   if (loading) {
@@ -81,7 +85,7 @@ const SignUpPage = () => {
       onStateChange={handleAuthStateChange}
       authState='signUp'>
       <SignIn />
-      <SignUp signUpConfig={{ hiddenDefaults: ['phone_number'] }} />
+      <SignUp signUpConfig={{ hiddenDefaults: ['phone_number'] }} onAuthEvent={handleAuthEvent} />
       <ConfirmSignUp />
     </Authenticator>
   )

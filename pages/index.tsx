@@ -1,5 +1,7 @@
 import Home from '@components/Hero'
 
-const Index = () => <Home />
+const Index = () => {
+  return <Home />
+}
 
 export default Index

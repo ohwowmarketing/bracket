@@ -36,9 +36,10 @@ interface GameProps {
   away: string
   value: string
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
+  children?: any
 }
 
-const Game = ({ name, label, home, away, value = '', onChange }: GameProps) => {
+const Game = ({ name, label, home, away, value = '', onChange, children }: GameProps) => {
   const classes = useStyles()
   const [pick, setPick] = React.useState<string>(value)
   React.useEffect(() => {
@@ -55,33 +56,36 @@ const Game = ({ name, label, home, away, value = '', onChange }: GameProps) => {
 
   return (
     <Paper className={classes.paper}>
-      <FormControl component='fieldset' className={classes.formControl}>
-        <>
-          <FormLabel component='legend' className={classes.legend}>
-            {label}
-          </FormLabel>
-          <RadioGroup aria-label={name} name={name} value={pick} onChange={handleChange}>
-            {homeTeam ? (
-              <FormControlLabel
-                value={homeTeam.id}
-                control={<Radio />}
-                label={<Label name={homeTeam.name} logo={homeTeam.logo} />}
-              />
-            ) : (
-              <FormControlLabel disabled control={<Radio />} label='TBD' />
-            )}
-            {awayTeam ? (
-              <FormControlLabel
-                value={awayTeam.id}
-                control={<Radio />}
-                label={<Label name={awayTeam.name} logo={awayTeam.logo} />}
-              />
-            ) : (
-              <FormControlLabel disabled control={<Radio />} label='TBD' />
-            )}
-          </RadioGroup>
-        </>
-      </FormControl>
+      <>
+        <FormControl component='fieldset' className={classes.formControl}>
+          <>
+            <FormLabel component='legend' className={classes.legend}>
+              {label}
+            </FormLabel>
+            <RadioGroup aria-label={name} name={name} value={pick} onChange={handleChange}>
+              {homeTeam ? (
+                <FormControlLabel
+                  value={homeTeam.id}
+                  control={<Radio />}
+                  label={<Label name={homeTeam.name} logo={homeTeam.logo} />}
+                />
+              ) : (
+                <FormControlLabel disabled control={<Radio />} label='TBD' />
+              )}
+              {awayTeam ? (
+                <FormControlLabel
+                  value={awayTeam.id}
+                  control={<Radio />}
+                  label={<Label name={awayTeam.name} logo={awayTeam.logo} />}
+                />
+              ) : (
+                <FormControlLabel disabled control={<Radio />} label='TBD' />
+              )}
+            </RadioGroup>
+          </>
+        </FormControl>
+        {children && children}
+      </>
     </Paper>
   )
 }

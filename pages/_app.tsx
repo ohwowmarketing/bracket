@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 import theme from 'mui/theme'
+// import Background from 'components/Background'
 import AppBar from 'components/AppBar'
 import Footer from 'components/Footer'
 import AmplifyTheme from 'components/AmplifyTheme'
@@ -40,6 +41,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        {/* <Background> */}
         <AppBar />
         <div className={classes.offset} />
         <Container>
@@ -50,6 +52,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           </Box>
         </Container>
         <Footer />
+        {/* </Background> */}
       </ThemeProvider>
     </>
   )

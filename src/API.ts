@@ -1,7 +1,75 @@
 /* tslint:disable */
+/* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateResultInput = {
+export type CreateLeaderboardInput = {
+  id?: string | null,
+  username?: string | null,
+  points?: string | null,
+  _version?: number | null,
+};
+
+export type ModelLeaderboardConditionInput = {
+  username?: ModelStringInput | null,
+  points?: ModelStringInput | null,
+  and?: Array< ModelLeaderboardConditionInput | null > | null,
+  or?: Array< ModelLeaderboardConditionInput | null > | null,
+  not?: ModelLeaderboardConditionInput | null,
+};
+
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
+
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
+export type UpdateLeaderboardInput = {
+  id: string,
+  username?: string | null,
+  points?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteLeaderboardInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
+export type CreateOfficialResultInput = {
   id?: string | null,
   superBowl?: Team | null,
   tieBreaker?: number | null,
@@ -56,7 +124,7 @@ export enum Team {
 }
 
 
-export type ModelResultConditionInput = {
+export type ModelOfficialResultConditionInput = {
   superBowl?: ModelTeamInput | null,
   tieBreaker?: ModelIntInput | null,
   afcConference?: ModelTeamInput | null,
@@ -71,9 +139,9 @@ export type ModelResultConditionInput = {
   nfcWildCard1?: ModelTeamInput | null,
   nfcWildCard2?: ModelTeamInput | null,
   nfcWildCard3?: ModelTeamInput | null,
-  and?: Array< ModelResultConditionInput | null > | null,
-  or?: Array< ModelResultConditionInput | null > | null,
-  not?: ModelResultConditionInput | null,
+  and?: Array< ModelOfficialResultConditionInput | null > | null,
+  or?: Array< ModelOfficialResultConditionInput | null > | null,
+  not?: ModelOfficialResultConditionInput | null,
 };
 
 export type ModelTeamInput = {
@@ -93,21 +161,7 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
-
-export type UpdateResultInput = {
+export type UpdateOfficialResultInput = {
   id: string,
   superBowl?: Team | null,
   tieBreaker?: number | null,
@@ -126,7 +180,7 @@ export type UpdateResultInput = {
   _version?: number | null,
 };
 
-export type DeleteResultInput = {
+export type DeleteOfficialResultInput = {
   id?: string | null,
   _version?: number | null,
 };
@@ -173,32 +227,6 @@ export type ModelEntryConditionInput = {
   not?: ModelEntryConditionInput | null,
 };
 
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
 export type UpdateEntryInput = {
   id: string,
   username?: string | null,
@@ -225,25 +253,13 @@ export type DeleteEntryInput = {
   _version?: number | null,
 };
 
-export type ModelResultFilterInput = {
+export type ModelLeaderboardFilterInput = {
   id?: ModelIDInput | null,
-  superBowl?: ModelTeamInput | null,
-  tieBreaker?: ModelIntInput | null,
-  afcConference?: ModelTeamInput | null,
-  nfcConference?: ModelTeamInput | null,
-  afcDivisional1?: ModelTeamInput | null,
-  afcDivisional2?: ModelTeamInput | null,
-  nfcDivisional1?: ModelTeamInput | null,
-  nfcDivisional2?: ModelTeamInput | null,
-  afcWildCard1?: ModelTeamInput | null,
-  afcWildCard2?: ModelTeamInput | null,
-  afcWildCard3?: ModelTeamInput | null,
-  nfcWildCard1?: ModelTeamInput | null,
-  nfcWildCard2?: ModelTeamInput | null,
-  nfcWildCard3?: ModelTeamInput | null,
-  and?: Array< ModelResultFilterInput | null > | null,
-  or?: Array< ModelResultFilterInput | null > | null,
-  not?: ModelResultFilterInput | null,
+  username?: ModelStringInput | null,
+  points?: ModelStringInput | null,
+  and?: Array< ModelLeaderboardFilterInput | null > | null,
+  or?: Array< ModelLeaderboardFilterInput | null > | null,
+  not?: ModelLeaderboardFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -260,6 +276,27 @@ export type ModelIDInput = {
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
   size?: ModelSizeInput | null,
+};
+
+export type ModelOfficialResultFilterInput = {
+  id?: ModelIDInput | null,
+  superBowl?: ModelTeamInput | null,
+  tieBreaker?: ModelIntInput | null,
+  afcConference?: ModelTeamInput | null,
+  nfcConference?: ModelTeamInput | null,
+  afcDivisional1?: ModelTeamInput | null,
+  afcDivisional2?: ModelTeamInput | null,
+  nfcDivisional1?: ModelTeamInput | null,
+  nfcDivisional2?: ModelTeamInput | null,
+  afcWildCard1?: ModelTeamInput | null,
+  afcWildCard2?: ModelTeamInput | null,
+  afcWildCard3?: ModelTeamInput | null,
+  nfcWildCard1?: ModelTeamInput | null,
+  nfcWildCard2?: ModelTeamInput | null,
+  nfcWildCard3?: ModelTeamInput | null,
+  and?: Array< ModelOfficialResultFilterInput | null > | null,
+  or?: Array< ModelOfficialResultFilterInput | null > | null,
+  not?: ModelOfficialResultFilterInput | null,
 };
 
 export type ModelEntryFilterInput = {
@@ -285,14 +322,77 @@ export type ModelEntryFilterInput = {
   not?: ModelEntryFilterInput | null,
 };
 
-export type CreateResultMutationVariables = {
-  input: CreateResultInput,
-  condition?: ModelResultConditionInput | null,
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type CreateLeaderboardMutationVariables = {
+  input: CreateLeaderboardInput,
+  condition?: ModelLeaderboardConditionInput | null,
 };
 
-export type CreateResultMutation = {
-  createResult:  {
-    __typename: "Result",
+export type CreateLeaderboardMutation = {
+  createLeaderboard:  {
+    __typename: "Leaderboard",
+    id: string,
+    username: string | null,
+    points: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateLeaderboardMutationVariables = {
+  input: UpdateLeaderboardInput,
+  condition?: ModelLeaderboardConditionInput | null,
+};
+
+export type UpdateLeaderboardMutation = {
+  updateLeaderboard:  {
+    __typename: "Leaderboard",
+    id: string,
+    username: string | null,
+    points: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteLeaderboardMutationVariables = {
+  input: DeleteLeaderboardInput,
+  condition?: ModelLeaderboardConditionInput | null,
+};
+
+export type DeleteLeaderboardMutation = {
+  deleteLeaderboard:  {
+    __typename: "Leaderboard",
+    id: string,
+    username: string | null,
+    points: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateOfficialResultMutationVariables = {
+  input: CreateOfficialResultInput,
+  condition?: ModelOfficialResultConditionInput | null,
+};
+
+export type CreateOfficialResultMutation = {
+  createOfficialResult:  {
+    __typename: "OfficialResult",
     id: string,
     superBowl: Team | null,
     tieBreaker: number | null,
@@ -316,14 +416,14 @@ export type CreateResultMutation = {
   } | null,
 };
 
-export type UpdateResultMutationVariables = {
-  input: UpdateResultInput,
-  condition?: ModelResultConditionInput | null,
+export type UpdateOfficialResultMutationVariables = {
+  input: UpdateOfficialResultInput,
+  condition?: ModelOfficialResultConditionInput | null,
 };
 
-export type UpdateResultMutation = {
-  updateResult:  {
-    __typename: "Result",
+export type UpdateOfficialResultMutation = {
+  updateOfficialResult:  {
+    __typename: "OfficialResult",
     id: string,
     superBowl: Team | null,
     tieBreaker: number | null,
@@ -347,14 +447,14 @@ export type UpdateResultMutation = {
   } | null,
 };
 
-export type DeleteResultMutationVariables = {
-  input: DeleteResultInput,
-  condition?: ModelResultConditionInput | null,
+export type DeleteOfficialResultMutationVariables = {
+  input: DeleteOfficialResultInput,
+  condition?: ModelOfficialResultConditionInput | null,
 };
 
-export type DeleteResultMutation = {
-  deleteResult:  {
-    __typename: "Result",
+export type DeleteOfficialResultMutation = {
+  deleteOfficialResult:  {
+    __typename: "OfficialResult",
     id: string,
     superBowl: Team | null,
     tieBreaker: number | null,
@@ -477,13 +577,82 @@ export type DeleteEntryMutation = {
   } | null,
 };
 
-export type GetResultQueryVariables = {
+export type GetLeaderboardQueryVariables = {
   id: string,
 };
 
-export type GetResultQuery = {
-  getResult:  {
-    __typename: "Result",
+export type GetLeaderboardQuery = {
+  getLeaderboard:  {
+    __typename: "Leaderboard",
+    id: string,
+    username: string | null,
+    points: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListLeaderboardsQueryVariables = {
+  filter?: ModelLeaderboardFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLeaderboardsQuery = {
+  listLeaderboards:  {
+    __typename: "ModelLeaderboardConnection",
+    items:  Array< {
+      __typename: "Leaderboard",
+      id: string,
+      username: string | null,
+      points: string | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncLeaderboardsQueryVariables = {
+  filter?: ModelLeaderboardFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncLeaderboardsQuery = {
+  syncLeaderboards:  {
+    __typename: "ModelLeaderboardConnection",
+    items:  Array< {
+      __typename: "Leaderboard",
+      id: string,
+      username: string | null,
+      points: string | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetOfficialResultQueryVariables = {
+  id: string,
+};
+
+export type GetOfficialResultQuery = {
+  getOfficialResult:  {
+    __typename: "OfficialResult",
     id: string,
     superBowl: Team | null,
     tieBreaker: number | null,
@@ -507,17 +676,17 @@ export type GetResultQuery = {
   } | null,
 };
 
-export type ListResultsQueryVariables = {
-  filter?: ModelResultFilterInput | null,
+export type ListOfficialResultsQueryVariables = {
+  filter?: ModelOfficialResultFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListResultsQuery = {
-  listResults:  {
-    __typename: "ModelResultConnection",
+export type ListOfficialResultsQuery = {
+  listOfficialResults:  {
+    __typename: "ModelOfficialResultConnection",
     items:  Array< {
-      __typename: "Result",
+      __typename: "OfficialResult",
       id: string,
       superBowl: Team | null,
       tieBreaker: number | null,
@@ -544,18 +713,18 @@ export type ListResultsQuery = {
   } | null,
 };
 
-export type SyncResultsQueryVariables = {
-  filter?: ModelResultFilterInput | null,
+export type SyncOfficialResultsQueryVariables = {
+  filter?: ModelOfficialResultFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncResultsQuery = {
-  syncResults:  {
-    __typename: "ModelResultConnection",
+export type SyncOfficialResultsQuery = {
+  syncOfficialResults:  {
+    __typename: "ModelOfficialResultConnection",
     items:  Array< {
-      __typename: "Result",
+      __typename: "OfficialResult",
       id: string,
       superBowl: Team | null,
       tieBreaker: number | null,
@@ -653,6 +822,47 @@ export type ListEntrysQuery = {
   } | null,
 };
 
+export type EntryByUsernameQueryVariables = {
+  username?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelEntryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type EntryByUsernameQuery = {
+  entryByUsername:  {
+    __typename: "ModelEntryConnection",
+    items:  Array< {
+      __typename: "Entry",
+      id: string,
+      username: string,
+      superBowl: Team | null,
+      tieBreaker: number | null,
+      afcConference: Team | null,
+      nfcConference: Team | null,
+      afcDivisional1: Team | null,
+      afcDivisional2: Team | null,
+      nfcDivisional1: Team | null,
+      nfcDivisional2: Team | null,
+      afcWildCard1: Team | null,
+      afcWildCard2: Team | null,
+      afcWildCard3: Team | null,
+      nfcWildCard1: Team | null,
+      nfcWildCard2: Team | null,
+      nfcWildCard3: Team | null,
+      owner: string | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
 export type SyncEntriesQueryVariables = {
   filter?: ModelEntryFilterInput | null,
   limit?: number | null,
@@ -693,9 +903,51 @@ export type SyncEntriesQuery = {
   } | null,
 };
 
-export type OnCreateResultSubscription = {
-  onCreateResult:  {
-    __typename: "Result",
+export type OnCreateLeaderboardSubscription = {
+  onCreateLeaderboard:  {
+    __typename: "Leaderboard",
+    id: string,
+    username: string | null,
+    points: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateLeaderboardSubscription = {
+  onUpdateLeaderboard:  {
+    __typename: "Leaderboard",
+    id: string,
+    username: string | null,
+    points: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteLeaderboardSubscription = {
+  onDeleteLeaderboard:  {
+    __typename: "Leaderboard",
+    id: string,
+    username: string | null,
+    points: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateOfficialResultSubscription = {
+  onCreateOfficialResult:  {
+    __typename: "OfficialResult",
     id: string,
     superBowl: Team | null,
     tieBreaker: number | null,
@@ -719,9 +971,9 @@ export type OnCreateResultSubscription = {
   } | null,
 };
 
-export type OnUpdateResultSubscription = {
-  onUpdateResult:  {
-    __typename: "Result",
+export type OnUpdateOfficialResultSubscription = {
+  onUpdateOfficialResult:  {
+    __typename: "OfficialResult",
     id: string,
     superBowl: Team | null,
     tieBreaker: number | null,
@@ -745,9 +997,9 @@ export type OnUpdateResultSubscription = {
   } | null,
 };
 
-export type OnDeleteResultSubscription = {
-  onDeleteResult:  {
-    __typename: "Result",
+export type OnDeleteOfficialResultSubscription = {
+  onDeleteOfficialResult:  {
+    __typename: "OfficialResult",
     id: string,
     superBowl: Team | null,
     tieBreaker: number | null,

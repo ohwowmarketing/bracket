@@ -35,7 +35,17 @@ export enum Team {
   WAS = "WAS"
 }
 
-export declare class Result {
+
+
+export declare class Leaderboard {
+  readonly id: string;
+  readonly username?: string;
+  readonly points?: string;
+  constructor(init: ModelInit<Leaderboard>);
+  static copyOf(source: Leaderboard, mutator: (draft: MutableModel<Leaderboard>) => MutableModel<Leaderboard> | void): Leaderboard;
+}
+
+export declare class OfficialResult {
   readonly id: string;
   readonly superBowl?: Team | keyof typeof Team;
   readonly tieBreaker?: number;
@@ -51,8 +61,8 @@ export declare class Result {
   readonly nfcWildCard1?: Team | keyof typeof Team;
   readonly nfcWildCard2?: Team | keyof typeof Team;
   readonly nfcWildCard3?: Team | keyof typeof Team;
-  constructor(init: ModelInit<Result>);
-  static copyOf(source: Result, mutator: (draft: MutableModel<Result>) => MutableModel<Result> | void): Result;
+  constructor(init: ModelInit<OfficialResult>);
+  static copyOf(source: OfficialResult, mutator: (draft: MutableModel<OfficialResult>) => MutableModel<OfficialResult> | void): OfficialResult;
 }
 
 export declare class Entry {

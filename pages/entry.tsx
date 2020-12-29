@@ -1,28 +1,84 @@
-import useRouter from 'next/router'
+import { withSSRContext, graphqlOperation } from 'aws-amplify'
 import Bracket from '@components/Bracket'
-import State from '@components/State'
-import useUser from '@hooks/useUser'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { entryByUsername } from 'src/graphql/queries'
+import { SM } from '@mui/Layout'
 
-const Index = () => {
-  const router = useRouter
-  const { loading, user } = useUser()
-
-  if (loading) {
-    return <CircularProgress color='secondary' />
-  }
-  if (user) {
-    if (
-      user.attributes &&
-      user.attributes['custom:state'] &&
-      user.attributes['custom:state'].length === 2
-    ) {
-      return <Bracket />
-    }
-    return <State />
+const Entry = ({ entry }) => {
+  if (entry) {
+    return <Bracket entry={entry} />
   } else {
-    router.push('/auth/signin')
+    return (
+      <SM align='center'>
+        <CircularProgress />
+      </SM>
+    )
   }
 }
 
-export default Index
+export const getServerSideProps = async ({ req, res }) => {
+  const { Auth, API } = withSSRContext({ req })
+  const user = await Auth.currentAuthenticatedUser()
+  if (!user) {
+    res.writeHead(302, { Location: '/auth/signin' })
+    res.end()
+  }
+  if (!user.attributes['custom:state'] || user.attributes['custom:state'].length !== 2) {
+    res.writeHead(302, { Location: '/state' })
+    res.end()
+  }
+  if (user.username.length > 1) {
+    const { data } = await API.graphql(
+      graphqlOperation(entryByUsername, { username: `${user.username}`, limit: 1 })
+    )
+    if (data) {
+      const [rawEntry] = data.entryByUsername.items
+      const entry = {
+        id: rawEntry.id,
+        username: rawEntry.username,
+        tieBreaker: rawEntry.tieBreaker,
+        superBowl: rawEntry.superBowl,
+        afcConference: rawEntry.afcConference,
+        nfcConference: rawEntry.nfcConference,
+        afcDivisional1: rawEntry.afcDivisional1,
+        afcDivisional2: rawEntry.afcDivisional2,
+        nfcDivisional1: rawEntry.nfcDivisional1,
+        nfcDivisional2: rawEntry.nfcDivisional2,
+        afcWildCard1: rawEntry.afcWildCard1,
+        afcWildCard2: rawEntry.afcWildCard2,
+        afcWildCard3: rawEntry.afcWildCard3,
+        nfcWildCard1: rawEntry.nfcWildCard1,
+        nfcWildCard2: rawEntry.nfcWildCard2,
+        nfcWildCard3: rawEntry.nfcWildCard3
+      }
+      return {
+        props: { entry }
+      }
+    } else {
+      return {
+        props: {
+          tieBreaker: 0,
+          superBowl: null,
+          afcConference: null,
+          nfcConference: null,
+          afcDivisional1: null,
+          afcDivisional2: null,
+          nfcDivisional1: null,
+          nfcDivisional2: null,
+          afcWildCard1: null,
+          afcWildCard2: null,
+          afcWildCard3: null,
+          nfcWildCard1: null,
+          nfcWildCard2: null,
+          nfcWildCard3: null
+        }
+      }
+    }
+  }
+
+  return {
+    props: { entry: null }
+  }
+}
+
+export default Entry

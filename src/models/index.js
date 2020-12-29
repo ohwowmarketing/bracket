@@ -37,10 +37,11 @@ const Team = {
   "WAS": "WAS"
 };
 
-const { Result, Entry } = initSchema(schema);
+const { Leaderboard, OfficialResult, Entry } = initSchema(schema);
 
 export {
-  Result,
+  Leaderboard,
+  OfficialResult,
   Entry,
   Team
 };

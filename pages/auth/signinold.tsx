@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { Hub } from 'aws-amplify'
 import { Authenticator, SignIn, SignUp, ConfirmSignUp } from 'aws-amplify-react'
 import { onAuthUIStateChange } from '@aws-amplify/ui-components'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -48,6 +49,25 @@ const SignInPage = () => {
     })
   }, [])
 
+  const listener = data => {
+    switch (data.payload.event) {
+      case 'signIn':
+        console.log('user signed in')
+        break
+      case 'signUp':
+        console.log('user signed up')
+        break
+      case 'signOut':
+        console.log('user signed out')
+        break
+      case 'signIn_failure':
+        console.log('user sign in failed')
+        break
+    }
+  }
+
+  Hub.listen('auth', listener)
+
   const handleAuthStateChange = stateChange => {
     console.log('handleAuthStateChange', stateChange)
     // 1. signIn 2. signedUp
@@ -58,23 +78,34 @@ const SignInPage = () => {
     return <CircularProgress color='secondary' />
   }
 
+  if (
+    authState === 'signedIn' &&
+    user &&
+    user.attributes &&
+    user.attributes['custom:state'] &&
+    user.attributes['custom:state'].length === 2
+  ) {
+    router.push('/entry')
+  }
+
+  const map = message => {
+    if (/incorrect.*username.*password/i.test(message)) {
+      return 'Incorrect username or password'
+    }
+
+    return message
+  }
+
   return (
     <>
       {authState === 'signedIn' && user ? (
-        <>
-          {user.attributes &&
-          user.attributes['custom:state'] &&
-          user.attributes['custom:state'].length === 2 ? (
-            router.push('/entry')
-          ) : (
-            <State />
-          )}
-        </>
+        <State />
       ) : (
         <Authenticator
           theme={authTheme}
           hideDefault={true}
           onStateChange={handleAuthStateChange}
+          errorMessage={map}
           authState='signIn'>
           <SignIn />
           <SignUp signUpConfig={{ hiddenDefaults: ['phone_number'] }} />

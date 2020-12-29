@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Auth } from 'aws-amplify'
+import { useState, useEffect } from 'react'
+import { Auth, Hub } from 'aws-amplify'
 import { makeStyles } from '@material-ui/core/styles'
 import MuiAppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -15,7 +15,6 @@ import Icon from '@material-ui/core/Icon'
 import MuiLink from '@material-ui/core/Link'
 import { H6 } from 'mui/Typography'
 import Link from './Link'
-import useUser from 'hooks/useUser'
 
 const drawerWidth = 240
 
@@ -56,10 +55,26 @@ const useStyles = makeStyles(theme => ({
 
 const AppBar = () => {
   const classes = useStyles()
-  const { loading, user } = useUser()
+  const [signedIn, setSignedIn] = useState<boolean>(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  useEffect(() => {
+    const unsubscribe = Hub.listen('auth', async ({ payload: { event } }) => {
+      if (event === 'signIn') {
+        const user = await Auth.currentAuthenticatedUser()
+        if (user.attributes['custom:state'].length === 2) {
+          setSignedIn(true)
+        }
+      } else if (event === 'signOut') {
+        setSignedIn(false)
+      }
+    })
+    return () => unsubscribe()
+  }, [])
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
+  }
+  const handleSignOut = async () => {
+    await Auth.signOut()
   }
   const container = typeof window !== undefined ? () => window.document.body : undefined
   return (
@@ -98,15 +113,25 @@ const AppBar = () => {
                       </ListItemIcon>
                     </>
                   </ListItem>
-                  {!loading && user ? (
+                  {signedIn ? (
                     <>
                       <ListItem button key='entry' component={Link} href='/entry'>
-                        <>
-                          <ListItemIcon>
-                            <Icon className='fas fa-ticket-alt fa-xs' color='primary' />
-                          </ListItemIcon>
-                          <ListItemText primary='Your Entry' />
-                        </>
+                        <ListItemIcon>
+                          <Icon className='fas fa-ticket-alt fa-xs' color='primary' />
+                        </ListItemIcon>
+                        <ListItemText primary='Your Entry' />
+                      </ListItem>
+                      <ListItem button key='entry' component={Link} href='/leaderboard'>
+                        <ListItemIcon>
+                          <Icon className='fas fa-trophy fa-xs' color='primary' />
+                        </ListItemIcon>
+                        <ListItemText primary='Leaderboard' />
+                      </ListItem>
+                      <ListItem button key='entry' component={Link} href='/rules'>
+                        <ListItemIcon>
+                          <Icon className='fas fa-tasks fa-xs' color='primary' />
+                        </ListItemIcon>
+                        <ListItemText primary='Rules / Prizes' />
                       </ListItem>
                       <ListItem button key='signOut' onClick={() => Auth.signOut()}>
                         <ListItemIcon>
@@ -116,14 +141,26 @@ const AppBar = () => {
                       </ListItem>
                     </>
                   ) : (
-                    <ListItem button key='profile' component={Link} href='/auth/signin'>
-                      <>
+                    <>
+                      <ListItem button key='home' component={Link} href='/'>
                         <ListItemIcon>
-                          <Icon className='fas fa-user-lock' color='primary' />
+                          <Icon className='fas fa-home' color='primary' />
+                        </ListItemIcon>
+                        <ListItemText primary='Home' />
+                      </ListItem>
+                      <ListItem button key='entry' component={Link} href='/rules'>
+                        <ListItemIcon>
+                          <Icon className='fas fa-tasks fa-xs' color='primary' />
+                        </ListItemIcon>
+                        <ListItemText primary='Rules / Prizes' />
+                      </ListItem>
+                      <ListItem button key='signin' component={Link} href='/auth/signin'>
+                        <ListItemIcon>
+                          <Icon className='fas fa-user-lock fa-xs' color='primary' />
                         </ListItemIcon>
                         <ListItemText primary='Sign In' />
-                      </>
-                    </ListItem>
+                      </ListItem>
+                    </>
                   )}
                 </>
               </List>
@@ -131,21 +168,36 @@ const AppBar = () => {
           </Hidden>
           <Hidden xsDown implementation='css'>
             <>
-              {!loading && user ? (
+              {signedIn ? (
                 <>
                   <Link variant='button' href='/entry' className={classes.link}>
                     Your Entry
                   </Link>
-                  <Link
+                  <Link variant='button' href='/leaderboard' className={classes.link}>
+                    Leaderboard
+                  </Link>
+                  <Link variant='button' href='/rules' className={classes.link}>
+                    Rules / Prizes
+                  </Link>
+                  <Link variant='button' href='/auth/signout' className={classes.link}>
+                    Sign Out
+                  </Link>
+                  {/* <MuiLink
                     variant='button'
                     href='/'
                     className={classes.link}
-                    onClick={() => Auth.signOut()}>
+                    onClick={handleSignOut}>
                     Sign Out
-                  </Link>
+                  </MuiLink> */}
                 </>
               ) : (
                 <>
+                  <Link variant='button' href='/' className={classes.link}>
+                    Home
+                  </Link>
+                  <Link variant='button' href='/rules' className={classes.link}>
+                    Rules / Prizes
+                  </Link>
                   <Link variant='button' href='/auth/signin' className={classes.link}>
                     Sign In
                   </Link>

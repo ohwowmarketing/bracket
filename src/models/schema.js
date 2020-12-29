@@ -1,9 +1,32 @@
 export const schema = {
     "models": {
-        "Result": {
+        "Leaderboard": {
+            "name": "Leaderboard",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "username": {
+                    "name": "username",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "points": {
+                    "name": "points",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
             "syncable": true,
-            "name": "Result",
-            "pluralName": "Results",
+            "pluralName": "Leaderboards",
             "attributes": [
                 {
                     "type": "model",
@@ -23,8 +46,8 @@ export const schema = {
                                 "operations": [
                                     "read",
                                     "create",
-                                    "delete",
-                                    "update"
+                                    "update",
+                                    "delete"
                                 ]
                             },
                             {
@@ -36,7 +59,10 @@ export const schema = {
                         ]
                     }
                 }
-            ],
+            ]
+        },
+        "OfficialResult": {
+            "name": "OfficialResult",
             "fields": {
                 "id": {
                     "name": "id",
@@ -169,12 +195,9 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 }
-            }
-        },
-        "Entry": {
+            },
             "syncable": true,
-            "name": "Entry",
-            "pluralName": "Entries",
+            "pluralName": "OfficialResults",
             "attributes": [
                 {
                     "type": "model",
@@ -185,16 +208,18 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
+                                "groupClaim": "cognito:groups",
                                 "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
                                 "operations": [
                                     "read",
                                     "create",
-                                    "update",
-                                    "delete"
-                                ],
-                                "identityClaim": "cognito:username"
+                                    "delete",
+                                    "update"
+                                ]
                             },
                             {
                                 "allow": "private",
@@ -205,7 +230,10 @@ export const schema = {
                         ]
                     }
                 }
-            ],
+            ]
+        },
+        "Entry": {
+            "name": "Entry",
             "fields": {
                 "id": {
                     "name": "id",
@@ -352,7 +380,50 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 }
-            }
+            },
+            "syncable": true,
+            "pluralName": "Entries",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsername",
+                        "fields": [
+                            "username"
+                        ],
+                        "queryField": "entryByUsername"
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ],
+                                "identityClaim": "cognito:username"
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
         }
     },
     "enums": {
@@ -394,5 +465,6 @@ export const schema = {
             ]
         }
     },
-    "version": "4321128bf6f6807978e342f30c05eff4"
+    "nonModels": {},
+    "version": "f5e6e5d9183f75469a06d4225b9c1fd5"
 };

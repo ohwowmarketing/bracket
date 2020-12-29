@@ -59,18 +59,18 @@ export const teams: TeamParams[] = [
 
 export const seeds: SeedParams = {
   afc1: 'KC',
-  afc2: 'PIT',
-  afc3: 'BUF',
+  afc2: 'BUF',
+  afc3: 'PIT',
   afc4: 'TEN',
   afc5: 'CLE',
   afc6: 'IND',
   afc7: 'MIA',
   nfc1: 'GB',
   nfc2: 'NO',
-  nfc3: 'LAR',
+  nfc3: 'SEA',
   nfc4: 'WAS',
-  nfc5: 'SEA',
-  nfc6: 'TB',
+  nfc5: 'TB',
+  nfc6: 'LAR',
   nfc7: 'ARI'
 }
 
