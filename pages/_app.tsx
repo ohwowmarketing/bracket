@@ -34,10 +34,13 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <title>Playoff Contest | Sports Gambling Guides</title>
+        <title>Sports Gambling Guides 2021 NFL Bracket Challenge</title>
         <link rel='icon' href='/favicon.ico' />
         <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width' />
-        <meta name='description' content='Create your NFL playoff bracket.' />
+        <meta
+          name='description'
+          content='Pick the most accurate NFL Playoff Bracket for your chance to win $1,000 in prizes. Compete against your friends and check the live leaderboard to see where you stand!'
+        />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
