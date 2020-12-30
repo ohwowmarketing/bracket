@@ -59,12 +59,12 @@ const AppBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
   useEffect(() => {
     const unsubscribe = Hub.listen('auth', async ({ payload: { event } }) => {
-      if (event === 'signIn') {
+      if (event === 'signIn' || event === 'signedIn') {
         const user = await Auth.currentAuthenticatedUser()
         if (user.attributes['custom:state'].length === 2) {
           setSignedIn(true)
         }
-      } else if (event === 'signOut') {
+      } else if (event === 'signOut' || event === 'signedOut') {
         setSignedIn(false)
       }
     })
@@ -179,16 +179,16 @@ const AppBar = () => {
                   <Link variant='button' href='/rules' className={classes.link}>
                     Rules / Prizes
                   </Link>
-                  <Link variant='button' href='/auth/signout' className={classes.link}>
+                  {/* <Link variant='button' href='/auth/signout' className={classes.link}>
                     Sign Out
-                  </Link>
-                  {/* <MuiLink
+                  </Link> */}
+                  <MuiLink
                     variant='button'
                     href='/'
                     className={classes.link}
                     onClick={handleSignOut}>
                     Sign Out
-                  </MuiLink> */}
+                  </MuiLink>
                 </>
               ) : (
                 <>

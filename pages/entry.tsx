@@ -33,51 +33,51 @@ export const getServerSideProps = async ({ req, res }) => {
     )
     if (data) {
       const [rawEntry] = data.entryByUsername.items
-      const entry = {
-        id: rawEntry.id,
-        username: rawEntry.username,
-        tieBreaker: rawEntry.tieBreaker,
-        superBowl: rawEntry.superBowl,
-        afcConference: rawEntry.afcConference,
-        nfcConference: rawEntry.nfcConference,
-        afcDivisional1: rawEntry.afcDivisional1,
-        afcDivisional2: rawEntry.afcDivisional2,
-        nfcDivisional1: rawEntry.nfcDivisional1,
-        nfcDivisional2: rawEntry.nfcDivisional2,
-        afcWildCard1: rawEntry.afcWildCard1,
-        afcWildCard2: rawEntry.afcWildCard2,
-        afcWildCard3: rawEntry.afcWildCard3,
-        nfcWildCard1: rawEntry.nfcWildCard1,
-        nfcWildCard2: rawEntry.nfcWildCard2,
-        nfcWildCard3: rawEntry.nfcWildCard3
-      }
-      return {
-        props: { entry }
-      }
-    } else {
-      return {
-        props: {
-          tieBreaker: 0,
-          superBowl: null,
-          afcConference: null,
-          nfcConference: null,
-          afcDivisional1: null,
-          afcDivisional2: null,
-          nfcDivisional1: null,
-          nfcDivisional2: null,
-          afcWildCard1: null,
-          afcWildCard2: null,
-          afcWildCard3: null,
-          nfcWildCard1: null,
-          nfcWildCard2: null,
-          nfcWildCard3: null
+      if (rawEntry) {
+        const entry = {
+          id: rawEntry.id,
+          username: rawEntry.username,
+          tieBreaker: rawEntry.tieBreaker,
+          superBowl: rawEntry.superBowl,
+          afcConference: rawEntry.afcConference,
+          nfcConference: rawEntry.nfcConference,
+          afcDivisional1: rawEntry.afcDivisional1,
+          afcDivisional2: rawEntry.afcDivisional2,
+          nfcDivisional1: rawEntry.nfcDivisional1,
+          nfcDivisional2: rawEntry.nfcDivisional2,
+          afcWildCard1: rawEntry.afcWildCard1,
+          afcWildCard2: rawEntry.afcWildCard2,
+          afcWildCard3: rawEntry.afcWildCard3,
+          nfcWildCard1: rawEntry.nfcWildCard1,
+          nfcWildCard2: rawEntry.nfcWildCard2,
+          nfcWildCard3: rawEntry.nfcWildCard3
+        }
+        return {
+          props: { entry }
         }
       }
     }
   }
 
   return {
-    props: { entry: null }
+    props: {
+      entry: {
+        tieBreaker: 0,
+        superBowl: null,
+        afcConference: null,
+        nfcConference: null,
+        afcDivisional1: null,
+        afcDivisional2: null,
+        nfcDivisional1: null,
+        nfcDivisional2: null,
+        afcWildCard1: null,
+        afcWildCard2: null,
+        afcWildCard3: null,
+        nfcWildCard1: null,
+        nfcWildCard2: null,
+        nfcWildCard3: null
+      }
+    }
   }
 }
 

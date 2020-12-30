@@ -62,6 +62,7 @@ const Page = () => {
 
   useEffect(() => {
     const initAuth = async () => {
+      await Auth.signOut({ global: true })
       if (type === 'signup') {
         setAuthState('signUp')
       } else if (type === 'forgot') {
@@ -70,15 +71,11 @@ const Page = () => {
         setAuthState('requireNewPassword')
       } else if (type === 'signout') {
         router.push('/')
-      } else {
+      } else if (type === 'signin') {
         setAuthState('signIn')
       }
     }
-    const signOutFirst = async () => {
-      await Auth.signOut()
-    }
     if (type) {
-      signOutFirst()
       initAuth()
     }
   }, [type])
