@@ -11,7 +11,7 @@ import Hidden from '@material-ui/core/Hidden'
 import useForm from '@hooks/useForm'
 import { Contained } from '@mui/Button'
 import { XS, Box } from '@mui/Layout'
-import { H3 } from '@mui/Typography'
+import { H4 } from '@mui/Typography'
 import Game from '@components/Game'
 import { MiniHero } from '@components/Hero'
 import { seeds } from '@lib/teams'
@@ -89,194 +89,170 @@ const Bracket = ({ entry }) => {
     setSaved(false)
   }
 
+  interface GameDisplayParams {
+    conf?: string
+    name: string
+    label: string
+    home: number | string
+    away: number | string
+  }
+
+  const GameDisplay = ({ conf = '', name, label, home, away }: GameDisplayParams) => {
+    const lower: string = conf ? conf.toLowerCase() : ''
+    const upper: string = conf ? conf.toUpperCase() : ''
+    const homeTeam = typeof home === 'number' ? seeds[`${lower}${home}`] : values[`${lower}${home}`]
+    const awayTeam = typeof away === 'number' ? seeds[`${lower}${away}`] : values[`${lower}${away}`]
+    return (
+      <Game
+        name={`${lower}${name}`}
+        label={`${upper} ${label}`}
+        home={homeTeam}
+        away={awayTeam}
+        value={values[`${lower}${name}`]}
+        onChange={handleChange}
+      />
+    )
+  }
+
+  const SuperBowl = () => {
+    return (
+      <Grid container direction='row' justify='center'>
+        <Grid item xs={12} md={4}>
+          <Hidden mdUp implementation='css'>
+            <H4 align='center'>Super Bowl</H4>
+          </Hidden>
+          <Game
+            name='superBowl'
+            label='Super Bowl (80 points)'
+            home={values.afcConference}
+            away={values.nfcConference}
+            onChange={handleChange}
+            value={values.superBowl}>
+            {values.superBowl !== null && (
+              <div className={classes.textFieldContainer}>
+                <TextField
+                  type='number'
+                  name='tieBreaker'
+                  label='Total Combined Score (Tie Breaker)'
+                  variant='outlined'
+                  value={values.tieBreaker}
+                  onChange={handleChange}
+                  fullWidth
+                />
+              </div>
+            )}
+          </Game>
+        </Grid>
+      </Grid>
+    )
+  }
+
+  const WildCardRound = ({ conf }) => {
+    return (
+      <Grid item container xs={12} md={4}>
+        <Grid container direction='column'>
+          <Grid item xs>
+            <GameDisplay
+              conf={conf}
+              name='WildCard1'
+              label='Wild Card (10 points)'
+              home={4}
+              away={5}
+            />
+          </Grid>
+          <Grid item xs>
+            <GameDisplay
+              conf={conf}
+              name='WildCard2'
+              label='Wild Card (10 points)'
+              home={3}
+              away={6}
+            />
+          </Grid>
+          <Grid item xs>
+            <GameDisplay
+              conf={conf}
+              name='WildCard3'
+              label='Wild Card (10 points)'
+              home={2}
+              away={7}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+    )
+  }
+
+  const DivisionalRound = ({ conf }: { conf: string }) => {
+    return (
+      <Grid item container xs={12} md={4}>
+        <Grid container direction='column'>
+          <Grid item xs>
+            <GameDisplay
+              conf={conf}
+              name='Divisional1'
+              label='Divisional (20 points)'
+              home={1}
+              away='WildCard1'
+            />
+          </Grid>
+          <Grid item xs>
+            <GameDisplay
+              conf={conf}
+              name='Divisional2'
+              label='Divisional (20 points)'
+              home='WildCard3'
+              away='WildCard2'
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+    )
+  }
+
+  const ConferenceRound = ({ conf }: { conf: string }) => {
+    return (
+      <Grid item container xs={12} md={4}>
+        <Grid container direction='column'>
+          <Grid item xs>
+            <GameDisplay
+              conf={conf}
+              name='Conference'
+              label='Conference (40 points)'
+              home='Divisional1'
+              away='Divisional2'
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+    )
+  }
+
+  const ConferenceBrackets = ({ conf }: { conf: string }) => {
+    return (
+      <Grid container alignItems='center' direction={conf === 'nfc' ? 'row-reverse' : 'row'}>
+        <Grid item xs>
+          <Hidden mdUp implementation='css'>
+            <H4 align='center'>{conf.toUpperCase()}</H4>
+          </Hidden>
+        </Grid>
+        <WildCardRound conf={conf} />
+        <DivisionalRound conf={conf} />
+        <ConferenceRound conf={conf} />
+      </Grid>
+    )
+  }
+
   return (
     <>
       <MiniHero />
       <form onSubmit={handleSubmit}>
         <Grid container className={classes.root} spacing={1}>
-          <Grid item container xs={12} sm={6} wrap='nowrap' alignItems='center'>
-            <Grid item container xs={12} sm={4}>
-              <Grid item container direction='column' xs={12} sm={12}>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='afcWildCard1'
-                    label='AFC Wild Card (10 points)'
-                    home={seeds.afc4}
-                    away={seeds.afc5}
-                    onChange={handleChange}
-                    value={values.afcWildCard1}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='afcWildCard2'
-                    label='AFC Wild Card (10 points)'
-                    home={seeds.afc3}
-                    away={seeds.afc6}
-                    onChange={handleChange}
-                    value={values.afcWildCard2}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='afcWildCard3'
-                    label='AFC Wild Card (10 points)'
-                    home={seeds.afc2}
-                    away={seeds.afc7}
-                    onChange={handleChange}
-                    value={values.afcWildCard3}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item container xs={12} sm={4}>
-              <Grid item container direction='column' xs={12} sm={12}>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='afcDivisional1'
-                    label='AFC Divisional (20 points)'
-                    home={seeds.afc1}
-                    away={values.afcWildCard1}
-                    onChange={handleChange}
-                    value={values.afcDivisional1}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='afcDivisional2'
-                    label='AFC Divisional (20 points)'
-                    home={values.afcWildCard3}
-                    away={values.afcWildCard2}
-                    onChange={handleChange}
-                    value={values.afcDivisional2}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item container xs={12} sm={4}>
-              <Grid item container direction='column' xs={12} sm={12}>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='afcConference'
-                    label='AFC Conference (40 points)'
-                    home={values.afcDivisional1}
-                    away={values.afcDivisional2}
-                    onChange={handleChange}
-                    value={values.afcConference}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
+          <Grid container wrap='nowrap'>
+            <ConferenceBrackets conf='afc' />
+            <ConferenceBrackets conf='nfc' />
           </Grid>
-          <Grid
-            item
-            container
-            xs={12}
-            sm={6}
-            wrap='nowrap'
-            alignItems='center'
-            direction='row-reverse'>
-            <Grid item container xs={12} sm={4}>
-              <Grid item container direction='column' xs={12} sm={12}>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='nfcWildCard1'
-                    label='NFC Wild Card (10 points)'
-                    home={seeds.nfc4}
-                    away={seeds.nfc5}
-                    onChange={handleChange}
-                    value={values.nfcWildCard1}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='nfcWildCard2'
-                    label='NFC Wild Card (10 points)'
-                    home={seeds.nfc3}
-                    away={seeds.nfc6}
-                    onChange={handleChange}
-                    value={values.nfcWildCard2}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='nfcWildCard3'
-                    label='NFC Wild Card (10 points)'
-                    home={seeds.nfc2}
-                    away={seeds.nfc7}
-                    onChange={handleChange}
-                    value={values.nfcWildCard3}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item container xs={12} sm={4}>
-              <Grid item container direction='column' xs={12} sm={12}>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='nfcDivisional1'
-                    label='NFC Divisional (20 points)'
-                    home={seeds.nfc1}
-                    away={values.nfcWildCard1}
-                    onChange={handleChange}
-                    value={values.nfcDivisional1}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='nfcDivisional2'
-                    label='NFC Divisional (20 points)'
-                    home={values.nfcWildCard3}
-                    away={values.nfcWildCard2}
-                    onChange={handleChange}
-                    value={values.nfcDivisional2}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item container xs={12} sm={4} justify='center'>
-              <Grid item container direction='column' xs={12} sm={12}>
-                <Grid item xs={12} sm={12}>
-                  <Game
-                    name='nfcConference'
-                    label='NFC Conference (40 points)'
-                    home={values.nfcDivisional1}
-                    away={values.nfcDivisional2}
-                    onChange={handleChange}
-                    value={values.nfcConference}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid container direction='row' justify='center'>
-            <Grid item xs={12} sm={4}>
-              <Hidden smUp implementation='css'>
-                <H3>Super Bowl</H3>
-              </Hidden>
-              <Game
-                name='superBowl'
-                label='Super Bowl (80 points)'
-                home={values.afcConference}
-                away={values.nfcConference}
-                onChange={handleChange}
-                value={values.superBowl}>
-                {values.superBowl !== null && (
-                  <div className={classes.textFieldContainer}>
-                    <TextField
-                      type='number'
-                      name='tieBreaker'
-                      label='Total Combined Score (Tie Breaker)'
-                      variant='outlined'
-                      value={values.tieBreaker}
-                      onChange={handleChange}
-                      fullWidth
-                    />
-                  </div>
-                )}
-              </Game>
-            </Grid>
-          </Grid>
+          <SuperBowl />
         </Grid>
 
         <XS align='center'>
