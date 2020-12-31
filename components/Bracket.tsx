@@ -54,7 +54,6 @@ const Bracket = ({ entry }) => {
       username: user.username,
       tieBreaker: parseInt(values.tieBreaker)
     }
-    // console.log(entryData)
     if (values.id) {
       const updateData = {
         ...entryData

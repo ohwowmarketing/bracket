@@ -8,7 +8,7 @@ import { Select, Checkbox } from '@mui/Form'
 import { Contained } from '@mui/Button'
 import { states } from '@lib/states'
 import useForm from '@hooks/useForm'
-import useUser from '@hooks/useUser'
+import useAmplifyAuth from '@hooks/useAmplifyAuth'
 import axios from 'axios'
 
 // 'http://localhost:3000/api/mc/add'
@@ -33,13 +33,15 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const StateForm = () => {
-  const { loading, user } = useUser()
+  const {
+    state: { user }
+  } = useAmplifyAuth()
   const router = useRouter()
   const classes = useStyles()
   const [confirmed, setConfirmed] = React.useState<boolean>(false)
   const initialValues: FormValues = { state: '' }
   const { values, handleChange, handleSubmit } = useForm(async () => {
-    if (!loading && user && values.state !== '' && confirmed) {
+    if (user && values.state !== '' && confirmed) {
       await Auth.updateUserAttributes(user, { 'custom:state': values.state })
       await axios.post(endpoint, {
         email: user.attributes.email,
