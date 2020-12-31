@@ -59,7 +59,6 @@ interface AppBarProps {
 }
 
 const AppBar = ({ user, handleSignOut }: AppBarProps) => {
-  console.log(user)
   const classes = useStyles()
   const [signedIn, setSignedIn] = useState<boolean>(false)
   const [mobileOpen, setMobileOpen] = useState(false)

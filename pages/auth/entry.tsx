@@ -4,7 +4,6 @@ import { entryByUsername } from 'src/graphql/queries'
 import Layout from '@components/Layout/AuthRequired'
 
 const Entry = ({ entry }) => {
-  console.log('client side crashed yet?')
   return (
     <Layout>
       <Bracket entry={entry} />
@@ -63,7 +62,6 @@ export const getServerSideProps = async ({ req, res }) => {
       }
     }
   } catch (err) {
-    console.log(err)
     return { props: { entry: defaultEntry } }
   }
 

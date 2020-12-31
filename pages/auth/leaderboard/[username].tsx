@@ -63,11 +63,9 @@ export const getServerSideProps = async ({ req, query }) => {
       props: { entry }
     }
   } catch (error) {
-    console.log(error)
-  }
-
-  return {
-    props: {}
+    return {
+      props: {}
+    }
   }
 }
 
