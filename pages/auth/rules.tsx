@@ -1,4 +1,4 @@
-import Layout from '@components/Layout/Global'
+import Layout from '@components/Layout/AuthRequired'
 import RulesCopy from '@components/Rules'
 
 const Rules = () => {

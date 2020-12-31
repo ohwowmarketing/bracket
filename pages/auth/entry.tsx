@@ -1,29 +1,38 @@
 import { withSSRContext, graphqlOperation } from 'aws-amplify'
 import Bracket from '@components/Bracket'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import { entryByUsername } from 'src/graphql/queries'
-import { SM } from '@mui/Layout'
+import Layout from '@components/Layout/AuthRequired'
 
 const Entry = ({ entry }) => {
-  if (entry) {
-    return <Bracket entry={entry} />
-  } else {
-    return (
-      <SM align='center'>
-        <CircularProgress />
-      </SM>
-    )
-  }
+  console.log('client side crashed yet?')
+  return (
+    <Layout>
+      <Bracket entry={entry} />
+    </Layout>
+  )
 }
 
 export const getServerSideProps = async ({ req, res }) => {
-  const { Auth, API } = withSSRContext({ req })
-  const user = await Auth.currentAuthenticatedUser()
-  if (!user) {
-    res.writeHead(302, { Location: '/auth/signin' })
-    res.end()
+  const defaultEntry = {
+    tieBreaker: 0,
+    superBowl: null,
+    afcConference: null,
+    nfcConference: null,
+    afcDivisional1: null,
+    afcDivisional2: null,
+    nfcDivisional1: null,
+    nfcDivisional2: null,
+    afcWildCard1: null,
+    afcWildCard2: null,
+    afcWildCard3: null,
+    nfcWildCard1: null,
+    nfcWildCard2: null,
+    nfcWildCard3: null
   }
-  if (user.username.length > 1) {
+  const { Auth, API } = withSSRContext({ req })
+  try {
+    const user = await Auth.currentAuthenticatedUser()
+
     const { data } = await API.graphql(
       graphqlOperation(entryByUsername, { username: `${user.username}`, limit: 1 })
     )
@@ -53,27 +62,13 @@ export const getServerSideProps = async ({ req, res }) => {
         }
       }
     }
+  } catch (err) {
+    console.log(err)
+    return { props: { entry: defaultEntry } }
   }
 
   return {
-    props: {
-      entry: {
-        tieBreaker: 0,
-        superBowl: null,
-        afcConference: null,
-        nfcConference: null,
-        afcDivisional1: null,
-        afcDivisional2: null,
-        nfcDivisional1: null,
-        nfcDivisional2: null,
-        afcWildCard1: null,
-        afcWildCard2: null,
-        afcWildCard3: null,
-        nfcWildCard1: null,
-        nfcWildCard2: null,
-        nfcWildCard3: null
-      }
-    }
+    props: { entry: defaultEntry }
   }
 }
 

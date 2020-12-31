@@ -32,6 +32,18 @@ const theme = createMuiTheme({
   },
   shape: {
     borderRadius: 4
+  },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        body: {
+          backgroundImage: 'url(/backgrounds/stadium.svg)',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'bottom center',
+          backgroundAttachment: 'fixed'
+        }
+      }
+    }
   }
 })
 

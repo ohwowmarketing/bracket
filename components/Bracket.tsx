@@ -101,7 +101,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='afcWildCard1'
-                    label='AFC Wild Card (1 point)'
+                    label='AFC Wild Card (10 points)'
                     home={seeds.afc4}
                     away={seeds.afc5}
                     onChange={handleChange}
@@ -111,7 +111,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='afcWildCard2'
-                    label='AFC Wild Card (1 point)'
+                    label='AFC Wild Card (10 points)'
                     home={seeds.afc3}
                     away={seeds.afc6}
                     onChange={handleChange}
@@ -121,7 +121,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='afcWildCard3'
-                    label='AFC Wild Card (1 point)'
+                    label='AFC Wild Card (10 points)'
                     home={seeds.afc2}
                     away={seeds.afc7}
                     onChange={handleChange}
@@ -135,7 +135,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='afcDivisional1'
-                    label='AFC Divisional (2 points)'
+                    label='AFC Divisional (20 points)'
                     home={seeds.afc1}
                     away={values.afcWildCard1}
                     onChange={handleChange}
@@ -145,7 +145,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='afcDivisional2'
-                    label='AFC Divisional (2 points)'
+                    label='AFC Divisional (20 points)'
                     home={values.afcWildCard3}
                     away={values.afcWildCard2}
                     onChange={handleChange}
@@ -159,7 +159,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='afcConference'
-                    label='AFC Conference (4 points)'
+                    label='AFC Conference (40 points)'
                     home={values.afcDivisional1}
                     away={values.afcDivisional2}
                     onChange={handleChange}
@@ -182,7 +182,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='nfcWildCard1'
-                    label='NFC Wild Card (1 point)'
+                    label='NFC Wild Card (10 points)'
                     home={seeds.nfc4}
                     away={seeds.nfc5}
                     onChange={handleChange}
@@ -192,7 +192,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='nfcWildCard2'
-                    label='NFC Wild Card (1 point)'
+                    label='NFC Wild Card (10 points)'
                     home={seeds.nfc3}
                     away={seeds.nfc6}
                     onChange={handleChange}
@@ -202,7 +202,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='nfcWildCard3'
-                    label='NFC Wild Card (1 point)'
+                    label='NFC Wild Card (10 points)'
                     home={seeds.nfc2}
                     away={seeds.nfc7}
                     onChange={handleChange}
@@ -216,7 +216,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='nfcDivisional1'
-                    label='NFC Divisional (2 points)'
+                    label='NFC Divisional (20 points)'
                     home={seeds.nfc1}
                     away={values.nfcWildCard1}
                     onChange={handleChange}
@@ -226,7 +226,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='nfcDivisional2'
-                    label='NFC Divisional (2 points)'
+                    label='NFC Divisional (20 points)'
                     home={values.nfcWildCard3}
                     away={values.nfcWildCard2}
                     onChange={handleChange}
@@ -240,7 +240,7 @@ const Bracket = ({ entry }) => {
                 <Grid item xs={12} sm={12}>
                   <Game
                     name='nfcConference'
-                    label='NFC Conference (4 points)'
+                    label='NFC Conference (40 points)'
                     home={values.nfcDivisional1}
                     away={values.nfcDivisional2}
                     onChange={handleChange}
@@ -257,7 +257,7 @@ const Bracket = ({ entry }) => {
               </Hidden>
               <Game
                 name='superBowl'
-                label='Super Bowl (8 points)'
+                label='Super Bowl (80 points)'
                 home={values.afcConference}
                 away={values.nfcConference}
                 onChange={handleChange}

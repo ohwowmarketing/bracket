@@ -37,7 +37,7 @@ const Hero = () => {
         against your friends and check the live leaderboard to see where you stand!
       </H5>
       <Box mt={2}>
-        <Contained component={Link} href='/auth/signup' color='primary' align='center'>
+        <Contained component={Link} href='/auth/entry' color='primary' align='center'>
           Create your bracket!
         </Contained>
       </Box>
@@ -53,7 +53,7 @@ export const MiniHero = () => {
         Sports Gambling Guides 2021 NFL Bracket Challenge
       </H5>
       <Body1 align='center' color='textSecondary'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet volutpat ligula.
+        All entries / picks will be locked at the start of the first scheduled game.
       </Body1>
     </MD>
   )
