@@ -57,7 +57,21 @@ const Layout = ({ children }) => {
             </Snackbar>
             <Authenticator theme={authTheme} hideDefault={true} authState='signIn'>
               <SignIn />
-              <SignUp signUpConfig={{ hiddenDefaults: ['phone_number'] }} />
+              <SignUp
+                signUpConfig={{
+                  hiddenDefaults: ['phone_number'],
+                  signUpFields: [
+                    {
+                      label: 'State',
+                      placeholder: 'DC',
+                      key: 'custom:state',
+                      required: true,
+                      displayOrder: 4,
+                      type: 'string'
+                    }
+                  ]
+                }}
+              />
               <ConfirmSignUp />
               <ForgotPassword />
               <RequireNewPassword />

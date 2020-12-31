@@ -1,5 +1,6 @@
 import { useReducer, useState, useEffect } from 'react'
 import { Auth, Hub } from 'aws-amplify'
+import axios from 'axios'
 
 const amplifyAuthReducer = (state, action) => {
   switch (action.type) {
@@ -76,6 +77,13 @@ const useAmplifyAuth = () => {
             console.log('signed in')
           }
           break
+        case 'signedUp':
+          if (state.user.attributes.email && state.user.attributes['custom:state'])
+            handleSignUp({
+              email: state.user.attributes.email,
+              stateCode: state.user.attributes['custom:state']
+            })
+          break
         case 'signUp_failure':
           dispatch({ type: 'ERROR_MESSAGE', payload: { errorMessage: payload.data.message } })
           break
@@ -104,6 +112,14 @@ const useAmplifyAuth = () => {
       dispatch({ type: 'RESET_USER_DATA' })
     } catch (error) {
       console.error('Error signing out user ', error)
+    }
+  }
+
+  const handleSignUp = async ({ email, stateCode }: { email: string; stateCode: string }) => {
+    try {
+      await axios.post('https://sggplayoffs.com/api/mc/add', { email, state: stateCode })
+    } catch (error) {
+      console.error('Error submitting to MailChimp', error)
     }
   }
 
