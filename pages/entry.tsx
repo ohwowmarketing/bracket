@@ -23,10 +23,6 @@ export const getServerSideProps = async ({ req, res }) => {
     res.writeHead(302, { Location: '/auth/signin' })
     res.end()
   }
-  if (!user.attributes['custom:state'] || user.attributes['custom:state'].length !== 2) {
-    res.writeHead(302, { Location: '/state' })
-    res.end()
-  }
   if (user.username.length > 1) {
     const { data } = await API.graphql(
       graphqlOperation(entryByUsername, { username: `${user.username}`, limit: 1 })

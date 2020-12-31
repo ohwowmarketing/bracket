@@ -61,7 +61,7 @@ const AppBar = () => {
     const unsubscribe = Hub.listen('auth', async ({ payload: { event } }) => {
       if (event === 'signIn' || event === 'signedIn') {
         const user = await Auth.currentAuthenticatedUser()
-        if (user.attributes['custom:state'].length === 2) {
+        if (user.attributes['custom:state'] && user.attributes['custom:state'].length === 2) {
           setSignedIn(true)
         }
       } else if (event === 'signOut' || event === 'signedOut') {

@@ -1,4 +1,5 @@
 const mailchimp = require('@mailchimp/mailchimp_marketing')
+import { setHeaders } from '@lib/headers'
 // const md5 = require('md5')
 // const listId = process.env.MAILCHIMP_LIST_ID
 // const email = 'prudence.mcvankab@example.com'
@@ -10,6 +11,10 @@ mailchimp.setConfig({
 })
 
 export default async (req, res) => {
+  const end = setHeaders(req, res)
+  if (end) {
+    return
+  }
   const { email, state } = req.body
   try {
     await mailchimp.lists.addListMember(process.env.MAILCHIMP_AUDIENCE_ID, {

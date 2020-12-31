@@ -62,16 +62,16 @@ export const seeds: SeedParams = {
   afc2: 'BUF',
   afc3: 'PIT',
   afc4: 'TEN',
-  afc5: 'CLE',
-  afc6: 'IND',
-  afc7: 'MIA',
+  afc5: 'MIA',
+  afc6: 'BAL',
+  afc7: 'CLE',
   nfc1: 'GB',
   nfc2: 'NO',
   nfc3: 'SEA',
-  nfc4: 'WAS',
-  nfc5: 'TB',
+  nfc4: 'TB',
+  nfc5: 'WAS',
   nfc6: 'LAR',
-  nfc7: 'ARI'
+  nfc7: 'CHI'
 }
 
 export const teamById = (id: string) => teams.find(team => team.id === id)
