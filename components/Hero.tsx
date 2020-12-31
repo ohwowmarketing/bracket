@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import Link from 'components/Link'
 import { SM, MD, Box } from '@mui/Layout'
-import { H3, H5, Body1 } from 'mui/Typography'
+import { H3, H5, Body1, Caption } from 'mui/Typography'
 import { Contained } from 'mui/Button'
 
 const useStyles = makeStyles(theme => ({
@@ -53,8 +53,13 @@ export const MiniHero = () => {
         Sports Gambling Guides 2021 NFL Bracket Challenge
       </H5>
       <Body1 align='center' color='textSecondary'>
-        All entries / picks will be locked at the start of the first scheduled game.
+        Pick the most accurate NFL Playoff Bracket for your chance to win a share of $1,000 in
+        prizes. After each round is completed, sign back into your account to see leaderboard
+        results.
       </Body1>
+      <Caption>
+        (See <Link href='/auth/rules'>Rules/Prizes</Link> for details.)
+      </Caption>
     </MD>
   )
 }
