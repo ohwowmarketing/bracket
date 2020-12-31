@@ -55,13 +55,12 @@ const Leaderboard = ({ leaderboards }) => {
 export const getServerSideProps = async ({ req, res }) => {
   const { Auth, API } = withSSRContext({ req })
   try {
-    const user = await Auth.currentAuthenticatedUser()
+    await Auth.currentAuthenticatedUser()
     const { data } = await API.graphql({
       query: listLeaderboards
     })
     const leaderboards = data.listLeaderboards.items
-    leaderboards.sort((a, b) => b.score - a.score)
-
+    await leaderboards.sort((a, b) => b.points - a.points)
     return {
       props: { leaderboards }
     }
