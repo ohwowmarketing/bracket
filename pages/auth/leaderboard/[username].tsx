@@ -53,6 +53,8 @@ const Entry = ({ entry }) => {
 }
 
 export const getServerSideProps = async ({ req }) => {
+  console.log(req.url)
+  console.log(req)
   const username = req.url.substring(req.url.lastIndexOf('/') + 1)
   const { Auth, API } = withSSRContext({ req })
   try {
