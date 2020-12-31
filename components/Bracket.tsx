@@ -5,7 +5,6 @@ import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
 import Hidden from '@material-ui/core/Hidden'
 import useForm from '@hooks/useForm'
@@ -57,12 +56,12 @@ const Bracket = ({ entry }) => {
     }
     if (values.id && values._version) {
       try {
-        const result = await API.graphql({
+        const result: any = await API.graphql({
           query: updateEntry,
           variables: { input: entryData },
           authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
         })
-        console.log(result)
+        values._version = result.data.updateEntry._version
         setWaiting(false)
         setSaved(true)
       } catch (e) {
@@ -260,17 +259,13 @@ const Bracket = ({ entry }) => {
 
         <XS align='center'>
           <>
-            {
-              <Snackbar
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                open={saved}
-                autoHideDuration={6000}
-                onClose={handleCloseSnackbar}>
+            {saved && (
+              <Box m={2}>
                 <Alert onClose={handleCloseSnackbar} severity='success'>
                   Entry has been saved!
                 </Alert>
-              </Snackbar>
-            }
+              </Box>
+            )}
             <Box mt={2}>
               <Contained type='submit' color='primary'>
                 <>
