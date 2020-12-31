@@ -39,8 +39,7 @@ const Leaderboard = ({ leaderboards }) => {
             {leaderboards.map(row => (
               <TableRow key={row.username}>
                 <TableCell component='th' scope='row'>
-                  {row.username}
-                  {/* <Link href={`/leaderboard/${row.username}`}>{row.username}</Link> */}
+                  <Link href={`/leaderboard/${row.username}`}>{row.username}</Link>
                 </TableCell>
                 <TableCell>{row.points}</TableCell>
               </TableRow>
