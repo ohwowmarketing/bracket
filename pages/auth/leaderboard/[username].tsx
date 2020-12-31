@@ -52,10 +52,8 @@ const Entry = ({ entry }) => {
   )
 }
 
-export const getServerSideProps = async ({ req }) => {
-  console.log(req.url)
-  console.log(req)
-  const username = req.url.substring(req.url.lastIndexOf('/') + 1)
+export const getServerSideProps = async ({ req, query }) => {
+  const { username } = query
   const { Auth, API } = withSSRContext({ req })
   try {
     await Auth.currentAuthenticatedUser()
