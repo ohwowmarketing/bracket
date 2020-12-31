@@ -52,19 +52,22 @@ const Bracket = ({ entry }) => {
     const entryData = {
       ...values,
       username: user.username,
-      tieBreaker: parseInt(values.tieBreaker)
+      tieBreaker: parseInt(values.tieBreaker),
+      _version: parseInt(values._version)
     }
-    if (values.id) {
-      const updateData = {
-        ...entryData
+    if (values.id && values._version) {
+      try {
+        const result = await API.graphql({
+          query: updateEntry,
+          variables: { input: entryData },
+          authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+        })
+        console.log(result)
+        setWaiting(false)
+        setSaved(true)
+      } catch (e) {
+        console.log(e)
       }
-      await API.graphql({
-        query: updateEntry,
-        variables: { input: updateData },
-        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
-      })
-      setWaiting(false)
-      setSaved(true)
     } else {
       try {
         const { data }: any = await API.graphql({

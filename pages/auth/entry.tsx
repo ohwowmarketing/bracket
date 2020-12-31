@@ -40,6 +40,7 @@ export const getServerSideProps = async ({ req, res }) => {
       if (rawEntry) {
         const entry = {
           id: rawEntry.id,
+          _version: rawEntry._version,
           username: rawEntry.username,
           tieBreaker: rawEntry.tieBreaker,
           superBowl: rawEntry.superBowl,
