@@ -28,17 +28,10 @@ export const UserContext = React.createContext<UserContextType | undefined>(unde
 
 const Layout = ({ children }) => {
   const classes = useStyles()
-  const [snackbarMessage, setSnackbarMessage] = React.useState<string>('')
   const {
     state: { user, errorMessage },
     handleSignOut
   } = useAmplifyAuth()
-  const handleCloseSnackbar = () => {
-    setSnackbarMessage('')
-  }
-  React.useEffect(() => {
-    setSnackbarMessage(errorMessage)
-  }, [errorMessage])
   return !user ? (
     <>
       <AppBar />
@@ -46,15 +39,7 @@ const Layout = ({ children }) => {
       <Container>
         <Box my={4}>
           <MD>
-            <Snackbar
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-              open={errorMessage.length > 0}
-              autoHideDuration={6000}
-              onClose={handleCloseSnackbar}>
-              <Alert onClose={handleCloseSnackbar} severity='warning'>
-                {errorMessage}
-              </Alert>
-            </Snackbar>
+            {errorMessage !== '' && <Alert severity='warning'>{errorMessage}</Alert>}
             <Authenticator theme={authTheme} hideDefault={true} authState='signIn'>
               <SignIn />
               <SignUp

@@ -22,7 +22,7 @@ const amplifyAuthReducer = (state, action) => {
     case 'RESET_USER_DATA':
       return { ...state, user: null }
     case 'ERROR_MESSAGE':
-      return { ...state, isError: true, errroMessage: action.payload.errorMessage }
+      return { ...state, isError: true, errorMessage: action.payload.errorMessage }
     default:
       throw new Error()
   }
