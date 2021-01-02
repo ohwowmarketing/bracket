@@ -38,7 +38,7 @@ const Hero = () => {
       </H5>
       <Box mt={2}>
         <Contained component={Link} href='/auth/entry' color='primary' align='center'>
-          Create your bracket!
+          Create Account | Sign In
         </Contained>
       </Box>
     </SM>
