@@ -10,7 +10,6 @@ import {
   ForgotPassword,
   RequireNewPassword
 } from 'aws-amplify-react'
-import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
 import { Container, Box, MD } from '@mui/Layout'
 import useAmplifyAuth from '@hooks/useAmplifyAuth'
@@ -28,6 +27,7 @@ export const UserContext = React.createContext<UserContextType | undefined>(unde
 
 const Layout = ({ children }) => {
   const classes = useStyles()
+  const [forceClose, setForceClose] = React.useState<boolean>(false)
   const {
     state: { user, errorMessage },
     handleSignOut
@@ -39,7 +39,11 @@ const Layout = ({ children }) => {
       <Container>
         <Box my={4}>
           <MD>
-            {errorMessage !== '' && <Alert severity='warning'>{errorMessage}</Alert>}
+            {errorMessage !== '' && !forceClose && (
+              <Alert severity='warning' onClose={() => setForceClose(true)}>
+                {errorMessage}
+              </Alert>
+            )}
             <Authenticator theme={authTheme} hideDefault={true} authState='signIn'>
               <SignIn />
               <SignUp

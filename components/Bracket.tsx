@@ -2,6 +2,7 @@ import * as React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { API, Auth, graphqlOperation } from 'aws-amplify'
 import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
+import axios from 'axios'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -74,7 +75,7 @@ const Bracket = () => {
         setWaiting(false)
         setSaved(true)
       } catch (e) {
-        console.log(e)
+        console.error(e)
       }
     } else {
       try {
@@ -92,19 +93,23 @@ const Bracket = () => {
         setWaiting(false)
         setSaved(true)
       } catch (e) {
-        console.log(e)
+        console.error(e)
       }
     }
   }, initialFields)
 
   React.useEffect(() => {
-    console.log(values)
-  }, [values])
-
-  React.useEffect(() => {
     const checkForEntry = async () => {
       try {
         const user = await Auth.currentAuthenticatedUser()
+
+        if (!user.attributes['custom:mc'] && user.attributes['custom:state']) {
+          await axios.post('https://sggplayoffs.com/api/mc/add', {
+            email: user.attributes.email,
+            state: user.attributes['custom:state']
+          })
+          await Auth.updateUserAttributes(user, { 'custom:mc': 1 })
+        }
 
         const { data }: any = await API.graphql(
           graphqlOperation(entryByUsername, { username: `${user.username}`, limit: 1 })
@@ -134,8 +139,8 @@ const Bracket = () => {
             handleUpdateFields(entry)
           }
         }
-      } catch (err) {
-        console.log(err)
+      } catch (e) {
+        console.error(err)
       }
     }
     checkForEntry()
