@@ -140,7 +140,7 @@ const Bracket = () => {
           }
         }
       } catch (e) {
-        console.error(err)
+        console.error(e)
       }
     }
     checkForEntry()
