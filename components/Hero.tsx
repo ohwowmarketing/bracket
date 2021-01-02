@@ -33,8 +33,8 @@ const Hero = () => {
         Sports Gambling Guides 2021 NFL Bracket Challenge
       </H3>
       <H5 component='p' align='center' color='textSecondary' gutterBottom>
-        Pick the most accurate NFL Playoff Bracket for your chance to win $1,000 in prizes. Compete
-        against your friends and check the live leaderboard to see where you stand!
+        Pick the most accurate NFL Playoff Bracket for your chance to win a share of $1,000 in
+        prizes. Compete against your friends and check the live leaderboard to see where you stand!
       </H5>
       <Box mt={2}>
         <Contained component={Link} href='/auth/entry' color='primary' align='center'>
