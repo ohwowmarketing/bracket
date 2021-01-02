@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import { API, Auth } from 'aws-amplify'
+import { API, Auth, graphqlOperation } from 'aws-amplify'
 import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
@@ -15,7 +15,8 @@ import Game from '@components/Game'
 import { MiniHero } from '@components/Hero'
 import { seeds } from '@lib/teams'
 import { createEntry, updateEntry } from 'src/graphql/mutations'
-import { listEntrys } from 'src/graphql/queries'
+import { entryByUsername } from 'src/graphql/queries'
+import Loading from '@components/Loading'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -31,23 +32,31 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-const Bracket = ({ entry }) => {
+const initialFields = {
+  tieBreaker: 0,
+  superBowl: null,
+  afcConference: null,
+  nfcConference: null,
+  afcDivisional1: null,
+  afcDivisional2: null,
+  nfcDivisional1: null,
+  nfcDivisional2: null,
+  afcWildCard1: null,
+  afcWildCard2: null,
+  afcWildCard3: null,
+  nfcWildCard1: null,
+  nfcWildCard2: null,
+  nfcWildCard3: null
+}
+
+const Bracket = () => {
   const classes = useStyles()
   const [waiting, setWaiting] = React.useState<boolean>(false)
   const [saved, setSaved] = React.useState<boolean>(false)
-  const [user, setUser] = React.useState<any>(null)
 
-  React.useEffect(() => {
-    const getUser = async () => {
-      const tmpUser = await Auth.currentAuthenticatedUser()
-      setUser(tmpUser)
-    }
-    getUser()
-  }, [])
-
-  const initialFormFields = entry
   const { values, handleChange, handleSubmit, handleUpdateFields } = useForm(async () => {
     setWaiting(true)
+    const user = await Auth.currentAuthenticatedUser()
     const entryData = {
       ...values,
       username: user.username,
@@ -76,7 +85,8 @@ const Bracket = ({ entry }) => {
         })
         const newValues = {
           ...entryData,
-          id: data.createEntry.id
+          id: data.createEntry.id,
+          _version: data.createEntry._version
         }
         handleUpdateFields(newValues)
         setWaiting(false)
@@ -85,7 +95,51 @@ const Bracket = ({ entry }) => {
         console.log(e)
       }
     }
-  }, initialFormFields)
+  }, initialFields)
+
+  React.useEffect(() => {
+    console.log(values)
+  }, [values])
+
+  React.useEffect(() => {
+    const checkForEntry = async () => {
+      try {
+        const user = await Auth.currentAuthenticatedUser()
+
+        const { data }: any = await API.graphql(
+          graphqlOperation(entryByUsername, { username: `${user.username}`, limit: 1 })
+        )
+        if (data) {
+          const [rawEntry] = data.entryByUsername.items
+          if (rawEntry) {
+            const entry = {
+              id: rawEntry.id,
+              _version: rawEntry._version,
+              username: rawEntry.username,
+              tieBreaker: rawEntry.tieBreaker,
+              superBowl: rawEntry.superBowl,
+              afcConference: rawEntry.afcConference,
+              nfcConference: rawEntry.nfcConference,
+              afcDivisional1: rawEntry.afcDivisional1,
+              afcDivisional2: rawEntry.afcDivisional2,
+              nfcDivisional1: rawEntry.nfcDivisional1,
+              nfcDivisional2: rawEntry.nfcDivisional2,
+              afcWildCard1: rawEntry.afcWildCard1,
+              afcWildCard2: rawEntry.afcWildCard2,
+              afcWildCard3: rawEntry.afcWildCard3,
+              nfcWildCard1: rawEntry.nfcWildCard1,
+              nfcWildCard2: rawEntry.nfcWildCard2,
+              nfcWildCard3: rawEntry.nfcWildCard3
+            }
+            handleUpdateFields(entry)
+          }
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    checkForEntry()
+  }, [])
 
   const handleCloseSnackbar = () => {
     setSaved(false)
@@ -97,6 +151,7 @@ const Bracket = ({ entry }) => {
     label: string
     home: number | string
     away: number | string
+    values?: any
   }
 
   const GameDisplay = ({ conf = '', name, label, home, away }: GameDisplayParams) => {
@@ -149,7 +204,7 @@ const Bracket = ({ entry }) => {
     )
   }
 
-  const WildCardRound = ({ conf }) => {
+  const WildCardRound = ({ conf }: { conf: string }) => {
     return (
       <Grid item container xs={12} md={4}>
         <Grid container direction='column'>
@@ -248,38 +303,42 @@ const Bracket = ({ entry }) => {
   return (
     <>
       <MiniHero />
-      <form onSubmit={handleSubmit}>
-        <Grid container className={classes.root} spacing={1}>
-          <Grid container wrap='nowrap'>
-            <ConferenceBrackets conf='afc' />
-            <ConferenceBrackets conf='nfc' />
+      {values ? (
+        <form onSubmit={handleSubmit}>
+          <Grid container className={classes.root} spacing={1}>
+            <Grid container wrap='nowrap'>
+              <ConferenceBrackets conf='afc' />
+              <ConferenceBrackets conf='nfc' />
+            </Grid>
+            <SuperBowl />
           </Grid>
-          <SuperBowl />
-        </Grid>
 
-        <XS align='center'>
-          <>
-            {saved && (
-              <Box m={2}>
-                <Alert onClose={handleCloseSnackbar} severity='success'>
-                  Entry has been saved!
-                </Alert>
+          <XS align='center'>
+            <>
+              {saved && (
+                <Box m={2}>
+                  <Alert onClose={handleCloseSnackbar} severity='success'>
+                    Entry has been saved!
+                  </Alert>
+                </Box>
+              )}
+              <Box mt={2}>
+                <Contained type='submit' color='primary'>
+                  <>
+                    {waiting ? (
+                      <CircularProgress color='inherit' size={20} />
+                    ) : (
+                      <>{values && values.id ? 'Update Entry' : 'Submit Entry'}</>
+                    )}
+                  </>
+                </Contained>
               </Box>
-            )}
-            <Box mt={2}>
-              <Contained type='submit' color='primary'>
-                <>
-                  {waiting ? (
-                    <CircularProgress color='inherit' size={20} />
-                  ) : (
-                    <>{values.id ? 'Update Entry' : 'Submit Entry'}</>
-                  )}
-                </>
-              </Contained>
-            </Box>
-          </>
-        </XS>
-      </form>
+            </>
+          </XS>
+        </form>
+      ) : (
+        <Loading />
+      )}
     </>
   )
 }
