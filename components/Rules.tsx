@@ -28,8 +28,8 @@ const Rules = () => {
       </P>
       <P>In the event a match does not occur, no points will be awarded for that match.</P>
       <P>
-        All entries / picks will be locked at the start of the first scheduled game. Once brackets
-        are locked no additional changes can be made to the brackets submitted.
+        All entries / picks will be locked 1 hour before the start of the first wild card game. Once
+        brackets are locked no additional changes can be made to the brackets submitted.
       </P>
       <P>
         Ties: In the event of a tie after games are concluded, entrants are required to enter the
