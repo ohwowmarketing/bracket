@@ -21,7 +21,9 @@ const amplifyAuthReducer = (state, action) => {
     case 'RESET_USER_DATA':
       return { ...state, user: null }
     case 'ERROR_MESSAGE':
-      return { ...state, isError: true, errroMessage: action.payload.errorMessage }
+      return { ...state, isError: true, errorMessage: action.payload.errorMessage }
+    case 'CLEAR_ERROR_MESSAGE':
+      return { ...state, isError: false, errorMessage: '' }
     default:
       throw new Error()
   }
@@ -69,6 +71,7 @@ const useAmplifyAuth = () => {
     }
 
     const onAuthEvent = payload => {
+      console.log(`auth event: ${payload.event} with data: ${payload.data.message}`)
       switch (payload.event) {
         case 'signIn':
           if (isMounted) {
@@ -105,7 +108,11 @@ const useAmplifyAuth = () => {
     }
   }
 
-  return { state, handleSignOut }
+  const handleClearError = () => {
+    dispatch({ type: 'CLEAR_ERROR_MESSAGE' })
+  }
+
+  return { state, handleSignOut, handleClearError }
 }
 
 export default useAmplifyAuth

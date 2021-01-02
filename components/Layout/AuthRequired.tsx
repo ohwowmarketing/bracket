@@ -27,10 +27,11 @@ export const UserContext = React.createContext<UserContextType | undefined>(unde
 
 const Layout = ({ children }) => {
   const classes = useStyles()
-  const [forceClose, setForceClose] = React.useState<boolean>(false)
+  // const [forceClose, setForceClose] = React.useState<boolean>(false)
   const {
     state: { user, errorMessage },
-    handleSignOut
+    handleSignOut,
+    handleClearError
   } = useAmplifyAuth()
   return !user ? (
     <>
@@ -39,8 +40,8 @@ const Layout = ({ children }) => {
       <Container>
         <Box my={4}>
           <MD>
-            {errorMessage !== '' && !forceClose && (
-              <Alert severity='warning' onClose={() => setForceClose(true)}>
+            {errorMessage !== '' && (
+              <Alert severity='warning' onClose={handleClearError}>
                 {errorMessage}
               </Alert>
             )}
