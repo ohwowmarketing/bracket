@@ -160,7 +160,7 @@ const Bracket = () => {
           state: user.attributes['custom:state']
         })
         if (response && response.status === 200) {
-          await Auth.updateUserAttributes(user, { 'custom:mc': 1 })
+          await Auth.updateUserAttributes(user, { 'custom:mc': '1' })
         }
       } catch (e) {
         console.error(e)
