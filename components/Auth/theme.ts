@@ -20,9 +20,11 @@ export const authTheme = {
     textAlign: 'left'
   },
   sectionFooter: {
-    linkColor: theme.palette.primary.main
+    linkColor: theme.palette.primary.main,
+    fontSize: '20px'
   },
   button: {
+    marginLeft: theme.spacing(1),
     backgroundColor: theme.palette.primary.main,
     borderRadius: `${theme.shape.borderRadius}px`,
     fontFamily: theme.typography.fontFamily
