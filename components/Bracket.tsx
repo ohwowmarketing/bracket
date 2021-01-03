@@ -54,6 +54,7 @@ const Bracket = () => {
   const classes = useStyles()
   const [waiting, setWaiting] = React.useState<boolean>(false)
   const [saved, setSaved] = React.useState<boolean>(false)
+  const [user, setUser] = React.useState<any>(null)
 
   const { values, handleChange, handleSubmit, handleUpdateFields } = useForm(async () => {
     setWaiting(true)
@@ -99,18 +100,20 @@ const Bracket = () => {
   }, initialFields)
 
   React.useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userData = await Auth.currentAuthenticatedUser()
+        setUser(userData)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    fetchUser()
+  }, [])
+
+  React.useEffect(() => {
     const checkForEntry = async () => {
       try {
-        const user = await Auth.currentAuthenticatedUser()
-
-        if (!user.attributes['custom:mc'] && user.attributes['custom:state']) {
-          await axios.post('https://sggplayoffs.com/api/mc/add', {
-            email: user.attributes.email,
-            state: user.attributes['custom:state']
-          })
-          await Auth.updateUserAttributes(user, { 'custom:mc': 1 })
-        }
-
         const { data }: any = await API.graphql(
           graphqlOperation(entryByUsername, { username: `${user.username}`, limit: 1 })
         )
@@ -143,8 +146,29 @@ const Bracket = () => {
         console.error(e)
       }
     }
-    checkForEntry()
-  }, [])
+
+    if (user) {
+      checkForEntry()
+    }
+  }, [user])
+
+  React.useEffect(() => {
+    const addUserToMailchimp = async () => {
+      try {
+        const response = await axios.post('https://sggplayoffs.com/api/mc/add', {
+          email: user.attributes.email,
+          state: user.attributes['custom:state']
+        })
+        console.log(response)
+        await Auth.updateUserAttributes(user, { 'custom:mc': 1 })
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    if (user && user.attributes['custom:state'] && !user.attributes['custom:mc']) {
+      addUserToMailchimp
+    }
+  }, [user])
 
   const handleCloseSnackbar = () => {
     setSaved(false)
