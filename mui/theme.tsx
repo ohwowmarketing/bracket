@@ -40,7 +40,8 @@ const theme = createMuiTheme({
           backgroundImage: 'url(/backgrounds/stadium.svg)',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'bottom center',
-          backgroundAttachment: 'fixed'
+          backgroundAttachment: 'fixed',
+          backgroundSize: 'cover'
         }
       }
     }
