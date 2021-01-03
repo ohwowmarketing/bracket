@@ -22,6 +22,9 @@ const useStyles = makeStyles(theme => ({
   },
   secondaryColor: {
     color: theme.palette.secondary.main
+  },
+  white: {
+    color: '#fff'
   }
 }))
 
@@ -38,7 +41,7 @@ const Hero = () => {
       </H5>
       <Box mt={2}>
         <Contained component={Link} href='/auth/entry' color='primary' align='center'>
-          Create Account | Sign In
+          <span className={classes.white}>Create Account | Sign In</span>
         </Contained>
       </Box>
     </SM>
