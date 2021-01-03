@@ -159,14 +159,15 @@ const Bracket = () => {
           email: user.attributes.email,
           state: user.attributes['custom:state']
         })
-        console.log(response)
-        await Auth.updateUserAttributes(user, { 'custom:mc': 1 })
+        if (response && response.status === 200) {
+          await Auth.updateUserAttributes(user, { 'custom:mc': 1 })
+        }
       } catch (e) {
         console.error(e)
       }
     }
     if (user && user.attributes['custom:state'] && !user.attributes['custom:mc']) {
-      addUserToMailchimp
+      addUserToMailchimp()
     }
   }, [user])
 
