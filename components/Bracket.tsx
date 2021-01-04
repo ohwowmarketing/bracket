@@ -215,19 +215,17 @@ const Bracket = () => {
             away={values.nfcConference}
             onChange={handleChange}
             value={values.superBowl}>
-            {values.superBowl !== null && (
-              <div className={classes.textFieldContainer}>
-                <TextField
-                  type='number'
-                  name='tieBreaker'
-                  label='Total Combined Score (Tie Breaker)'
-                  variant='outlined'
-                  value={values.tieBreaker}
-                  onChange={handleChange}
-                  fullWidth
-                />
-              </div>
-            )}
+            <div className={classes.textFieldContainer}>
+              <TextField
+                type='number'
+                name='tieBreaker'
+                label='Total Combined Score (Tie Breaker)'
+                variant='outlined'
+                value={values.tieBreaker || 0}
+                onChange={handleChange}
+                fullWidth
+              />
+            </div>
           </Game>
         </Grid>
       </Grid>
