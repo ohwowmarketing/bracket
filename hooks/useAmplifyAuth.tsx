@@ -71,7 +71,7 @@ const useAmplifyAuth = () => {
     }
 
     const onAuthEvent = payload => {
-      console.log(`auth event: ${payload.event} with data: ${payload.data.message}`)
+      // console.log(`auth event: ${payload.event} with data: ${payload.data.message}`)
       switch (payload.event) {
         case 'signIn':
           if (isMounted) {
