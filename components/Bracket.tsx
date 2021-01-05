@@ -239,10 +239,10 @@ const Bracket = () => {
           <Grid item xs>
             <GameDisplay
               conf={conf}
-              name='WildCard3'
+              name='WildCard1'
               label='Wild Card (10 points)'
-              home={2}
-              away={7}
+              home={4}
+              away={5}
             />
           </Grid>
           <Grid item xs>
@@ -257,10 +257,10 @@ const Bracket = () => {
           <Grid item xs>
             <GameDisplay
               conf={conf}
-              name='WildCard1'
+              name='WildCard3'
               label='Wild Card (10 points)'
-              home={4}
-              away={5}
+              home={2}
+              away={7}
             />
           </Grid>
         </Grid>
@@ -278,7 +278,7 @@ const Bracket = () => {
               name='Divisional1'
               label='Divisional (20 points)'
               home={1}
-              away='WildCard3'
+              away='WildCard1'
             />
           </Grid>
           <Grid item xs>
@@ -286,8 +286,8 @@ const Bracket = () => {
               conf={conf}
               name='Divisional2'
               label='Divisional (20 points)'
-              home='WildCard2'
-              away='WildCard1'
+              home='WildCard3'
+              away='WildCard2'
             />
           </Grid>
         </Grid>
