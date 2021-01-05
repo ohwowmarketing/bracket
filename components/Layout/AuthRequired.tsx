@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
                   hiddenDefaults: ['phone_number'],
                   signUpFields: [
                     {
-                      label: 'State',
+                      label: 'State Abbreviation',
                       placeholder: 'DC',
                       key: 'custom:state',
                       required: true,
