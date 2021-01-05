@@ -27,12 +27,32 @@ export const UserContext = React.createContext<UserContextType | undefined>(unde
 
 const Layout = ({ children }) => {
   const classes = useStyles()
+  const [displayedError, setDisplayedError] = React.useState<string>('')
   // const [forceClose, setForceClose] = React.useState<boolean>(false)
   const {
     state: { user, errorMessage },
     handleSignOut,
     handleClearError
   } = useAmplifyAuth()
+
+  const map = message => {
+    setDisplayedError(message)
+
+    return message
+  }
+
+  React.useEffect(() => {
+    if (errorMessage !== '') {
+      if (/incorrect.*username.*password/i.test(errorMessage)) {
+        setDisplayedError('Incorrect username or password')
+      } else if (/username.*expression/i.test(errorMessage)) {
+        setDisplayedError('Username may not contain spaces')
+      } else {
+        setDisplayedError(errorMessage)
+      }
+    }
+  }, [errorMessage])
+
   return !user ? (
     <>
       <AppBar />
@@ -40,12 +60,16 @@ const Layout = ({ children }) => {
       <Container>
         <Box my={4}>
           <MD>
-            {errorMessage !== '' && (
+            {displayedError !== '' && (
               <Alert severity='warning' onClose={handleClearError}>
-                {errorMessage}
+                {displayedError}
               </Alert>
             )}
-            <Authenticator theme={authTheme} hideDefault={true} authState='signIn'>
+            <Authenticator
+              theme={authTheme}
+              errorMessage={map}
+              hideDefault={true}
+              authState='signIn'>
               <SignIn />
               <SignUp
                 signUpConfig={{
