@@ -1,5 +1,7 @@
 export interface TeamParams {
   id: string
+  seed: number
+  conference: string
   city: string
   name: string
   logo: string
@@ -23,38 +25,104 @@ interface SeedParams {
 }
 
 export const teams: TeamParams[] = [
-  { id: 'ARI', city: 'Arizona', name: 'Cardinals', logo: '/logos/ari.svg' },
-  { id: 'ATL', city: 'Atlanta', name: 'Falcons', logo: '/logos/atl.svg' },
-  { id: 'BAL', city: 'Baltimore', name: 'Ravens', logo: '/logos/bal.svg' },
-  { id: 'BUF', city: 'Buffalo', name: 'Bills', logo: '/logos/buf.svg' },
-  { id: 'CAR', city: 'Carolina', name: 'Panthers', logo: '/logos/car.svg' },
-  { id: 'CHI', city: 'Chicago', name: 'Bears', logo: '/logos/chi.svg' },
-  { id: 'CIN', city: 'Cincinnati', name: 'Bengals', logo: '/logos/cin.svg' },
-  { id: 'CLE', city: 'Cleveland', name: 'Browns', logo: '/logos/cle.svg' },
-  { id: 'DAL', city: 'Dallas', name: 'Cowboys', logo: '/logos/dal.svg' },
-  { id: 'DEN', city: 'Denver', name: 'Broncos', logo: '/logos/den.svg' },
-  { id: 'DET', city: 'Detroit', name: 'Lions', logo: '/logos/det.svg' },
-  { id: 'GB', city: 'Green Bay', name: 'Packers', logo: '/logos/gb.svg' },
-  { id: 'HOU', city: 'Houston', name: 'Texans', logo: '/logos/hou.svg' },
-  { id: 'IND', city: 'Indianapolis', name: 'Colts', logo: '/logos/ind.svg' },
-  { id: 'JAX', city: 'Jacksonville', name: 'Jaguars', logo: '/logos/jax.svg' },
-  { id: 'KC', city: 'Kansas City', name: 'Chiefs', logo: '/logos/kc.svg' },
-  { id: 'LAC', city: 'Los Angeles', name: 'Chargers', logo: '/logos/lac.svg' },
-  { id: 'LAR', city: 'Los Angeles', name: 'Rams', logo: '/logos/lar.svg' },
-  { id: 'LV', city: 'Las Vegas', name: 'Raiders', logo: '/logos/lv.svg' },
-  { id: 'MIA', city: 'Miami', name: 'Dolphins', logo: '/logos/mia.svg' },
-  { id: 'MIN', city: 'Minnesota', name: 'Vikings', logo: '/logos/min.svg' },
-  { id: 'NE', city: 'New England', name: 'Patriots', logo: '/logos/ne.svg' },
-  { id: 'NO', city: 'New Orleans', name: 'Saints', logo: '/logos/no.svg' },
-  { id: 'NYG', city: 'New York', name: 'Giants', logo: '/logos/nyg.svg' },
-  { id: 'NYJ', city: 'New York', name: 'Jets', logo: '/logos/nyj.svg' },
-  { id: 'PHI', city: 'Philadelphia', name: 'Eagles', logo: '/logos/phi.svg' },
-  { id: 'PIT', city: 'Pittsburgh', name: 'Steelers', logo: '/logos/pit.svg' },
-  { id: 'SEA', city: 'Seattle', name: 'Seahawks', logo: '/logos/sea.svg' },
-  { id: 'SF', city: 'San Francisco', name: '49ers', logo: '/logos/sf.svg' },
-  { id: 'TB', city: 'Tampa Bay', name: 'Buccaneers', logo: '/logos/tb.svg' },
-  { id: 'TEN', city: 'Tennessee', name: 'Titans', logo: '/logos/ten.svg' },
-  { id: 'WAS', city: 'Washington', name: 'Football Team', logo: '/logos/was.jpg' }
+  {
+    id: 'BAL',
+    seed: 5,
+    conference: 'afc',
+    city: 'Baltimore',
+    name: 'Ravens',
+    logo: '/logos/bal.svg'
+  },
+  { id: 'BUF', seed: 2, conference: 'afc', city: 'Buffalo', name: 'Bills', logo: '/logos/buf.svg' },
+  { id: 'CHI', seed: 7, conference: 'nfc', city: 'Chicago', name: 'Bears', logo: '/logos/chi.svg' },
+  {
+    id: 'CLE',
+    seed: 6,
+    conference: 'afc',
+    city: 'Cleveland',
+    name: 'Browns',
+    logo: '/logos/cle.svg'
+  },
+  {
+    id: 'GB',
+    seed: 1,
+    conference: 'nfc',
+    city: 'Green Bay',
+    name: 'Packers',
+    logo: '/logos/gb.svg'
+  },
+  {
+    id: 'IND',
+    seed: 7,
+    conference: 'afc',
+    city: 'Indianapolis',
+    name: 'Colts',
+    logo: '/logos/ind.svg'
+  },
+  {
+    id: 'KC',
+    seed: 1,
+    conference: 'afc',
+    city: 'Kansas City',
+    name: 'Chiefs',
+    logo: '/logos/kc.svg'
+  },
+  {
+    id: 'LAR',
+    seed: 6,
+    conference: 'nfc',
+    city: 'Los Angeles',
+    name: 'Rams',
+    logo: '/logos/lar.svg'
+  },
+  {
+    id: 'NO',
+    seed: 2,
+    conference: 'nfc',
+    city: 'New Orleans',
+    name: 'Saints',
+    logo: '/logos/no.svg'
+  },
+  {
+    id: 'PIT',
+    seed: 3,
+    conference: 'afc',
+    city: 'Pittsburgh',
+    name: 'Steelers',
+    logo: '/logos/pit.svg'
+  },
+  {
+    id: 'SEA',
+    seed: 3,
+    conference: 'nfc',
+    city: 'Seattle',
+    name: 'Seahawks',
+    logo: '/logos/sea.svg'
+  },
+  {
+    id: 'TB',
+    seed: 5,
+    conference: 'nfc',
+    city: 'Tampa Bay',
+    name: 'Buccaneers',
+    logo: '/logos/tb.svg'
+  },
+  {
+    id: 'TEN',
+    seed: 4,
+    conference: 'afc',
+    city: 'Tennessee',
+    name: 'Titans',
+    logo: '/logos/ten.svg'
+  },
+  {
+    id: 'WAS',
+    seed: 4,
+    conference: 'nfc',
+    city: 'Washington',
+    name: 'Football Team',
+    logo: '/logos/was.jpg'
+  }
 ]
 
 export const seeds: SeedParams = {

@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Paper from '@material-ui/core/Paper'
 import { teamById, TeamParams } from '@lib/teams'
-import Label from '@components/Label'
+import TeamDisplay from '@components/TeamDisplay'
 
 const useStyles = makeStyles((theme: Theme) => ({
   formControl: {
@@ -67,7 +67,7 @@ const Game = ({ name, label, home, away, value = '', onChange, children }: GameP
                 <FormControlLabel
                   value={homeTeam.id}
                   control={<Radio />}
-                  label={<Label name={homeTeam.name} logo={homeTeam.logo} />}
+                  label={<TeamDisplay id={homeTeam.id} />}
                 />
               ) : (
                 <FormControlLabel disabled control={<Radio />} label='TBD' />
@@ -76,7 +76,7 @@ const Game = ({ name, label, home, away, value = '', onChange, children }: GameP
                 <FormControlLabel
                   value={awayTeam.id}
                   control={<Radio />}
-                  label={<Label name={awayTeam.name} logo={awayTeam.logo} />}
+                  label={<TeamDisplay id={awayTeam.id} />}
                 />
               ) : (
                 <FormControlLabel disabled control={<Radio />} label='TBD' />
