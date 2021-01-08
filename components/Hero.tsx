@@ -57,8 +57,16 @@ export const MiniHero = () => {
       </H5>
       <Body1 align='center' color='textSecondary'>
         Pick the most accurate NFL Playoff Bracket for your chance to win a share of $1,000 in
-        prizes. After each round is completed, sign back into your account to see leaderboard
-        results.
+        prizes.
+      </Body1>
+      <Body1 align='center' color='textSecondary'>
+        After each round is completed, sign back into your account to see leaderboard results.
+      </Body1>
+      <Body1 align='center' color='textSecondary'>
+        All entries / picks will be locked on Saturday, January 9th, 2021 at 12:05 PM EST.
+      </Body1>
+      <Body1 align='center' color='textSecondary'>
+        Once brackets are locked no additional changes can be made to the brackets submitted.
       </Body1>
       <Caption>
         (See <Link href='/auth/rules'>Rules/Prizes</Link> for details.)

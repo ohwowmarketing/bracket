@@ -28,7 +28,7 @@ const Rules = () => {
       </P>
       <P>In the event a match does not occur, no points will be awarded for that match.</P>
       <P>
-        All entries / picks will be locked 1 hour before the start of the first wild card game. Once
+        All entries / picks will be locked on Saturday, January 8th, 2021 at 12:05 PM EST. Once
         brackets are locked no additional changes can be made to the brackets submitted.
       </P>
       <P>
