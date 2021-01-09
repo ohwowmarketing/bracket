@@ -1,5 +1,9 @@
 import { withSSRContext } from 'aws-amplify'
-import { listLeaderboards } from 'src/graphql/queries'
+import {
+  listLeaderboards,
+  // leaderByUsername,
+  entryByUsername
+} from 'src/graphql/queries'
 // import { listScores } from 'src/graphql/queries'
 // import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
 import { makeStyles } from '@material-ui/core/styles'
@@ -23,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Leaderboard = ({ leaderboards }) => {
+const Leaderboard = ({ leaderboards, user }) => {
   const classes = useStyles()
   return (
     <Layout>
@@ -54,6 +58,22 @@ const Leaderboard = ({ leaderboards }) => {
                   </TableCell>
                 </TableRow>
               ))}
+              <TableRow key='blank'>
+                <TableCell>{'...'}</TableCell>
+                <TableCell align='right'> </TableCell>
+                <TableCell align='right'> </TableCell>
+              </TableRow>
+              <TableRow key={`user-${user.username}`}>
+                <TableCell>{user.username}</TableCell>
+                <TableCell align='right'>{user.points}</TableCell>
+                <TableCell align='right'>
+                  <Link href={`/auth/leaderboard/${user.username}`}>
+                    <Contained color='primary' size='small'>
+                      View Picks
+                    </Contained>
+                  </Link>
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
@@ -65,17 +85,33 @@ const Leaderboard = ({ leaderboards }) => {
 export const getServerSideProps = async ({ req, res }) => {
   const { Auth, API } = withSSRContext({ req })
   try {
-    await Auth.currentAuthenticatedUser()
+    const user = await Auth.currentAuthenticatedUser()
     const { data } = await API.graphql({
-      query: listLeaderboards
+      query: listLeaderboards,
+      variables: {
+        limit: 20
+      }
     })
     const leaderboards = data.listLeaderboards.items
     await leaderboards.sort((a, b) => b.points - a.points)
+    const prizes = 6
+    const leaders = leaderboards.slice(0, prizes).map(i => i)
+
+    const userPoints = await API.graphql({
+      query: entryByUsername,
+      variables: {
+        username: user.username
+      }
+    })
+    const [userData] = userPoints.data.entryByUsername.items
+    let points = userData.afcWildCard3 === 'BUF' ? 10 : 0
+
     return {
-      props: { leaderboards }
+      props: { leaderboards: leaders, user: { username: user.username, points } }
     }
   } catch (err) {
-    res.writeHead(302, { Location: '/auth/signin' })
+    console.error(err)
+    res.writeHead(302, { Location: '/' })
     res.end()
   }
   return { props: {} }

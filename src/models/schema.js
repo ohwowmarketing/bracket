@@ -33,6 +33,16 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsername",
+                        "fields": [
+                            "username"
+                        ],
+                        "queryField": "leaderByUsername"
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -466,5 +476,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "f5e6e5d9183f75469a06d4225b9c1fd5"
+    "version": "41f284eacd9f64fcff14f432a0fe4231"
 };

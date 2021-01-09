@@ -19,10 +19,9 @@ import { XS, Box } from '@mui/Layout'
 import { H4 } from '@mui/Typography'
 import { entryByUsername } from 'src/graphql/queries'
 import { createEntry, updateEntry } from 'src/graphql/mutations'
-import { seeds, teamById, TeamParams } from '@lib/teams'
+import { seeds } from '@lib/teams'
 import { MiniHero } from '@components/Hero'
 import TeamDisplay from '@components/TeamDisplay'
-import Game from '@components/Game'
 import Loading from '@components/Loading'
 
 const initialFields = {

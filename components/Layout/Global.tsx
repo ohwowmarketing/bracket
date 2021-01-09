@@ -1,8 +1,8 @@
 import * as React from 'react'
-import AppBar from 'components/AppBar'
-import Footer from 'components/Footer'
 import { makeStyles } from '@material-ui/core/styles'
 import { Container, Box } from '@mui/Layout'
+import AppBar from '@components/Layout/AppBar'
+import Footer from '@components/Layout/Footer'
 
 const useStyles = makeStyles(theme => ({
   offset: theme.mixins.toolbar

@@ -79,6 +79,7 @@ export default async (req, res) => {
     try {
       const listEntrysQuery = await API.graphql({
         query: listEntrys,
+        variables: { limit: 200 },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
       })
       const entries = listEntrysQuery.data.listEntrys.items

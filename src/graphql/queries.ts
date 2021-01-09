@@ -38,6 +38,36 @@ export const listLeaderboards = /* GraphQL */ `
     }
   }
 `;
+export const leaderByUsername = /* GraphQL */ `
+  query LeaderByUsername(
+    $username: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelLeaderboardFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    leaderByUsername(
+      username: $username
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        username
+        points
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const syncLeaderboards = /* GraphQL */ `
   query SyncLeaderboards(
     $filter: ModelLeaderboardFilterInput

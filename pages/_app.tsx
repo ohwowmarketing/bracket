@@ -12,13 +12,8 @@ Amplify.configure({
   ...config,
   ssr: true
 })
-// export const UserContext = React.createContext()
 
 const App = ({ Component, pageProps }: AppProps) => {
-  // const {
-  //   state: { user },
-  //   handleSignOut
-  // } = useAmplifyAuth()
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) {

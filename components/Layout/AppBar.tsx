@@ -12,9 +12,8 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import Icon from '@material-ui/core/Icon'
 import MuiLink from '@material-ui/core/Link'
-import { H6 } from 'mui/Typography'
-import Link from './Link'
-import { any } from 'prop-types'
+import { H6 } from '@mui/Typography'
+import Link from '@components/Link'
 
 const drawerWidth = 240
 
@@ -117,12 +116,12 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                         </ListItemIcon>
                         <ListItemText primary='Your Entry' />
                       </ListItem>
-                      {/* <ListItem button key='entry' component={Link} href='/auth/leaderboard'>
+                      <ListItem button key='entry' component={Link} href='/auth/leaderboard'>
                         <ListItemIcon>
                           <Icon className='fas fa-trophy fa-xs' color='primary' />
                         </ListItemIcon>
                         <ListItemText primary='Leaderboard' />
-                      </ListItem> */}
+                      </ListItem>
                       <ListItem button key='entry' component={Link} href='/auth/rules'>
                         <ListItemIcon>
                           <Icon className='fas fa-tasks fa-xs' color='primary' />
@@ -174,9 +173,9 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                   <Link variant='button' href='/auth/entry' className={classes.link}>
                     Your Entry
                   </Link>
-                  {/* <Link variant='button' href='/auth/leaderboard' className={classes.link}>
+                  <Link variant='button' href='/auth/leaderboard' className={classes.link}>
                     Leaderboard
-                  </Link> */}
+                  </Link>
                   <Link variant='button' href='/auth/rules' className={classes.link}>
                     Rules / Prizes
                   </Link>

@@ -1,12 +1,12 @@
-// import Bracket from '@components/Bracket'
-import NFL2021Entry from '@components/Campaign/NFL2021Entry'
+// import NFL2021 from '@components/Campaign/NFL2021'
+import EntryTable from '@components/Campaign/NFL2021/EntryTable'
 import Layout from '@components/Layout/AuthRequired'
 
 const Entry = () => {
   return (
     <Layout>
-      {/* <Bracket /> */}
-      <NFL2021Entry />
+      {/* <NFL2021 /> */}
+      <EntryTable />
     </Layout>
   )
 }

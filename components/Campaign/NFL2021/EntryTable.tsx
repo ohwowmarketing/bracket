@@ -22,7 +22,7 @@ const initialFields = {
   nfcWildCard3: ''
 }
 
-const NFL2021Entry = () => {
+const EntryTable = () => {
   const [entry, setEntry] = React.useState<any>(initialFields)
   const [user, setUser] = React.useState<any>(null)
 
@@ -64,4 +64,4 @@ const NFL2021Entry = () => {
   return entry ? <DisplayEntry entry={entry} /> : <Loading />
 }
 
-export default NFL2021Entry
+export default EntryTable

@@ -1,12 +1,10 @@
 import * as React from 'react'
-import AppBar from 'components/AppBar'
-import Footer from 'components/Footer'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Authenticator,
   SignIn,
-  SignUp,
-  ConfirmSignUp,
+  // SignUp,
+  // ConfirmSignUp,
   ForgotPassword,
   RequireNewPassword
 } from 'aws-amplify-react'
@@ -14,6 +12,8 @@ import Alert from '@material-ui/lab/Alert'
 import { Container, Box, MD } from '@mui/Layout'
 import useAmplifyAuth from '@hooks/useAmplifyAuth'
 import { authTheme } from '@components/Auth/theme'
+import AppBar from '@components/Layout/AppBar'
+import Footer from '@components/Layout/Footer'
 
 const useStyles = makeStyles(theme => ({
   offset: theme.mixins.toolbar
@@ -28,7 +28,6 @@ export const UserContext = React.createContext<UserContextType | undefined>(unde
 const Layout = ({ children }) => {
   const classes = useStyles()
   const [displayedError, setDisplayedError] = React.useState<string>('')
-  // const [forceClose, setForceClose] = React.useState<boolean>(false)
   const {
     state: { user, errorMessage },
     handleSignOut,
@@ -71,7 +70,7 @@ const Layout = ({ children }) => {
               hideDefault={true}
               authState='signIn'>
               <SignIn />
-              <SignUp
+              {/* <SignUp
                 signUpConfig={{
                   hiddenDefaults: ['phone_number'],
                   signUpFields: [
@@ -86,7 +85,7 @@ const Layout = ({ children }) => {
                   ]
                 }}
               />
-              <ConfirmSignUp />
+              <ConfirmSignUp /> */}
               <ForgotPassword />
               <RequireNewPassword />
             </Authenticator>

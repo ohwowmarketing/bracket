@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles'
-import Link from 'components/Link'
+import Link from '@components/Link'
 import { SM, MD, Box } from '@mui/Layout'
-import { H3, H5, Body1, Caption } from 'mui/Typography'
-import { Contained } from 'mui/Button'
+import { H3, H5, Body1, Caption } from '@mui/Typography'
+import { Contained } from '@mui/Button'
 
 const useStyles = makeStyles(theme => ({
   hero: {
