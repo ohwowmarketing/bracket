@@ -41,7 +41,7 @@ const Hero = () => {
       </H5>
       <Box mt={2}>
         <Contained component={Link} href='/auth/entry' color='primary' align='center'>
-          <span className={classes.white}>Create Account | Sign In</span>
+          <span className={classes.white}>Sign In</span>
         </Contained>
       </Box>
     </SM>
