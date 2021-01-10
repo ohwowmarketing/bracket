@@ -86,16 +86,24 @@ export const getServerSideProps = async ({ req, res }) => {
   const { Auth, API } = withSSRContext({ req })
   try {
     const user = await Auth.currentAuthenticatedUser()
-    const { data } = await API.graphql({
-      query: listLeaderboards,
-      variables: {
-        limit: 20
-      }
-    })
-    const leaderboards = data.listLeaderboards.items
-    await leaderboards.sort((a, b) => b.points - a.points)
-    const prizes = 6
-    const leaders = leaderboards.slice(0, prizes).map(i => i)
+    // const { data } = await API.graphql({
+    //   query: listLeaderboards,
+    //   variables: {
+    //     limit: 20
+    //   }
+    // })
+    // const leaderboards = data.listLeaderboards.items
+    // await leaderboards.sort((a, b) => b.points - a.points)
+    // const prizes = 6
+    // const leaders = leaderboards.slice(0, prizes).map(i => i)
+    const leaders = [
+      { username: 'Evancaro54', points: '30' },
+      { username: 'Max_Hernandez31', points: '30' },
+      { username: 'Calvin02', points: '30' },
+      { username: 'Dandan4927', points: '30' },
+      { username: 'ttrifecta', points: '30' },
+      { username: 'Jaxonallen3', points: '30' }
+    ]
 
     const userPoints = await API.graphql({
       query: entryByUsername,
