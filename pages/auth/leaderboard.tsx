@@ -97,12 +97,12 @@ export const getServerSideProps = async ({ req, res }) => {
     // const prizes = 6
     // const leaders = leaderboards.slice(0, prizes).map(i => i)
     const leaders = [
-      { username: 'Evancaro54', points: '30' },
-      { username: 'Max_Hernandez31', points: '30' },
-      { username: 'Calvin02', points: '30' },
-      { username: 'Dandan4927', points: '30' },
-      { username: 'ttrifecta', points: '30' },
-      { username: 'Jaxonallen3', points: '30' }
+      { username: 'dazwayersing16', points: '40' },
+      { username: 'ttrifecta', points: '40' },
+      { username: 'ruka_chan_52', points: '40' },
+      { username: 'Evancaro54', points: '40' },
+      { username: 'Finntorello3', points: '40' },
+      { username: 'perfy', points: '40' }
     ]
 
     const userPoints = await API.graphql({
@@ -120,6 +120,9 @@ export const getServerSideProps = async ({ req, res }) => {
       points += 10
     }
     if (userData.nfcWildCard1 === 'TB') {
+      points += 10
+    }
+    if (userData.afcWildCard1 === 'BAL') {
       points += 10
     }
     return {
