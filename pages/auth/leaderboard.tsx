@@ -104,8 +104,16 @@ export const getServerSideProps = async ({ req, res }) => {
       }
     })
     const [userData] = userPoints.data.entryByUsername.items
-    let points = userData.afcWildCard3 === 'BUF' ? 10 : 0
-
+    let points = 0
+    if (userData.afcWildCard3 === 'BUF') {
+      points += 10
+    }
+    if (userData.nfcWildCard2 === 'LAR') {
+      points += 10
+    }
+    if (userData.nfcWildCard1 === 'TB') {
+      points += 10
+    }
     return {
       props: { leaderboards: leaders, user: { username: user.username, points } }
     }
