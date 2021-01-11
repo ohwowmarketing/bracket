@@ -97,12 +97,34 @@ export const getServerSideProps = async ({ req, res }) => {
     // const prizes = 6
     // const leaders = leaderboards.slice(0, prizes).map(i => i)
     const leaders = [
-      { username: 'zlenz10', points: '50' },
-      { username: 'Jace.larson39', points: '50' },
-      { username: 'lukepopp', points: '50' },
-      { username: 'Colekannam', points: '50' },
-      { username: 'Shaner888', points: '50' },
-      { username: 'Tyler0312', points: '50' }
+      { username: 'blakeharshman', points: '60' },
+      { username: 'ethanrutherford', points: '60' },
+      { username: 'EthanVon', points: '60' },
+      { username: 'jacoblisbona', points: '60' },
+      { username: 'Captainkeags', points: '60' },
+      { username: 'wboelter', points: '60' },
+      { username: 'manny10', points: '60' },
+      { username: 'Beingeaglesfanhurts', points: '60' },
+      { username: 'amrose83', points: '60' },
+      { username: 'Bigsimonnn', points: '60' },
+      { username: 'WarEaglezzz', points: '60' },
+      { username: 'AnthonyDiMattia', points: '60' },
+      { username: 'EGBroadbent', points: '60' },
+      { username: 'Colekannam', points: '60' },
+      { username: 'SpookyShoes48', points: '60' },
+      { username: 'Ruben.da30', points: '60' },
+      { username: 'Randyy77', points: '60' },
+      { username: 'Slick', points: '60' },
+      { username: 'Lukesluyter', points: '60' },
+      { username: 'sbarsh', points: '60' },
+      { username: 'Epatrick2017', points: '60' },
+      { username: 'Terminatorwil', points: '60' },
+      { username: 'Jaredp', points: '60' },
+      { username: 'Ccurnow23', points: '60' },
+      { username: 'MilkyWRLD', points: '60' },
+      { username: 'Jacklowe', points: '60' },
+      { username: 'KyleTooFye', points: '60' },
+      { username: 'Coheathomas', points: '60' }
     ]
 
     const userPoints = await API.graphql({
@@ -113,16 +135,20 @@ export const getServerSideProps = async ({ req, res }) => {
     })
     const [userData] = userPoints.data.entryByUsername.items
     let points = 0
-    if (userData.afcWildCard3 === 'BUF') {
+    if (userData.afcWildCard1 === 'BAL') {
       points += 10
     }
-    if (userData.nfcWildCard2 === 'LAR') {
+    if (userData.afcWildCard2 === 'CLE') {
+      // or PIT
+      points += 10
+    }
+    if (userData.afcWildCard3 === 'BUF') {
       points += 10
     }
     if (userData.nfcWildCard1 === 'TB') {
       points += 10
     }
-    if (userData.afcWildCard1 === 'BAL') {
+    if (userData.nfcWildCard2 === 'LAR') {
       points += 10
     }
     if (userData.nfcWildCard3 === 'NO') {
