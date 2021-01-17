@@ -50,9 +50,9 @@ export default async (req, res) => {
     try {
       const listOfficialResultsQuery = await API.graphql({
         query: listOfficialResults,
-        variables: { limit: 1 },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
       })
+      console.log(listOfficialResultsQuery.data.listOfficialResults)
       const [officialResult] = listOfficialResultsQuery.data.listOfficialResults.items
       return officialResult
     } catch (e) {
@@ -75,18 +75,18 @@ export default async (req, res) => {
     }
   }
 
-  const getEntries = async () => {
+  const getEntries = async ({ limit, token }: { limit: number; token: string | null }) => {
     try {
       const listEntrysQuery = await API.graphql({
         query: listEntrys,
-        variables: { limit: 200 },
+        variables: { limit, nextToken: token },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
       })
-      const entries = listEntrysQuery.data.listEntrys.items
-      return entries
+      const { items, nextToken } = listEntrysQuery.data.listEntrys
+      return { items, nextToken }
     } catch (e) {
       res.statusCode = 400
-      res.json({ e })
+      res.json({ from: 'getEntries', message: e.message })
     }
   }
 
@@ -120,12 +120,27 @@ export default async (req, res) => {
 
   const officialResultPromise = getOfficialResult()
   const originalLeaderboardsPromise = getOriginalLeaderboards()
-  const entriesPromise = getEntries()
+  let token: string | null = null
+  const perPage: number = 2
+  const maxPages: number = 3
+  const entries = []
 
-  const [officialResult, originalLeaderboards, entries] = await Promise.all([
+  for (let currPage = 1; currPage < maxPages; currPage++) {
+    if (currPage !== 1 && token !== null) {
+      const { items, nextToken } = await getEntries({
+        limit: perPage,
+        token
+      })
+      if (items) {
+        entries.push(items)
+        token = nextToken
+      }
+    }
+  }
+
+  const [officialResult, originalLeaderboards] = await Promise.all([
     officialResultPromise,
-    originalLeaderboardsPromise,
-    entriesPromise
+    originalLeaderboardsPromise
   ])
 
   let newLeaderboards = []
