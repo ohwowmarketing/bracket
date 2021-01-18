@@ -96,30 +96,31 @@ export const getServerSideProps = async ({ req, res }) => {
     // await leaderboards.sort((a, b) => b.points - a.points)
     // const prizes = 6
     // const leaders = leaderboards.slice(0, prizes).map(i => i)
+
     const leaders = [
-      { username: 'anthonysaub', points: '120' },
-      { username: 'Beingeaglesfanhurts', points: '120' },
-      { username: 'Bigsimonnn', points: '120' },
-      { username: 'blakeharshman', points: '120' },
-      { username: 'Camscott', points: '120' },
-      { username: 'Captainkeags', points: '120' },
-      { username: 'Coheathomas', points: '120' },
-      { username: 'EGBroadbent', points: '120' },
-      { username: 'Epatrick2017', points: '120' },
-      { username: 'ethanrutherford', points: '120' },
-      { username: 'EthanVon', points: '120' },
-      { username: 'KyleTooFye', points: '120' },
-      { username: 'Lukesluyter', points: '120' },
-      { username: 'manny10', points: '120' },
-      { username: 'MilkyWRLD', points: '120' },
-      { username: 'Randyy77', points: '120' },
-      { username: 'Ruben.da30', points: '120' },
-      { username: 'sbarsh', points: '120' },
-      { username: 'Slick', points: '120' },
-      { username: 'SpookyShoes48', points: '120' },
-      { username: 'Terminatorwil', points: '120' },
-      { username: 'WarEaglezzz', points: '120' },
-      { username: 'wboelter', points: '120' }
+      // { username: 'anthonysaub', points: '140' },
+      // { username: 'Beingeaglesfanhurts', points: '140' },
+      // { username: 'blakeharshman', points: '140' },
+      // { username: 'Camscott', points: '140' },
+      // { username: 'Captainkeags', points: '140' },
+      // { username: 'Coheathomas', points: '140' },
+      // { username: 'Epatrick2017', points: '140' },
+      // { username: 'ethanrutherford', points: '140' },
+      // { username: 'EthanVon', points: '140' },
+      // { username: 'Lukesluyter', points: '140' },
+      // { username: 'manny10', points: '140' },
+      // { username: 'MilkyWRLD', points: '140' },
+      // { username: 'Randyy77', points: '140' },
+      // { username: 'Ruben.da30', points: '140' },
+      // { username: 'sbarsh', points: '140' },
+      // { username: 'SpookyShoes48', points: '140' },
+      // { username: 'WarEaglezzz', points: '140' },
+      // { username: 'wboelter', points: '140' }
+      { username: 'Bigsimonnn', points: '140' },
+      { username: 'EGBroadbent', points: '140' },
+      { username: 'KyleTooFye', points: '140' },
+      { username: 'Slick', points: '140' },
+      { username: 'Terminatorwil', points: '140' }
     ]
 
     const userPoints = await API.graphql({
@@ -157,9 +158,9 @@ export const getServerSideProps = async ({ req, res }) => {
     if (userData.afcDivisional1 === 'KC') {
       points += 20
     }
-    // if (userData.nfcDivisional2 === 'TB|NO') {
-    //   points += 20
-    // }
+    if (userData.nfcDivisional2 === 'TB') {
+      points += 20
+    }
     return {
       props: { leaderboards: leaders, user: { username: user.username, points } }
     }
