@@ -97,26 +97,6 @@ export const getServerSideProps = async ({ req, res }) => {
     // const leaders = leaderboards.slice(0, prizes).map(i => i)
 
     const leaders = [
-      // { username: 'anthonysaub', points: '140' },
-      // { username: 'Beingeaglesfanhurts', points: '140' },
-      // { username: 'blakeharshman', points: '140' },
-      // { username: 'Camscott', points: '140' },
-      // { username: 'Captainkeags', points: '140' },
-      // { username: 'Coheathomas', points: '140' },
-      // { username: 'Epatrick2017', points: '140' },
-      // { username: 'ethanrutherford', points: '140' },
-      // { username: 'EthanVon', points: '140' },
-      // { username: 'Lukesluyter', points: '140' },
-      // { username: 'manny10', points: '140' },
-      // { username: 'MilkyWRLD', points: '140' },
-      // { username: 'Randyy77', points: '140' },
-      // { username: 'Ruben.da30', points: '140' },
-      // { username: 'sbarsh', points: '140' },
-      // { username: 'SpookyShoes48', points: '140' },
-      // { username: 'WarEaglezzz', points: '140' },
-      // { username: 'wboelter', points: '140' }
-
-      { username: 'KyleTooFye', points: '140' },
       { username: 'EGBroadbent', points: '180' },
       { username: 'Slick', points: '180' },
       { username: 'Terminatorwil', points: '180' },
