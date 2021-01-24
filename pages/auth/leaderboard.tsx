@@ -1,9 +1,6 @@
-import { withSSRContext } from 'aws-amplify'
-import {
-  listLeaderboards,
-  // leaderByUsername,
-  entryByUsername
-} from 'src/graphql/queries'
+import Layout from '@components/Layout/AuthRequired'
+import Link from '@components/Link'
+import Paper from '@material-ui/core/Paper'
 // import { listScores } from 'src/graphql/queries'
 // import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
 import { makeStyles } from '@material-ui/core/styles'
@@ -13,12 +10,14 @@ import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
+import { Contained } from '@mui/Button'
 import { SM } from '@mui/Layout'
 import { H3, H4, P } from '@mui/Typography'
-import { Contained } from '@mui/Button'
-import Link from '@components/Link'
-import Layout from '@components/Layout/AuthRequired'
+import { withSSRContext } from 'aws-amplify'
+import {
+  // leaderByUsername,
+  entryByUsername
+} from 'src/graphql/queries'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -116,11 +115,31 @@ export const getServerSideProps = async ({ req, res }) => {
       // { username: 'SpookyShoes48', points: '140' },
       // { username: 'WarEaglezzz', points: '140' },
       // { username: 'wboelter', points: '140' }
-      { username: 'Bigsimonnn', points: '140' },
-      { username: 'EGBroadbent', points: '140' },
+
       { username: 'KyleTooFye', points: '140' },
-      { username: 'Slick', points: '140' },
-      { username: 'Terminatorwil', points: '140' }
+      { username: 'EGBroadbent', points: '180' },
+      { username: 'Slick', points: '180' },
+      { username: 'Terminatorwil', points: '180' },
+      { username: 'Aaronleepena22', points: '170' },
+      { username: 'asferratore8', points: '170' },
+      { username: 'billls.culture', points: '170' },
+      { username: 'bradygoat', points: '170' },
+      { username: 'Chrisraffone7', points: '170' },
+      { username: 'Dev44', points: '170' },
+      { username: 'dimitri', points: '170' },
+      { username: 'Eero', points: '170' },
+      { username: 'Godman69', points: '170' },
+      { username: 'Jdietz3', points: '170' },
+      { username: 'Jonasdelo', points: '170' },
+      { username: 'Jonathanh4616', points: '170' },
+      { username: 'Jroode12', points: '170' },
+      { username: 'LeBrows-', points: '170' },
+      { username: 'Ryan_wrld15', points: '170' },
+      { username: 'Shaner888', points: '170' },
+      { username: 'Sideswipe', points: '170' },
+      { username: 'theofox13', points: '170' },
+      { username: 'TimboG@89', points: '170' },
+      { username: 'Tyler0312', points: '170' }
     ]
 
     const userPoints = await API.graphql({
@@ -160,6 +179,9 @@ export const getServerSideProps = async ({ req, res }) => {
     }
     if (userData.nfcDivisional2 === 'TB') {
       points += 20
+    }
+    if (userData.nfcConference === 'TB') {
+      points += 40
     }
     return {
       props: { leaderboards: leaders, user: { username: user.username, points } }
