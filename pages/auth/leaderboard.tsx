@@ -97,29 +97,18 @@ export const getServerSideProps = async ({ req, res }) => {
     // const leaders = leaderboards.slice(0, prizes).map(i => i)
 
     const leaders = [
-      { username: 'EGBroadbent', points: '180' },
-      { username: 'Slick', points: '180' },
-      { username: 'Terminatorwil', points: '180' },
-      { username: 'Aaronleepena22', points: '170' },
-      { username: 'asferratore8', points: '170' },
-      { username: 'billls.culture', points: '170' },
-      { username: 'bradygoat', points: '170' },
-      { username: 'Chrisraffone7', points: '170' },
-      { username: 'Dev44', points: '170' },
-      { username: 'dimitri', points: '170' },
-      { username: 'Eero', points: '170' },
-      { username: 'Godman69', points: '170' },
-      { username: 'Jdietz3', points: '170' },
-      { username: 'Jonasdelo', points: '170' },
-      { username: 'Jonathanh4616', points: '170' },
-      { username: 'Jroode12', points: '170' },
-      { username: 'LeBrows-', points: '170' },
-      { username: 'Ryan_wrld15', points: '170' },
-      { username: 'Shaner888', points: '170' },
-      { username: 'Sideswipe', points: '170' },
-      { username: 'theofox13', points: '170' },
-      { username: 'TimboG@89', points: '170' },
-      { username: 'Tyler0312', points: '170' }
+      { username: 'Terminatorwil', points: '220' },
+      { username: 'bradygoat', points: '210' },
+      { username: 'Chrisraffone7', points: '210' },
+      { username: 'dimitri', points: '210' },
+      { username: 'Eero', points: '210' },
+      { username: 'Jdietz3', points: '210' },
+      { username: 'Jonasdelo', points: '210' },
+      { username: 'Jonathanh4616', points: '210' },
+      { username: 'Jroode12', points: '210' },
+      { username: 'LeBrows-', points: '210' },
+      { username: 'Ryan_wrld15', points: '210' },
+      { username: 'TimboG@89', points: '210' }
     ]
 
     const userPoints = await API.graphql({
@@ -161,6 +150,9 @@ export const getServerSideProps = async ({ req, res }) => {
       points += 20
     }
     if (userData.nfcConference === 'TB') {
+      points += 40
+    }
+    if (userData.afcConference === 'KC') {
       points += 40
     }
     return {
