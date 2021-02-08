@@ -1,8 +1,7 @@
-// import Home from '@components/Hero'
 import Layout from '@components/Layout/Global'
 import Results from '@components/Results'
 
-const Index = () => {
+const ResultsPage = () => {
   return (
     <Layout>
       <Results />
@@ -10,4 +9,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default ResultsPage

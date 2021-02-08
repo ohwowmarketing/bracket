@@ -1,19 +1,19 @@
-import { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import Link from '@components/Link'
 import MuiAppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
+import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
+import Icon from '@material-ui/core/Icon'
+import IconButton from '@material-ui/core/IconButton'
+import MuiLink from '@material-ui/core/Link'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import Divider from '@material-ui/core/Divider'
-import Icon from '@material-ui/core/Icon'
-import MuiLink from '@material-ui/core/Link'
+import { makeStyles } from '@material-ui/core/styles'
+import Toolbar from '@material-ui/core/Toolbar'
 import { H6 } from '@mui/Typography'
-import Link from '@components/Link'
+import { useEffect, useState } from 'react'
 
 const drawerWidth = 240
 
@@ -154,12 +154,12 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                         </ListItemIcon>
                         <ListItemText primary='Rules / Prizes' />
                       </ListItem>
-                      <ListItem button key='signin' component={Link} href='/auth/entry'>
+                      {/* <ListItem button key='signin' component={Link} href='/auth/entry'>
                         <ListItemIcon>
                           <Icon className='fas fa-user-lock fa-xs' color='primary' />
                         </ListItemIcon>
                         <ListItemText primary='Sign In' />
-                      </ListItem>
+                      </ListItem> */}
                     </>
                   )}
                 </>
@@ -198,9 +198,9 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                   <Link variant='button' href='/rules' className={classes.link}>
                     Rules / Prizes
                   </Link>
-                  <Link variant='button' href='/auth/entry' className={classes.link}>
+                  {/* <Link variant='button' href='/auth/entry' className={classes.link}>
                     Sign In
-                  </Link>
+                  </Link> */}
                 </>
               )}
             </>
