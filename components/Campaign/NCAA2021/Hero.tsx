@@ -21,10 +21,10 @@ const Hero = () => {
   return (
     <SM component='main' className={classes.hero}>
       <H3 align='center' color='textPrimary' gutterBottom>
-        Sports Gambling Guides 2021 NFL Bracket Challenge
+        Sports Gambling Guides 2021 NCAA Bracket Challenge
       </H3>
       <H5 component='p' align='center' color='textSecondary' gutterBottom>
-        Pick the most accurate NFL Playoff Bracket for your chance to win a
+        Pick the most accurate NCAA Playoff Bracket for your chance to win a
         share of $1,000 in prizes. Compete against your friends and check the
         live leaderboard to see where you stand!
       </H5>
