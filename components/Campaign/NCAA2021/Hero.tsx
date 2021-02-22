@@ -31,10 +31,10 @@ const Hero = () => {
       <Box mt={2}>
         <Contained
           component={Link}
-          href='/auth/entry'
+          href='/ncaa/entry'
           color='primary'
           align='center'>
-          <span className={classes.white}>Sign In</span>
+          <span className={classes.white}>Create Entry</span>
         </Contained>
       </Box>
     </SM>
