@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react'
 
 const drawerWidth = 240
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
@@ -71,9 +71,14 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
-  const container = typeof window !== undefined ? () => window.document.body : undefined
+  const container =
+    typeof window !== undefined ? () => window.document.body : undefined
   return (
-    <MuiAppBar position='fixed' color='primary' elevation={0} className={classes.appBar}>
+    <MuiAppBar
+      position='fixed'
+      color='primary'
+      elevation={0}
+      className={classes.appBar}>
       <Toolbar>
         <IconButton
           edge='start'
@@ -85,7 +90,12 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
         </IconButton>
         <H6 color='primary' className={classes.title} noWrap>
           <MuiLink href='https://sportsgamblingguides.com'>
-            <img src='/logo.png' width={225} height={40} alt='Sports Gambling Guide Logo' />
+            <img
+              src='/logo.png'
+              width={225}
+              height={40}
+              alt='Sports Gambling Guide Logo'
+            />
           </MuiLink>
         </H6>
         <nav>
@@ -110,21 +120,42 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                   </ListItem>
                   {signedIn ? (
                     <>
-                      <ListItem button key='entry' component={Link} href='/auth/entry'>
+                      <ListItem
+                        button
+                        key='entry'
+                        component={Link}
+                        href='/auth/entry'>
                         <ListItemIcon>
-                          <Icon className='fas fa-ticket-alt fa-xs' color='primary' />
+                          <Icon
+                            className='fas fa-ticket-alt fa-xs'
+                            color='primary'
+                          />
                         </ListItemIcon>
                         <ListItemText primary='Your Entry' />
                       </ListItem>
-                      <ListItem button key='entry' component={Link} href='/auth/leaderboard'>
+                      <ListItem
+                        button
+                        key='entry'
+                        component={Link}
+                        href='/auth/leaderboard'>
                         <ListItemIcon>
-                          <Icon className='fas fa-trophy fa-xs' color='primary' />
+                          <Icon
+                            className='fas fa-trophy fa-xs'
+                            color='primary'
+                          />
                         </ListItemIcon>
                         <ListItemText primary='Leaderboard' />
                       </ListItem>
-                      <ListItem button key='entry' component={Link} href='/auth/rules'>
+                      <ListItem
+                        button
+                        key='entry'
+                        component={Link}
+                        href='/auth/rules'>
                         <ListItemIcon>
-                          <Icon className='fas fa-tasks fa-xs' color='primary' />
+                          <Icon
+                            className='fas fa-tasks fa-xs'
+                            color='primary'
+                          />
                         </ListItemIcon>
                         <ListItemText primary='Rules / Prizes' />
                       </ListItem>
@@ -135,7 +166,10 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                         href='/'
                         onClick={handleSignOut}>
                         <ListItemIcon>
-                          <Icon className='fas fa-door-open fa-xs' color='primary' />
+                          <Icon
+                            className='fas fa-door-open fa-xs'
+                            color='primary'
+                          />
                         </ListItemIcon>
                         <ListItemText primary='Sign Out' />
                       </ListItem>
@@ -148,13 +182,13 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                         </ListItemIcon>
                         <ListItemText primary='Home' />
                       </ListItem>
-                      <ListItem button key='entry' component={Link} href='/rules'>
+                      {/* <ListItem button key='entry' component={Link} href='/rules'>
                         <ListItemIcon>
                           <Icon className='fas fa-tasks fa-xs' color='primary' />
                         </ListItemIcon>
                         <ListItemText primary='Rules / Prizes' />
                       </ListItem>
-                      {/* <ListItem button key='signin' component={Link} href='/auth/entry'>
+                      <ListItem button key='signin' component={Link} href='/auth/entry'>
                         <ListItemIcon>
                           <Icon className='fas fa-user-lock fa-xs' color='primary' />
                         </ListItemIcon>
@@ -170,16 +204,29 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
             <>
               {signedIn ? (
                 <>
-                  <Link variant='button' href='/auth/entry' className={classes.link}>
+                  <Link
+                    variant='button'
+                    href='/auth/entry'
+                    className={classes.link}>
                     Your Entry
                   </Link>
-                  <Link variant='button' href='/auth/leaderboard' className={classes.link}>
+                  <Link
+                    variant='button'
+                    href='/auth/leaderboard'
+                    className={classes.link}>
                     Leaderboard
                   </Link>
-                  <Link variant='button' href='/auth/rules' className={classes.link}>
+                  <Link
+                    variant='button'
+                    href='/auth/rules'
+                    className={classes.link}>
                     Rules / Prizes
                   </Link>
-                  <Link variant='button' href='/' className={classes.link} onClick={handleSignOut}>
+                  <Link
+                    variant='button'
+                    href='/'
+                    className={classes.link}
+                    onClick={handleSignOut}>
                     Sign Out
                   </Link>
                   {/* <MuiLink
@@ -195,10 +242,10 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                   <Link variant='button' href='/' className={classes.link}>
                     Home
                   </Link>
-                  <Link variant='button' href='/rules' className={classes.link}>
+                  {/* <Link variant='button' href='/rules' className={classes.link}>
                     Rules / Prizes
                   </Link>
-                  {/* <Link variant='button' href='/auth/entry' className={classes.link}>
+                  <Link variant='button' href='/auth/entry' className={classes.link}>
                     Sign In
                   </Link> */}
                 </>

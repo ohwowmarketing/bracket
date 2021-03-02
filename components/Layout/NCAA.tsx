@@ -15,9 +15,9 @@ const Layout = ({ children }) => {
     <>
       <AppBar />
       <div className={classes.offset} />
-      <Container>
-        <Box my={4}>{children}</Box>
-      </Container>
+      {/* <Container> */}
+      <Box my={4}>{children}</Box>
+      {/* </Container> */}
       <Footer />
     </>
   )

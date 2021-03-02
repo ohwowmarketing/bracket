@@ -151,7 +151,7 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                   <ListItemIcon>
                     <Icon className='fas fa-trophy fa-xs' color='primary' />
                   </ListItemIcon>
-                  <ListItemText primary={`Past Winner's`} />
+                  <ListItemText primary='Past Winners' />
                 </ListItem>
               </List>
             </Drawer>
@@ -190,7 +190,7 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
               variant='button'
               href='/ncaa/winners'
               className={classes.link}>
-              Past Winner's
+              Past Winners
             </Link>
           </Hidden>
         </nav>
