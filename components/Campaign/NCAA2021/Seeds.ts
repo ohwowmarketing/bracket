@@ -131,7 +131,7 @@ const seeds: TeamProps[] = [
     name: 'North Carolina',
     logo: 'north-carolina.svg'
   },
-  { id: 'c11', seed: 11, group: 'c', name: 'Louiseville / SDSU' },
+  { id: 'c11', seed: 11, group: 'c', name: 'Louisville / SDSU' },
   { id: 'c12', seed: 12, group: 'c', name: 'Belmont', logo: 'belmont.svg' },
   { id: 'c13', seed: 13, group: 'c', name: 'Toledo', logo: 'toledo.svg' },
   { id: 'c14', seed: 14, group: 'c', name: 'UNCG', logo: 'unc-greensboro.svg' },
