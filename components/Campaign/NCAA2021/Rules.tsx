@@ -1,9 +1,19 @@
+import { makeStyles } from '@material-ui/core/styles'
 import { SM } from '@mui/Layout'
 import { H5, P, Caption } from '@mui/Typography'
 
+const useStyles = makeStyles((theme) => ({
+  bg: {
+    padding: theme.spacing(4, 6),
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    borderRadius: '10px'
+  }
+}))
+
 const Rules = () => {
+  const classes = useStyles()
   return (
-    <SM>
+    <SM className={classes.bg}>
       <H5 gutterBottom>Rules</H5>
       <P>
         NO PURCHASE NECESSARY FOR ENTRY. AVOID WHERE PROHIBITED BY LAW. THIS

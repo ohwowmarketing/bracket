@@ -4,10 +4,11 @@ import Radio from '@material-ui/core/Radio'
 import { TeamProps } from './Seeds'
 
 const useStyles = makeStyles((theme: Theme) => ({
-  formControl: {
-    margin: '1px',
-    padding: '1px',
-    width: '95%'
+  label: {
+    '& > span': {
+      paddingTop: '2px',
+      paddingBottom: '2px'
+    }
   },
   teamBox: {
     display: 'flex',
@@ -19,13 +20,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 'bold'
   },
   logoBox: {
-    width: '24px',
-    height: '24px',
+    width: '20px',
+    height: '20px',
     marginRight: theme.spacing(1)
   },
   logo: {
-    width: '24px',
-    height: '24px',
+    width: '20px',
+    height: '20px',
     objectFit: 'fill'
   }
 }))
@@ -36,7 +37,7 @@ const Team = ({ team }: { team: TeamProps }) => {
   return (
     <FormControlLabel
       value={id}
-      control={<Radio />}
+      control={<Radio size='small' />}
       label={
         <div className={classes.teamBox}>
           {logo && (
@@ -51,6 +52,7 @@ const Team = ({ team }: { team: TeamProps }) => {
           {`(${seed})${String.fromCharCode(160)}${name}`}
         </div>
       }
+      className={classes.label}
     />
   )
 }

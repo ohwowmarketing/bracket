@@ -1,7 +1,10 @@
-import Paper from '@material-ui/core/Paper'
 // import { listScores } from 'src/graphql/queries'
 // import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
+import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
+import Box from '@material-ui/core/Box'
+import Paper from '@material-ui/core/Paper'
+import Icon from '@material-ui/core/Icon'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -11,10 +14,18 @@ import TableRow from '@material-ui/core/TableRow'
 import { SM } from '@mui/Layout'
 import { H3, H4 } from '@mui/Typography'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(1),
     border: `1px solid ${theme.palette.primary.main}`
+  },
+  amazonCard: {
+    border: `1px solid ${theme.palette.grey[700]}`,
+    borderRadius: '4px',
+    padding: '2px 2px',
+    textAlign: 'center',
+    fontSize: 10,
+    color: theme.palette.grey[700]
   }
 }))
 
@@ -169,7 +180,18 @@ const Results = () => {
             {winners.map((row, i) => (
               <TableRow key={row.username}>
                 <TableCell>{i + 1}</TableCell>
-                <TableCell>{row.prize}</TableCell>
+                <TableCell>
+                  <>
+                    {row.prize}
+                    <Box className={classes.amazonCard}>
+                      <Icon
+                        className='fab fa-amazon'
+                        color='inherit'
+                        fontSize='small'
+                      />
+                    </Box>
+                  </>
+                </TableCell>
                 <TableCell>{row.username}</TableCell>
                 <TableCell align='right'>{row.points}</TableCell>
                 {/* <TableCell>{row.awc1}</TableCell>

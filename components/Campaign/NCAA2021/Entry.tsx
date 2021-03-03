@@ -1,21 +1,26 @@
 import * as React from 'react'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import clsx from 'clsx'
+import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { XL } from '@mui/Layout'
 import Game from './Game'
 import Round from './Round'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
-    justifyContent: 'flex-start',
-    // justifyContent: 'space-evenly',
-    // justifyContent: 'center',
-    // overflowX: 'auto',
-    // alignItems: 'center',
     '& > div': {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-around'
     }
+  },
+  centerLayout: {
+    justifyContent: 'space-evenly'
+    // justifyContent: 'center',
+  },
+  leftLayout: {
+    justifyContent: 'flex-start'
   },
   matches: {
     padding: theme.spacing(2),
@@ -44,6 +49,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const NCAA2021 = () => {
   const classes = useStyles()
+  const theme = useTheme()
+  const centerBrackets = useMediaQuery(theme.breakpoints.up('xl'))
 
   const [entry, setEntry] = React.useState<any>({})
 
@@ -58,74 +65,81 @@ const NCAA2021 = () => {
     return ''
   }
 
-  console.log(entry.a)
-
   return (
-    <form>
-      <div className={classes.root}>
-        <Round groups={['a', 'b']} round='first' callback={handlePick} />
-        <Round
-          groups={['a', 'b']}
-          round='second'
-          callback={handlePick}
-          entry={(id) => getTeamId(id)}
-        />
-        <Round
-          groups={['a', 'b']}
-          round='sweet16'
-          callback={handlePick}
-          entry={(id) => getTeamId(id)}
-        />
-        <Round
-          groups={['a', 'b']}
-          round='elite8'
-          callback={handlePick}
-          entry={(id) => getTeamId(id)}
-        />
-        <div>
-          <Game
-            key='a-b'
-            id='a-b'
-            home={entry['a-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
-            away={entry['b-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
-            onChange={(e) => handlePick(e)}
+    <XL>
+      <form>
+        <div
+          className={clsx(classes.root, {
+            [classes.centerLayout]: centerBrackets,
+            [classes.leftLayout]: !centerBrackets
+          })}>
+          <Round groups={['a', 'c']} round='first' callback={handlePick} />
+          <Round
+            groups={['a', 'c']}
+            round='second'
+            callback={handlePick}
+            entry={(id) => getTeamId(id)}
           />
-          <Game
-            key='championship'
-            id='championship'
-            home={entry['a-b']}
-            away={entry['c-d']}
-            onChange={(e) => handlePick(e)}
+          <Round
+            groups={['a', 'c']}
+            round='sweet16'
+            callback={handlePick}
+            entry={(id) => getTeamId(id)}
           />
-          <Game
-            key='c-d'
-            id='c-d'
-            home={entry['c-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
-            away={entry['d-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
-            onChange={(e) => handlePick(e)}
+          <Round
+            groups={['a', 'c']}
+            round='elite8'
+            callback={handlePick}
+            entry={(id) => getTeamId(id)}
           />
+          <div>
+            <Game
+              key='a-b'
+              id='a-b'
+              round='final4'
+              home={entry['a-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
+              away={entry['b-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
+              onChange={(e) => handlePick(e)}
+            />
+            <Game
+              key='championship'
+              id='championship'
+              round='championship'
+              home={entry['a-b']}
+              away={entry['c-d']}
+              onChange={(e) => handlePick(e)}
+            />
+            <Game
+              key='c-d'
+              id='c-d'
+              round='final4'
+              home={entry['c-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
+              away={entry['d-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
+              onChange={(e) => handlePick(e)}
+            />
+          </div>
+          <Round
+            groups={['b', 'd']}
+            round='elite8'
+            callback={handlePick}
+            entry={(id) => getTeamId(id)}
+          />
+          <Round
+            groups={['b', 'd']}
+            round='sweet16'
+            callback={handlePick}
+            entry={(id) => getTeamId(id)}
+          />
+          <Round
+            groups={['b', 'd']}
+            round='second'
+            callback={handlePick}
+            entry={(id) => getTeamId(id)}
+          />
+          <Round groups={['b', 'd']} round='first' callback={handlePick} />
         </div>
-        <Round
-          groups={['c', 'd']}
-          round='elite8'
-          callback={handlePick}
-          entry={(id) => getTeamId(id)}
-        />
-        <Round
-          groups={['c', 'd']}
-          round='sweet16'
-          callback={handlePick}
-          entry={(id) => getTeamId(id)}
-        />
-        <Round
-          groups={['c', 'd']}
-          round='second'
-          callback={handlePick}
-          entry={(id) => getTeamId(id)}
-        />
-        <Round groups={['c', 'd']} round='first' callback={handlePick} />
-      </div>
-    </form>
+      </form>
+    </XL>
   )
 }
 

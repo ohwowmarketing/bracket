@@ -6,10 +6,12 @@ import { Contained } from '@mui/Button'
 
 const useStyles = makeStyles((theme) => ({
   hero: {
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(4, 6),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    borderRadius: '10px'
   },
   white: {
     color: '#fff'

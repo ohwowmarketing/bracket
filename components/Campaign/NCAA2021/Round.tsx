@@ -32,6 +32,7 @@ const Round = ({
               key={uniq}
               id={uniq}
               group={group}
+              round={round}
               home={home}
               away={away}
               onChange={(e) => callback(e)}
