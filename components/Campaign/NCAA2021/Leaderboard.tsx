@@ -151,7 +151,7 @@ const Leaderboard = () => {
       <Box textAlign='center'>
         <H3>Leaderboard</H3>
         <H4>NCAA Bracket Challenge</H4>
-        <P>Scores are updated at the end of each round.</P>
+        <P>Scores are updated at the end of each day.</P>
       </Box>
 
       <TableContainer component={Paper} className={classes.paper}>

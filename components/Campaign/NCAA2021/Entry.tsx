@@ -22,6 +22,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   leftLayout: {
     justifyContent: 'flex-start'
   },
+  final4: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center !important',
+    '& > div': {
+      margin: theme.spacing(2)
+    }
+  },
   matches: {
     padding: theme.spacing(2),
     textAlign: 'center'
@@ -92,7 +100,7 @@ const NCAA2021 = () => {
             callback={handlePick}
             entry={(id) => getTeamId(id)}
           />
-          <div>
+          <div className={classes.final4}>
             <Game
               key='a-b'
               id='a-b'
