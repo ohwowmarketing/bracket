@@ -7,13 +7,15 @@ interface RoundProps {
   groups?: string[]
   callback: (evt: React.ChangeEvent<HTMLInputElement>) => void
   entry?: (string) => string
+  locked: boolean
 }
 
 const Round = ({
   round,
   groups,
   callback,
-  entry
+  entry,
+  locked
 }: RoundProps): React.ReactElement => {
   return (
     <div key={groups ? `${round}-${groups.join('-')}` : round}>
@@ -36,6 +38,7 @@ const Round = ({
               home={home}
               away={away}
               onChange={(e) => callback(e)}
+              locked={locked}
             />
           )
         })

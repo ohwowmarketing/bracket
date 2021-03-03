@@ -1,8 +1,10 @@
 import * as React from 'react'
 import clsx from 'clsx'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
+import Box from '@material-ui/core/Box'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { XL } from '@mui/Layout'
+import { Contained } from '@mui/Button'
 import Game from './Game'
 import Round from './Round'
 
@@ -61,6 +63,7 @@ const NCAA2021 = () => {
   const centerBrackets = useMediaQuery(theme.breakpoints.up('xl'))
 
   const [entry, setEntry] = React.useState<any>({})
+  const [locked, setLocked] = React.useState<boolean>(false)
 
   const handlePick = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setEntry({ ...entry, [evt.target.name]: evt.target.value })
@@ -75,30 +78,43 @@ const NCAA2021 = () => {
 
   return (
     <XL>
+      <Box textAlign='center'>
+        <Contained onClick={() => setLocked(!locked)}>
+          {locked ? 'Unlock' : 'Lock'}
+        </Contained>
+      </Box>
       <form>
         <div
           className={clsx(classes.root, {
             [classes.centerLayout]: centerBrackets,
             [classes.leftLayout]: !centerBrackets
           })}>
-          <Round groups={['a', 'c']} round='first' callback={handlePick} />
+          <Round
+            groups={['a', 'c']}
+            round='first'
+            callback={handlePick}
+            locked={locked}
+          />
           <Round
             groups={['a', 'c']}
             round='second'
             callback={handlePick}
             entry={(id) => getTeamId(id)}
+            locked={locked}
           />
           <Round
             groups={['a', 'c']}
             round='sweet16'
             callback={handlePick}
             entry={(id) => getTeamId(id)}
+            locked={locked}
           />
           <Round
             groups={['a', 'c']}
             round='elite8'
             callback={handlePick}
             entry={(id) => getTeamId(id)}
+            locked={locked}
           />
           <div className={classes.final4}>
             <Game
@@ -108,6 +124,7 @@ const NCAA2021 = () => {
               home={entry['a-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
               away={entry['b-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
               onChange={(e) => handlePick(e)}
+              locked={locked}
             />
             <Game
               key='championship'
@@ -116,6 +133,7 @@ const NCAA2021 = () => {
               home={entry['a-b']}
               away={entry['c-d']}
               onChange={(e) => handlePick(e)}
+              locked={locked}
             />
             <Game
               key='c-d'
@@ -124,6 +142,7 @@ const NCAA2021 = () => {
               home={entry['c-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
               away={entry['d-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
               onChange={(e) => handlePick(e)}
+              locked={locked}
             />
           </div>
           <Round
@@ -131,20 +150,28 @@ const NCAA2021 = () => {
             round='elite8'
             callback={handlePick}
             entry={(id) => getTeamId(id)}
+            locked={locked}
           />
           <Round
             groups={['b', 'd']}
             round='sweet16'
             callback={handlePick}
             entry={(id) => getTeamId(id)}
+            locked={locked}
           />
           <Round
             groups={['b', 'd']}
             round='second'
             callback={handlePick}
             entry={(id) => getTeamId(id)}
+            locked={locked}
           />
-          <Round groups={['b', 'd']} round='first' callback={handlePick} />
+          <Round
+            groups={['b', 'd']}
+            round='first'
+            callback={handlePick}
+            locked={locked}
+          />
         </div>
       </form>
     </XL>

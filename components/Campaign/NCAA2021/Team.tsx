@@ -31,13 +31,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-const Team = ({ team }: { team: TeamProps }) => {
+const Team = ({ team, locked }: { team: TeamProps; locked: boolean }) => {
   const { id, seed, name, logo } = team
   const classes = useStyles()
   return (
     <FormControlLabel
       value={id}
-      control={<Radio size='small' />}
+      control={<Radio size='small' disabled={locked} />}
       label={
         <div className={classes.teamBox}>
           {logo && (
