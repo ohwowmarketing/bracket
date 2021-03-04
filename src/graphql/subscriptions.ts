@@ -2,6 +2,54 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateBracket = /* GraphQL */ `
+  subscription OnCreateBracket {
+    onCreateBracket {
+      id
+      picks
+      event
+      username
+      owner
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateBracket = /* GraphQL */ `
+  subscription OnUpdateBracket {
+    onUpdateBracket {
+      id
+      picks
+      event
+      username
+      owner
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteBracket = /* GraphQL */ `
+  subscription OnDeleteBracket {
+    onDeleteBracket {
+      id
+      picks
+      event
+      username
+      owner
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateLeaderboard = /* GraphQL */ `
   subscription OnCreateLeaderboard {
     onCreateLeaderboard {
@@ -36,84 +84,6 @@ export const onDeleteLeaderboard = /* GraphQL */ `
       id
       username
       points
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateOfficialResult = /* GraphQL */ `
-  subscription OnCreateOfficialResult {
-    onCreateOfficialResult {
-      id
-      superBowl
-      tieBreaker
-      afcConference
-      nfcConference
-      afcDivisional1
-      afcDivisional2
-      nfcDivisional1
-      nfcDivisional2
-      afcWildCard1
-      afcWildCard2
-      afcWildCard3
-      nfcWildCard1
-      nfcWildCard2
-      nfcWildCard3
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateOfficialResult = /* GraphQL */ `
-  subscription OnUpdateOfficialResult {
-    onUpdateOfficialResult {
-      id
-      superBowl
-      tieBreaker
-      afcConference
-      nfcConference
-      afcDivisional1
-      afcDivisional2
-      nfcDivisional1
-      nfcDivisional2
-      afcWildCard1
-      afcWildCard2
-      afcWildCard3
-      nfcWildCard1
-      nfcWildCard2
-      nfcWildCard3
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteOfficialResult = /* GraphQL */ `
-  subscription OnDeleteOfficialResult {
-    onDeleteOfficialResult {
-      id
-      superBowl
-      tieBreaker
-      afcConference
-      nfcConference
-      afcDivisional1
-      afcDivisional2
-      nfcDivisional1
-      nfcDivisional2
-      afcWildCard1
-      afcWildCard2
-      afcWildCard3
-      nfcWildCard1
-      nfcWildCard2
-      nfcWildCard3
       _version
       _deleted
       _lastChangedAt

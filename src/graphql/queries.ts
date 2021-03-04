@@ -2,6 +2,108 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getBracket = /* GraphQL */ `
+  query GetBracket($id: ID!) {
+    getBracket(id: $id) {
+      id
+      picks
+      event
+      username
+      owner
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listBrackets = /* GraphQL */ `
+  query ListBrackets(
+    $filter: ModelBracketFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBrackets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        picks
+        event
+        username
+        owner
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const bracketByUsername = /* GraphQL */ `
+  query BracketByUsername(
+    $username: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelBracketFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bracketByUsername(
+      username: $username
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        picks
+        event
+        username
+        owner
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncBrackets = /* GraphQL */ `
+  query SyncBrackets(
+    $filter: ModelBracketFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncBrackets(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        picks
+        event
+        username
+        owner
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getLeaderboard = /* GraphQL */ `
   query GetLeaderboard($id: ID!) {
     getLeaderboard(id: $id) {
@@ -85,106 +187,6 @@ export const syncLeaderboards = /* GraphQL */ `
         id
         username
         points
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getOfficialResult = /* GraphQL */ `
-  query GetOfficialResult($id: ID!) {
-    getOfficialResult(id: $id) {
-      id
-      superBowl
-      tieBreaker
-      afcConference
-      nfcConference
-      afcDivisional1
-      afcDivisional2
-      nfcDivisional1
-      nfcDivisional2
-      afcWildCard1
-      afcWildCard2
-      afcWildCard3
-      nfcWildCard1
-      nfcWildCard2
-      nfcWildCard3
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listOfficialResults = /* GraphQL */ `
-  query ListOfficialResults(
-    $filter: ModelOfficialResultFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listOfficialResults(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        superBowl
-        tieBreaker
-        afcConference
-        nfcConference
-        afcDivisional1
-        afcDivisional2
-        nfcDivisional1
-        nfcDivisional2
-        afcWildCard1
-        afcWildCard2
-        afcWildCard3
-        nfcWildCard1
-        nfcWildCard2
-        nfcWildCard3
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncOfficialResults = /* GraphQL */ `
-  query SyncOfficialResults(
-    $filter: ModelOfficialResultFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncOfficialResults(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        superBowl
-        tieBreaker
-        afcConference
-        nfcConference
-        afcDivisional1
-        afcDivisional2
-        nfcDivisional1
-        nfcDivisional2
-        afcWildCard1
-        afcWildCard2
-        afcWildCard3
-        nfcWildCard1
-        nfcWildCard2
-        nfcWildCard3
         _version
         _deleted
         _lastChangedAt

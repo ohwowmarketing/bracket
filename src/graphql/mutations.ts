@@ -2,6 +2,63 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createBracket = /* GraphQL */ `
+  mutation CreateBracket(
+    $input: CreateBracketInput!
+    $condition: ModelBracketConditionInput
+  ) {
+    createBracket(input: $input, condition: $condition) {
+      id
+      picks
+      event
+      username
+      owner
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateBracket = /* GraphQL */ `
+  mutation UpdateBracket(
+    $input: UpdateBracketInput!
+    $condition: ModelBracketConditionInput
+  ) {
+    updateBracket(input: $input, condition: $condition) {
+      id
+      picks
+      event
+      username
+      owner
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteBracket = /* GraphQL */ `
+  mutation DeleteBracket(
+    $input: DeleteBracketInput!
+    $condition: ModelBracketConditionInput
+  ) {
+    deleteBracket(input: $input, condition: $condition) {
+      id
+      picks
+      event
+      username
+      owner
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createLeaderboard = /* GraphQL */ `
   mutation CreateLeaderboard(
     $input: CreateLeaderboardInput!
@@ -45,93 +102,6 @@ export const deleteLeaderboard = /* GraphQL */ `
       id
       username
       points
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createOfficialResult = /* GraphQL */ `
-  mutation CreateOfficialResult(
-    $input: CreateOfficialResultInput!
-    $condition: ModelOfficialResultConditionInput
-  ) {
-    createOfficialResult(input: $input, condition: $condition) {
-      id
-      superBowl
-      tieBreaker
-      afcConference
-      nfcConference
-      afcDivisional1
-      afcDivisional2
-      nfcDivisional1
-      nfcDivisional2
-      afcWildCard1
-      afcWildCard2
-      afcWildCard3
-      nfcWildCard1
-      nfcWildCard2
-      nfcWildCard3
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateOfficialResult = /* GraphQL */ `
-  mutation UpdateOfficialResult(
-    $input: UpdateOfficialResultInput!
-    $condition: ModelOfficialResultConditionInput
-  ) {
-    updateOfficialResult(input: $input, condition: $condition) {
-      id
-      superBowl
-      tieBreaker
-      afcConference
-      nfcConference
-      afcDivisional1
-      afcDivisional2
-      nfcDivisional1
-      nfcDivisional2
-      afcWildCard1
-      afcWildCard2
-      afcWildCard3
-      nfcWildCard1
-      nfcWildCard2
-      nfcWildCard3
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteOfficialResult = /* GraphQL */ `
-  mutation DeleteOfficialResult(
-    $input: DeleteOfficialResultInput!
-    $condition: ModelOfficialResultConditionInput
-  ) {
-    deleteOfficialResult(input: $input, condition: $condition) {
-      id
-      superBowl
-      tieBreaker
-      afcConference
-      nfcConference
-      afcDivisional1
-      afcDivisional2
-      nfcDivisional1
-      nfcDivisional2
-      afcWildCard1
-      afcWildCard2
-      afcWildCard3
-      nfcWildCard1
-      nfcWildCard2
-      nfcWildCard3
       _version
       _deleted
       _lastChangedAt
