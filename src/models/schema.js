@@ -1,5 +1,64 @@
 export const schema = {
     "models": {
+        "Bracket": {
+            "name": "Bracket",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "picks": {
+                    "name": "picks",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "event": {
+                    "name": "event",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Event"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "owner": {
+                    "name": "owner",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "Brackets",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Leaderboard": {
             "name": "Leaderboard",
             "fields": {
@@ -58,177 +117,6 @@ export const schema = {
                                     "create",
                                     "update",
                                     "delete"
-                                ]
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "OfficialResult": {
-            "name": "OfficialResult",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "superBowl": {
-                    "name": "superBowl",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "tieBreaker": {
-                    "name": "tieBreaker",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "afcConference": {
-                    "name": "afcConference",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "nfcConference": {
-                    "name": "nfcConference",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "afcDivisional1": {
-                    "name": "afcDivisional1",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "afcDivisional2": {
-                    "name": "afcDivisional2",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "nfcDivisional1": {
-                    "name": "nfcDivisional1",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "nfcDivisional2": {
-                    "name": "nfcDivisional2",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "afcWildCard1": {
-                    "name": "afcWildCard1",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "afcWildCard2": {
-                    "name": "afcWildCard2",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "afcWildCard3": {
-                    "name": "afcWildCard3",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "nfcWildCard1": {
-                    "name": "nfcWildCard1",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "nfcWildCard2": {
-                    "name": "nfcWildCard2",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "nfcWildCard3": {
-                    "name": "nfcWildCard3",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Team"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "OfficialResults",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "Admin"
-                                ],
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "delete",
-                                    "update"
                                 ]
                             },
                             {
@@ -437,6 +325,13 @@ export const schema = {
         }
     },
     "enums": {
+        "Event": {
+            "name": "Event",
+            "values": [
+                "NFLTWENTYONE",
+                "NCAATWENTYONE"
+            ]
+        },
         "Team": {
             "name": "Team",
             "values": [
@@ -476,5 +371,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "41f284eacd9f64fcff14f432a0fe4231"
+    "version": "9534072ffcd72c23237d847b2b2e91cc"
 };

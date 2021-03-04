@@ -206,19 +206,19 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                 <>
                   <Link
                     variant='button'
-                    href='/auth/entry'
+                    href='/ncaa/entry'
                     className={classes.link}>
                     Your Entry
                   </Link>
                   <Link
                     variant='button'
-                    href='/auth/leaderboard'
+                    href='/ncaa/leaderboard'
                     className={classes.link}>
                     Leaderboard
                   </Link>
                   <Link
                     variant='button'
-                    href='/auth/rules'
+                    href='/ncaa/rules'
                     className={classes.link}>
                     Rules / Prizes
                   </Link>
@@ -229,13 +229,6 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                     onClick={handleSignOut}>
                     Sign Out
                   </Link>
-                  {/* <MuiLink
-                    variant='button'
-                    href='/'
-                    className={classes.link}
-                    onClick={handleSignOut}>
-                    Sign Out
-                  </MuiLink> */}
                 </>
               ) : (
                 <>

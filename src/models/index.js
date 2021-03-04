@@ -2,6 +2,11 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
+const Event = {
+  "NFLTWENTYONE": "NFLTWENTYONE",
+  "NCAATWENTYONE": "NCAATWENTYONE"
+};
+
 const Team = {
   "ARI": "ARI",
   "ATL": "ATL",
@@ -37,11 +42,12 @@ const Team = {
   "WAS": "WAS"
 };
 
-const { Leaderboard, OfficialResult, Entry } = initSchema(schema);
+const { Bracket, Leaderboard, Entry } = initSchema(schema);
 
 export {
+  Bracket,
   Leaderboard,
-  OfficialResult,
   Entry,
+  Event,
   Team
 };

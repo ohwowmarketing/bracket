@@ -51,6 +51,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       'linear-gradient(to top right, rgba(255, 255, 255, 0.9), rgba(220, 220, 220, 0.9))',
     boxShadow: '2px 2px 3px rgba(0, 0, 0, 0.3)'
   },
+  gold: {
+    borderColor: '#d4af37',
+    boxShadow: '2px 2px 3px rgba(212, 175, 55, 0.5)'
+  },
   topLeft: {
     borderColor: '#ffc53a',
     boxShadow: '2px 2px 3px rgba(255, 197, 58, 0.5)'
@@ -139,10 +143,11 @@ const Game = ({
     <div>
       <Box
         className={clsx(classes.paper, {
-          [classes.topLeft]: !locked && group === 'a',
-          [classes.topRight]: !locked && group === 'b',
-          [classes.bottomLeft]: !locked && group === 'c',
-          [classes.bottomRight]: !locked && group === 'd',
+          // [classes.topLeft]: !locked && group === 'a',
+          // [classes.topRight]: !locked && group === 'b',
+          // [classes.bottomLeft]: !locked && group === 'c',
+          // [classes.bottomRight]: !locked && group === 'd',
+          [classes.gold]: !locked,
           [classes.correctPick]: locked && results[id] === selection,
           [classes.incorrectPick]: locked && results[id] !== selection
         })}>

@@ -1,5 +1,10 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
+export enum Event {
+  NFLTWENTYONE = "NFLTWENTYONE",
+  NCAATWENTYONE = "NCAATWENTYONE"
+}
+
 export enum Team {
   ARI = "ARI",
   ATL = "ATL",
@@ -37,32 +42,21 @@ export enum Team {
 
 
 
+export declare class Bracket {
+  readonly id: string;
+  readonly picks?: string;
+  readonly event?: Event | keyof typeof Event;
+  readonly owner?: string;
+  constructor(init: ModelInit<Bracket>);
+  static copyOf(source: Bracket, mutator: (draft: MutableModel<Bracket>) => MutableModel<Bracket> | void): Bracket;
+}
+
 export declare class Leaderboard {
   readonly id: string;
   readonly username?: string;
   readonly points?: string;
   constructor(init: ModelInit<Leaderboard>);
   static copyOf(source: Leaderboard, mutator: (draft: MutableModel<Leaderboard>) => MutableModel<Leaderboard> | void): Leaderboard;
-}
-
-export declare class OfficialResult {
-  readonly id: string;
-  readonly superBowl?: Team | keyof typeof Team;
-  readonly tieBreaker?: number;
-  readonly afcConference?: Team | keyof typeof Team;
-  readonly nfcConference?: Team | keyof typeof Team;
-  readonly afcDivisional1?: Team | keyof typeof Team;
-  readonly afcDivisional2?: Team | keyof typeof Team;
-  readonly nfcDivisional1?: Team | keyof typeof Team;
-  readonly nfcDivisional2?: Team | keyof typeof Team;
-  readonly afcWildCard1?: Team | keyof typeof Team;
-  readonly afcWildCard2?: Team | keyof typeof Team;
-  readonly afcWildCard3?: Team | keyof typeof Team;
-  readonly nfcWildCard1?: Team | keyof typeof Team;
-  readonly nfcWildCard2?: Team | keyof typeof Team;
-  readonly nfcWildCard3?: Team | keyof typeof Team;
-  constructor(init: ModelInit<OfficialResult>);
-  static copyOf(source: OfficialResult, mutator: (draft: MutableModel<OfficialResult>) => MutableModel<OfficialResult> | void): OfficialResult;
 }
 
 export declare class Entry {
