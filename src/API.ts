@@ -266,6 +266,16 @@ export enum ModelSortDirection {
 }
 
 
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
 export type ModelLeaderboardFilterInput = {
   id?: ModelIDInput | null,
   username?: ModelStringInput | null,
@@ -574,6 +584,36 @@ export type BracketByUsernameQueryVariables = {
 
 export type BracketByUsernameQuery = {
   bracketByUsername:  {
+    __typename: "ModelBracketConnection",
+    items:  Array< {
+      __typename: "Bracket",
+      id: string,
+      picks: string | null,
+      event: Event | null,
+      username: string,
+      owner: string | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type BracketByUsernameEventQueryVariables = {
+  username?: string | null,
+  event?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelBracketFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type BracketByUsernameEventQuery = {
+  bracketByUsernameEvent:  {
     __typename: "ModelBracketConnection",
     items:  Array< {
       __typename: "Bracket",
