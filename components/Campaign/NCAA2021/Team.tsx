@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Radio from '@material-ui/core/Radio'
@@ -31,9 +32,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-const Team = ({ team, locked }: { team: TeamProps; locked: boolean }) => {
+const Team = ({ team }: { team: TeamProps }) => {
   const { id, seed, name, logo } = team
+
+  const { locked } = useSelector((state) => state)
   const classes = useStyles()
+
   return (
     <FormControlLabel
       value={id}

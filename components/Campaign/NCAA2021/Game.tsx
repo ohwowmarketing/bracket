@@ -1,15 +1,14 @@
 import * as React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import clsx from 'clsx'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup'
-import Radio from '@material-ui/core/Radio'
 import Championship from './Championship'
-import { getTeamById } from './Seeds'
-import Team from './Team'
+import Radio from './Radio'
+import { getTeamById, TeamProps } from './Seeds'
 import { results } from './Results'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -86,34 +85,45 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface GameProps {
   id: string
-  group?: string
   round: 'first' | 'second' | 'sweet16' | 'elite8' | 'final4' | 'championship'
-  home?: string
-  away?: string
-  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
-  locked: boolean
+  home: string
+  away: string
 }
 
-const Game = ({
-  id,
-  group,
-  round,
-  home,
-  away,
-  onChange,
-  locked
-}: GameProps) => {
-  const [selection, setSelection] = React.useState<string>('')
-
+const Game = ({ id, round, home, away }: GameProps) => {
   const classes = useStyles()
+  const dispatch = useDispatch()
+  const { picks, locked } = useSelector((state) => state)
+
+  const [selection, setSelection] = React.useState<string>('')
+  const [homeTeam, setHomeTeam] = React.useState<TeamProps | null>(null)
+  const [awayTeam, setAwayTeam] = React.useState<TeamProps | null>(null)
+
+  React.useEffect(() => {
+    if (round === 'first') {
+      setHomeTeam(getTeamById(home))
+      setAwayTeam(getTeamById(away))
+    } else {
+      if (picks[home]) {
+        setHomeTeam(getTeamById(picks[home]))
+      }
+      if (picks[away]) {
+        setAwayTeam(getTeamById(picks[away]))
+      }
+    }
+    if (picks[id]) {
+      setSelection(picks[id])
+    }
+  }, [picks])
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: 'PICK',
+      game: id,
+      team: evt.target.value
+    })
     setSelection(evt.target.value)
-    onChange(evt)
   }
-
-  const homeTeam = home ? getTeamById(home) : null
-  const awayTeam = away ? getTeamById(away) : null
 
   const matchPoints = (label: string, points: number): string => {
     if (locked && results[id] !== selection) {
@@ -143,10 +153,6 @@ const Game = ({
     <div>
       <Box
         className={clsx(classes.paper, {
-          // [classes.topLeft]: !locked && group === 'a',
-          // [classes.topRight]: !locked && group === 'b',
-          // [classes.bottomLeft]: !locked && group === 'c',
-          // [classes.bottomRight]: !locked && group === 'd',
           [classes.gold]: !locked,
           [classes.correctPick]: locked && results[id] === selection,
           [classes.incorrectPick]: locked && results[id] !== selection
@@ -156,33 +162,11 @@ const Game = ({
             {matchLabel()}
           </FormLabel>
           <RadioGroup name={id} value={selection} onChange={handleChange}>
-            {home && homeTeam ? (
-              <Team team={homeTeam} locked={locked} />
-            ) : (
-              <FormControlLabel
-                control={<Radio size='small' disabled />}
-                label='TBD'
-                className={classes.label}
-              />
-            )}
-            {away && awayTeam ? (
-              <Team team={awayTeam} locked={locked} />
-            ) : (
-              <FormControlLabel
-                control={<Radio size='small' disabled />}
-                label='TBD'
-                className={classes.label}
-              />
-            )}
+            <Radio team={homeTeam} />
+            <Radio team={awayTeam} />
           </RadioGroup>
         </FormControl>
-        {round === 'championship' && (
-          <Championship
-            disabled={!home || !away}
-            onChange={onChange}
-            locked={locked}
-          />
-        )}
+        {round === 'championship' && <Championship />}
       </Box>
     </div>
   )

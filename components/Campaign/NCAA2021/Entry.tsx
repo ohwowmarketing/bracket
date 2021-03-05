@@ -1,179 +1,72 @@
 import * as React from 'react'
-import clsx from 'clsx'
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
+import { useSelector, useDispatch } from 'react-redux'
+import { API, Auth, graphqlOperation } from 'aws-amplify'
+import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
 import Box from '@material-ui/core/Box'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { XL } from '@mui/Layout'
 import { Contained } from '@mui/Button'
-import Game from './Game'
-import Round from './Round'
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    '& > div': {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-around'
-    }
-  },
-  centerLayout: {
-    justifyContent: 'space-evenly'
-    // justifyContent: 'center',
-  },
-  leftLayout: {
-    justifyContent: 'flex-start'
-  },
-  final4: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center !important',
-    '& > div': {
-      margin: theme.spacing(2)
-    }
-  },
-  matches: {
-    padding: theme.spacing(2),
-    textAlign: 'center'
-  },
-  textFieldContainer: {
-    padding: theme.spacing(2, 1)
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    width: '90%'
-  },
-  paper: {
-    margin: theme.spacing(1),
-    // paddingTop: theme.spacing(1),
-    border: `1px solid ${theme.palette.primary.main}`
-  },
-  legend: {
-    fontSize: '0.85em',
-    color: theme.palette.primary.main
-  },
-  label: {
-    marginTop: `-${theme.spacing(4)}px`
-  }
-}))
+import Brackets from './Brackets'
+import { bracketByUsername } from 'src/graphql/queries'
+// import { createBracket, updateBracket } from 'src/graphql/mutations'
 
 const NCAA2021 = () => {
-  const classes = useStyles()
-  const theme = useTheme()
-  const centerBrackets = useMediaQuery(theme.breakpoints.up('xl'))
+  const dispatch = useDispatch()
+  const { locked } = useSelector((state) => state)
 
-  const [entry, setEntry] = React.useState<any>({})
-  const [locked, setLocked] = React.useState<boolean>(false)
+  const [user, setUser] = React.useState<any>(null)
 
-  const handlePick = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setEntry({ ...entry, [evt.target.name]: evt.target.value })
-  }
-
-  const getTeamId = (id: string) => {
-    if (entry[id]) {
-      return entry[id]
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userData = await Auth.currentAuthenticatedUser()
+        setUser(userData)
+      } catch (e) {
+        console.error(e)
+      }
     }
-    return ''
-  }
+    fetchUser()
+  }, [])
+
+  React.useEffect(() => {
+    const checkForEntry = async () => {
+      try {
+        const brackets: any = await API.graphql(
+          graphqlOperation(bracketByUsername, {
+            username: `${user.username}`
+          })
+        )
+        if (brackets.data.bracketByUsername.items) {
+          brackets.data.bracketByUsername.items.map((item) => {
+            if (item.event === 'NCAATWENTYONE') {
+              console.log(item)
+              dispatch({
+                type: 'IMPORT',
+                bracketId: item.id,
+                picks: JSON.parse(item.picks),
+                tieBreaker: item.tieBreaker,
+                version: item._version
+              })
+            }
+          })
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    if (user) {
+      checkForEntry()
+    }
+  }, [user])
 
   return (
     <XL>
       <Box textAlign='center'>
-        <Contained onClick={() => setLocked(!locked)}>
+        <Contained onClick={() => dispatch({ type: 'LOCK' })}>
           {locked ? 'Unlock' : 'Lock'}
         </Contained>
       </Box>
-      <form>
-        <div
-          className={clsx(classes.root, {
-            [classes.centerLayout]: centerBrackets,
-            [classes.leftLayout]: !centerBrackets
-          })}>
-          <Round
-            groups={['a', 'c']}
-            round='first'
-            callback={handlePick}
-            locked={locked}
-          />
-          <Round
-            groups={['a', 'c']}
-            round='second'
-            callback={handlePick}
-            entry={(id) => getTeamId(id)}
-            locked={locked}
-          />
-          <Round
-            groups={['a', 'c']}
-            round='sweet16'
-            callback={handlePick}
-            entry={(id) => getTeamId(id)}
-            locked={locked}
-          />
-          <Round
-            groups={['a', 'c']}
-            round='elite8'
-            callback={handlePick}
-            entry={(id) => getTeamId(id)}
-            locked={locked}
-          />
-          <div className={classes.final4}>
-            <Game
-              key='a-b'
-              id='a-b'
-              round='final4'
-              home={entry['a-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
-              away={entry['b-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
-              onChange={(e) => handlePick(e)}
-              locked={locked}
-            />
-            <Game
-              key='championship'
-              id='championship'
-              round='championship'
-              home={entry['a-b']}
-              away={entry['c-d']}
-              onChange={(e) => handlePick(e)}
-              locked={locked}
-            />
-            <Game
-              key='c-d'
-              id='c-d'
-              round='final4'
-              home={entry['c-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
-              away={entry['d-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15']}
-              onChange={(e) => handlePick(e)}
-              locked={locked}
-            />
-          </div>
-          <Round
-            groups={['b', 'd']}
-            round='elite8'
-            callback={handlePick}
-            entry={(id) => getTeamId(id)}
-            locked={locked}
-          />
-          <Round
-            groups={['b', 'd']}
-            round='sweet16'
-            callback={handlePick}
-            entry={(id) => getTeamId(id)}
-            locked={locked}
-          />
-          <Round
-            groups={['b', 'd']}
-            round='second'
-            callback={handlePick}
-            entry={(id) => getTeamId(id)}
-            locked={locked}
-          />
-          <Round
-            groups={['b', 'd']}
-            round='first'
-            callback={handlePick}
-            locked={locked}
-          />
-        </div>
-      </form>
+      <Brackets />
     </XL>
   )
 }
