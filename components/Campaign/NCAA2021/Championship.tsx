@@ -6,6 +6,8 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import TextField from '@material-ui/core/TextField'
 import FormLabel from '@material-ui/core/FormLabel'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Alert from '@material-ui/lab/Alert'
 import { Contained } from '@mui/Button'
 import Link from '@components/Link'
 import { createBracket, updateBracket } from 'src/graphql/mutations'
@@ -26,8 +28,10 @@ const Championship = () => {
   const { bracketId, picks, tieBreaker, version, locked } = useSelector(
     (state) => state
   )
-  const [disabled, setDisabled] = React.useState(true)
+  const [disabled, setDisabled] = React.useState<boolean>(true)
   const [user, setUser] = React.useState(null)
+  const [loading, setLoading] = React.useState<boolean>(false)
+  const [alert, setAlert] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     const fetchUser = async () => {
@@ -56,6 +60,7 @@ const Championship = () => {
 
   const handleSubmit = async (evt: React.SyntheticEvent) => {
     evt.preventDefault()
+    setLoading(true)
     if (tieBreaker !== 0) {
       if (bracketId) {
         const result: any = await API.graphql({
@@ -95,6 +100,8 @@ const Championship = () => {
           dispatch({ type: 'SAVE', bracketId: result.data.createBracket.id })
         }
       }
+      setLoading(false)
+      setAlert(true)
     }
   }
 
@@ -118,19 +125,36 @@ const Championship = () => {
         />
       </Box>
       {!locked && (
-        <Box my={2} textAlign='center'>
-          <Contained
-            disabled={tieBreaker === 0}
-            component={Link}
-            href='/ncaa/entry'
-            color='primary'
-            align='center'
-            onClick={handleSubmit}>
-            <span className={classes.white}>
-              {bracketId ? 'Update Entry' : 'Submit Entry'}
-            </span>
-          </Contained>
-        </Box>
+        <>
+          {alert && (
+            <Box my={2} textAlign='center'>
+              <Alert
+                severity='success'
+                onClose={() => {
+                  setAlert(false)
+                }}>
+                {version > 1 ? 'Updated' : 'Saved'}
+              </Alert>
+            </Box>
+          )}
+          <Box my={2} textAlign='center'>
+            <Contained
+              disabled={tieBreaker === 0 || loading}
+              component={Link}
+              href='/ncaa/entry'
+              color='primary'
+              align='center'
+              onClick={handleSubmit}>
+              <span className={classes.white}>
+                {loading ? (
+                  <CircularProgress color='inherit' size={16} />
+                ) : (
+                  <>{bracketId ? 'Update Entry' : 'Submit Entry'}</>
+                )}
+              </span>
+            </Contained>
+          </Box>
+        </>
       )}
     </>
   )
