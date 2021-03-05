@@ -11,6 +11,7 @@ export const createBracket = /* GraphQL */ `
       id
       picks
       event
+      tieBreaker
       username
       owner
       _version
@@ -30,6 +31,7 @@ export const updateBracket = /* GraphQL */ `
       id
       picks
       event
+      tieBreaker
       username
       owner
       _version
@@ -49,6 +51,7 @@ export const deleteBracket = /* GraphQL */ `
       id
       picks
       event
+      tieBreaker
       username
       owner
       _version

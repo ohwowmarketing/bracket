@@ -46,6 +46,7 @@ export declare class Bracket {
   readonly id: string;
   readonly picks?: string;
   readonly event?: Event | keyof typeof Event;
+  readonly tieBreaker?: number;
   readonly username: string;
   readonly owner?: string;
   constructor(init: ModelInit<Bracket>);

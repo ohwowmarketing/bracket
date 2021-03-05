@@ -26,6 +26,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "tieBreaker": {
+                    "name": "tieBreaker",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "username": {
                     "name": "username",
                     "isArray": false,
@@ -418,5 +425,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "7943eee6ddd09e3b347575eedadf8a68"
+    "version": "c4d77aface74fa5ef880e99742a4c2df"
 };

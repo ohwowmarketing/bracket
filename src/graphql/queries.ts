@@ -8,6 +8,7 @@ export const getBracket = /* GraphQL */ `
       id
       picks
       event
+      tieBreaker
       username
       owner
       _version
@@ -29,6 +30,7 @@ export const listBrackets = /* GraphQL */ `
         id
         picks
         event
+        tieBreaker
         username
         owner
         _version
@@ -61,6 +63,7 @@ export const bracketByUsername = /* GraphQL */ `
         id
         picks
         event
+        tieBreaker
         username
         owner
         _version
@@ -93,6 +96,7 @@ export const bracketByEvent = /* GraphQL */ `
         id
         picks
         event
+        tieBreaker
         username
         owner
         _version
@@ -127,6 +131,7 @@ export const bracketByUsernameEvent = /* GraphQL */ `
         id
         picks
         event
+        tieBreaker
         username
         owner
         _version
@@ -157,6 +162,7 @@ export const syncBrackets = /* GraphQL */ `
         id
         picks
         event
+        tieBreaker
         username
         owner
         _version
