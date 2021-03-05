@@ -74,6 +74,38 @@ export const bracketByUsername = /* GraphQL */ `
     }
   }
 `;
+export const bracketByEvent = /* GraphQL */ `
+  query BracketByEvent(
+    $event: Event
+    $sortDirection: ModelSortDirection
+    $filter: ModelBracketFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bracketByEvent(
+      event: $event
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        picks
+        event
+        username
+        owner
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const bracketByUsernameEvent = /* GraphQL */ `
   query BracketByUsernameEvent(
     $username: String

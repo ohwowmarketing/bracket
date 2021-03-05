@@ -603,6 +603,35 @@ export type BracketByUsernameQuery = {
   } | null,
 };
 
+export type BracketByEventQueryVariables = {
+  event?: Event | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelBracketFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type BracketByEventQuery = {
+  bracketByEvent:  {
+    __typename: "ModelBracketConnection",
+    items:  Array< {
+      __typename: "Bracket",
+      id: string,
+      picks: string | null,
+      event: Event | null,
+      username: string,
+      owner: string | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
 export type BracketByUsernameEventQueryVariables = {
   username?: string | null,
   event?: ModelStringKeyConditionInput | null,

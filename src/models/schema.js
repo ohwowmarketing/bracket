@@ -61,6 +61,16 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
+                        "name": "byEvent",
+                        "fields": [
+                            "event"
+                        ],
+                        "queryField": "bracketByEvent"
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
                         "name": "byUsernameEvent",
                         "fields": [
                             "username",
@@ -408,5 +418,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "aee2abe9843a65151c78bdf2fb6f6d3d"
+    "version": "7943eee6ddd09e3b347575eedadf8a68"
 };
