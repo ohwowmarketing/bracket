@@ -1,13 +1,12 @@
 import * as React from 'react'
+import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { API, Auth, graphqlOperation } from 'aws-amplify'
-import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
 import Box from '@material-ui/core/Box'
 import { XL } from '@mui/Layout'
 import { Contained } from '@mui/Button'
 import Brackets from './Brackets'
 import { bracketByUsername } from 'src/graphql/queries'
-// import { createBracket, updateBracket } from 'src/graphql/mutations'
 
 const NCAA2021 = () => {
   const dispatch = useDispatch()
@@ -56,6 +55,32 @@ const NCAA2021 = () => {
 
     if (user) {
       checkForEntry()
+    }
+  }, [user])
+
+  React.useEffect(() => {
+    const addUserToMailchimp = async () => {
+      try {
+        const response = await axios.post(
+          'https://sggplayoffs.com/api/mc/add',
+          {
+            email: user.attributes.email,
+            state: user.attributes['custom:state']
+          }
+        )
+        if (response && response.status === 200) {
+          await Auth.updateUserAttributes(user, { 'custom:mc': '1' })
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    if (
+      user &&
+      user.attributes['custom:state'] &&
+      !user.attributes['custom:mc']
+    ) {
+      addUserToMailchimp()
     }
   }, [user])
 
