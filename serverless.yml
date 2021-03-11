@@ -9,7 +9,7 @@ nextApp:
       defaults:
         forward:
           headers: [Host]
-    domain: ['sggplayoffs.com, brackets.sportsgamblingguides.com']
+    domain: ['sggplayoffs.com', 'brackets.sportsgamblingguides.com']
     domainType: 'both'
     domainRedirects:
       www.sggplayoffs.com: https://sggplayoffs.com
