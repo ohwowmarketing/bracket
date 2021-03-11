@@ -37,12 +37,10 @@ const theme = createMuiTheme({
     MuiCssBaseline: {
       '@global': {
         body: {
-          // backgroundImage: 'url(/backgrounds/stadium.svg)',
-          // backgroundImage: 'url(/backgrounds/court/court.png)',
+          // backgroundImage: 'url(/backgrounds/ncaa/ncaa-3x.jpg)',
           backgroundImage:
-            'linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(/backgrounds/court/court.png)',
-          // backgroundImage:
-          //   'linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/backgrounds/court/court.png)',
+            'linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(/backgrounds/ncaa/ncaa-3x.jpg)',
+          // backgroundImage: `-webkit-image-set('/backgrounds/ncaa/ncaa-1x.jpg' 1x, '/backgrounds/ncaa/ncaa-2x.jpg' 2x, '/backgrounds/ncaa/ncaa-3x.jpg' 3x, '/backgrounds/ncaa/ncaa-4x.jpg' 4x)`,
           // backgroundImage:
           //   '-webkit-image-set(url(/backgrounds/court/court-1x.png) 1x, url(/backgrounds/court/court-2x.png) 2x, url(/backgrounds/court/court-3x.png) 3x, url(/backgrounds/court/court-4x.png) 4x)',
           // backgroundImage:

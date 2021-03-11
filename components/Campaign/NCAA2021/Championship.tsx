@@ -1,8 +1,9 @@
 import * as React from 'react'
+import axios from 'axios'
 import { API, Auth } from 'aws-amplify'
 import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
 import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import TextField from '@material-ui/core/TextField'
 import FormLabel from '@material-ui/core/FormLabel'
@@ -12,7 +13,7 @@ import { Contained } from '@mui/Button'
 import Link from '@components/Link'
 import { createBracket, updateBracket } from 'src/graphql/mutations'
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   totalScore: {
     fontSize: '0.85em',
     marginBottom: '10px'
@@ -98,6 +99,14 @@ const Championship = () => {
         })
         if (result.data.createBracket.id) {
           dispatch({ type: 'SAVE', bracketId: result.data.createBracket.id })
+        }
+        try {
+          await axios.post('https://sggplayoffs.com/api/mc/tag', {
+            email: user.attributes.email,
+            tag: 'NCAA Playoffs'
+          })
+        } catch (e) {
+          console.error(e)
         }
       }
       setLoading(false)

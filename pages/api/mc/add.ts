@@ -1,9 +1,5 @@
 const mailchimp = require('@mailchimp/mailchimp_marketing')
 import { setHeaders } from '@lib/headers'
-// const md5 = require('md5')
-// const listId = process.env.MAILCHIMP_LIST_ID
-// const email = 'prudence.mcvankab@example.com'
-// const subscriberHash = md5(email.toLowerCase())
 
 mailchimp.setConfig({
   apiKey: process.env.MAILCHIMP_API_KEY,
