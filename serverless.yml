@@ -1,5 +1,5 @@
 nextApp:
-  component: "@sls-next/serverless-component@1.19.0-alpha.0"
+  component: '@sls-next/serverless-component@1.19.0-alpha.0'
   inputs:
     env:
       MAILCHIMP_API_KEY: ${env.MAILCHIMP_API_KEY}
@@ -9,7 +9,7 @@ nextApp:
       defaults:
         forward:
           headers: [Host]
-    domain: ["sggplayoffs.com"]
-    domainType: "both"
+    domain: ['sggplayoffs.com, brackets.sportsgamblingguides.com']
+    domainType: 'both'
     domainRedirects:
       www.sggplayoffs.com: https://sggplayoffs.com
