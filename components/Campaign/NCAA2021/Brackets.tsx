@@ -1,10 +1,10 @@
 import clsx from 'clsx'
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Finals from './Finals'
 import Round from './Round'
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex'
   },
