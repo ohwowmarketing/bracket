@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles'
+import MuiLink from '@material-ui/core/Link'
 import Link from '@components/Link'
-import { SM, Box } from '@mui/Layout'
-import { H3, H5 } from '@mui/Typography'
+import { MD, Box } from '@mui/Layout'
+import { H4, H5 } from '@mui/Typography'
 import { Contained } from '@mui/Button'
 
 const useStyles = makeStyles((theme) => ({
@@ -21,25 +22,48 @@ const useStyles = makeStyles((theme) => ({
 const Hero = () => {
   const classes = useStyles()
   return (
-    <SM component='main' className={classes.hero}>
-      <H3 align='center' color='textPrimary' gutterBottom>
-        Sports Gambling Guides 2021 NCAA Bracket Challenge
-      </H3>
-      <H5 component='p' align='center' color='textSecondary' gutterBottom>
-        Pick the most accurate NCAA Playoff Bracket for your chance to win a
-        share of $1,000 in prizes. Compete against your friends and check the
-        live leaderboard to see where you stand!
-      </H5>
-      <Box mt={2}>
-        <Contained
-          component={Link}
-          href='/ncaa/entry'
-          color='primary'
-          align='center'>
-          <span className={classes.white}>Create Entry</span>
-        </Contained>
+    <MD component='main' className={classes.hero}>
+      <Box display='flex'>
+        <Box>
+          <MuiLink href='http://dkng.co/1000SGG'>
+            <img
+              src='/promo/draftkings.gif'
+              width='150'
+              height='300'
+              alt='DraftKings Promo: Bet $4 to win $256'
+            />
+          </MuiLink>
+        </Box>
+        <Box px={2}>
+          <H4 align='center' color='textPrimary'>
+            Sports Gambling Guides
+          </H4>
+          <H4 align='center' color='textPrimary' gutterBottom>
+            2021 NCAA Bracket Challenge
+          </H4>
+          <H5 component='p' align='center' color='textSecondary' gutterBottom>
+            Pick the most accurate NCAA Playoff Bracket for your chance to win a
+            share of $1,000 in prizes. Compete against your friends and check
+            the live leaderboard to see where you stand!
+          </H5>
+          <Box mt={2} textAlign='center'>
+            <Contained component={Link} href='/ncaa/entry' color='primary'>
+              <span className={classes.white}>Create Entry</span>
+            </Contained>
+          </Box>
+        </Box>
+        <Box>
+          <MuiLink href='http://dkng.co/1000SGG'>
+            <img
+              src='/promo/draftkings.gif'
+              width='150'
+              height='300'
+              alt='DraftKings Promo: Bet $4 to win $256'
+            />
+          </MuiLink>
+        </Box>
       </Box>
-    </SM>
+    </MD>
   )
 }
 

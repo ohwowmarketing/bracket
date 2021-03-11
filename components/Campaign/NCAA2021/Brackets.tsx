@@ -6,12 +6,7 @@ import Round from './Round'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex',
-    '& > div': {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-around'
-    }
+    display: 'flex'
   },
   centerLayout: {
     justifyContent: 'space-evenly'

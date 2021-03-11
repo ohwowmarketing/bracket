@@ -37,7 +37,6 @@ const NCAA2021 = () => {
         if (brackets.data.bracketByUsername.items) {
           brackets.data.bracketByUsername.items.map((item) => {
             if (item.event === 'NCAATWENTYONE') {
-              console.log(item)
               dispatch({
                 type: 'IMPORT',
                 bracketId: item.id,

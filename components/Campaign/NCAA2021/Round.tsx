@@ -1,6 +1,24 @@
 import * as React from 'react'
+import clsx from 'clsx'
+import { makeStyles } from '@material-ui/core/styles'
+import Box from '@material-ui/core/Box'
+import Link from '@material-ui/core/Link'
 import { getMatchesByRound, MatchParams } from './Seeds'
 import Game from './Game'
+
+const useStyles = makeStyles(() => ({
+  round: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around'
+  },
+  elite8: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+}))
 
 interface RoundProps {
   round: 'first' | 'second' | 'sweet16' | 'elite8'
@@ -8,9 +26,15 @@ interface RoundProps {
 }
 
 const Round = ({ round, groups }: RoundProps): React.ReactElement => {
+  const classes = useStyles()
   return (
-    <div key={groups ? `${round}-${groups.join('-')}` : round}>
-      {groups.map((group) => {
+    <div
+      key={groups ? `${round}-${groups.join('-')}` : round}
+      className={clsx({
+        [classes.elite8]: round === 'elite8',
+        [classes.round]: round !== 'elite8'
+      })}>
+      {groups.map((group, index) => {
         const matches = getMatchesByRound(round)
         return matches.map((match: MatchParams) => {
           const teamId = (team: 'home' | 'away') => {
@@ -18,14 +42,29 @@ const Round = ({ round, groups }: RoundProps): React.ReactElement => {
             return `${group}${dash}${match[team]}`
           }
           const uniq = `${group}-${match.home}-${match.away}`
+          const showPromo = Boolean(round === 'elite8' && index === 0)
           return (
-            <Game
-              key={uniq}
-              id={uniq}
-              round={round}
-              home={teamId('home')}
-              away={teamId('away')}
-            />
+            <>
+              <Game
+                key={uniq}
+                id={uniq}
+                round={round}
+                home={teamId('home')}
+                away={teamId('away')}
+              />
+              {showPromo && (
+                <Box my={'180px'}>
+                  <Link href='http://dkng.co/1000SGG' key={`${uniq}-promo`}>
+                    <img
+                      src='/promo/draftkings.gif'
+                      width='150'
+                      height='300'
+                      alt='DraftKings Promo: Bet $4 to win $256'
+                    />
+                  </Link>
+                </Box>
+              )}
+            </>
           )
         })
       })}

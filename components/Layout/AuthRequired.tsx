@@ -8,6 +8,7 @@ import {
   ForgotPassword,
   RequireNewPassword
 } from 'aws-amplify-react'
+import Link from '@material-ui/core/Link'
 import Alert from '@material-ui/lab/Alert'
 import { Container, Box, MD } from '@mui/Layout'
 import useAmplifyAuth from '@hooks/useAmplifyAuth'
@@ -59,13 +60,24 @@ const Layout = ({ children }) => {
       <AppBar />
       <div className={classes.offset} />
       <Container>
-        <Box my={4}>
-          <MD>
-            {displayedError !== '' && (
-              <Alert severity='warning' onClose={handleClearError}>
-                {displayedError}
-              </Alert>
-            )}
+        {/* <MD> */}
+        {displayedError !== '' && (
+          <Alert severity='warning' onClose={handleClearError}>
+            {displayedError}
+          </Alert>
+        )}
+        <Box display='flex' mt={12} justifyContent='center'>
+          <Box mt={8}>
+            <Link href='http://dkng.co/1000SGG'>
+              <img
+                src='/promo/draftkings.gif'
+                width='150'
+                height='300'
+                alt='DraftKings Promo: Bet $4 to win $256'
+              />
+            </Link>
+          </Box>
+          <Box px={4}>
             <Authenticator
               theme={authTheme}
               errorMessage={map}
@@ -91,8 +103,19 @@ const Layout = ({ children }) => {
               <ForgotPassword />
               <RequireNewPassword />
             </Authenticator>
-          </MD>
+          </Box>
+          <Box mt={8}>
+            <Link href='http://dkng.co/1000SGG'>
+              <img
+                src='/promo/draftkings.gif'
+                width='150'
+                height='300'
+                alt='DraftKings Promo: Bet $4 to win $256'
+              />
+            </Link>
+          </Box>
         </Box>
+        {/* </MD> */}
       </Container>
       <Footer />
     </>
