@@ -1,16 +1,19 @@
 import * as React from 'react'
 import axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux'
+import {
+  // useSelector,
+  useDispatch
+} from 'react-redux'
 import { API, Auth, graphqlOperation } from 'aws-amplify'
-import Box from '@material-ui/core/Box'
+// import Box from '@material-ui/core/Box'
 import { XL } from '@mui/Layout'
-import { Contained } from '@mui/Button'
+// import { Contained } from '@mui/Button'
 import Brackets from './Brackets'
 import { bracketByUsername } from 'src/graphql/queries'
 
 const NCAA2021 = () => {
   const dispatch = useDispatch()
-  const { locked } = useSelector((state) => state)
+  // const { locked } = useSelector((state) => state)
 
   const [user, setUser] = React.useState<any>(null)
 
@@ -85,11 +88,11 @@ const NCAA2021 = () => {
 
   return (
     <XL>
-      <Box textAlign='center'>
+      {/* <Box textAlign='center'>
         <Contained onClick={() => dispatch({ type: 'LOCK' })}>
           {locked ? 'Unlock' : 'Lock'}
         </Contained>
-      </Box>
+      </Box> */}
       <Brackets />
     </XL>
   )

@@ -111,7 +111,11 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
               <Divider />
               <List>
                 <>
-                  <ListItem button key='home' component={Link} href='/'>
+                  <ListItem
+                    button
+                    key='home'
+                    component={MuiLink}
+                    href='https://sportsgamblingguides.com'>
                     <>
                       <ListItemIcon>
                         <img src='/logo-alt.png' width={169} height={30} />
@@ -123,8 +127,18 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                       <ListItem
                         button
                         key='entry'
+                        component={MuiLink}
+                        href='https://sportsgamblingguides.com'>
+                        <ListItemIcon>
+                          <Icon className='fas fa-home fa-xs' color='primary' />
+                        </ListItemIcon>
+                        <ListItemText primary='Home' />
+                      </ListItem>
+                      <ListItem
+                        button
+                        key='entry'
                         component={Link}
-                        href='/auth/entry'>
+                        href='/ncaa/entry'>
                         <ListItemIcon>
                           <Icon
                             className='fas fa-ticket-alt fa-xs'
@@ -133,7 +147,7 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                         </ListItemIcon>
                         <ListItemText primary='Your Entry' />
                       </ListItem>
-                      <ListItem
+                      {/* <ListItem
                         button
                         key='entry'
                         component={Link}
@@ -145,12 +159,12 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                           />
                         </ListItemIcon>
                         <ListItemText primary='Leaderboard' />
-                      </ListItem>
+                      </ListItem> */}
                       <ListItem
                         button
                         key='entry'
                         component={Link}
-                        href='/auth/rules'>
+                        href='/ncaa/prizes'>
                         <ListItemIcon>
                           <Icon
                             className='fas fa-tasks fa-xs'
@@ -204,21 +218,27 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
             <>
               {signedIn ? (
                 <>
+                  <MuiLink
+                    variant='button'
+                    href='https://sportsgamblingguides.com'
+                    className={classes.link}>
+                    Home
+                  </MuiLink>
                   <Link
                     variant='button'
                     href='/ncaa/entry'
                     className={classes.link}>
                     Your Entry
                   </Link>
-                  <Link
+                  {/* <Link
                     variant='button'
                     href='/ncaa/leaderboard'
                     className={classes.link}>
                     Leaderboard
-                  </Link>
+                  </Link> */}
                   <Link
                     variant='button'
-                    href='/ncaa/rules'
+                    href='/ncaa/prizes'
                     className={classes.link}>
                     Rules / Prizes
                   </Link>

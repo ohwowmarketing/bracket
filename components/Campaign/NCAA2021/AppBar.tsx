@@ -102,12 +102,25 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
               <div className={classes.toolbar} />
               <Divider />
               <List>
-                <ListItem button key='home-icon' component={Link} href='/'>
+                <ListItem
+                  button
+                  key='home-icon'
+                  component={MuiLink}
+                  href='https://sportgamblingguides.com'>
                   <ListItemIcon>
-                    <img src='/logo-alt.png' width={169} height={30} />
+                    <img
+                      src='/logo-alt.png'
+                      width={169}
+                      height={30}
+                      alt='Sports Gambling Guides'
+                    />
                   </ListItemIcon>
                 </ListItem>
-                <ListItem button key='home' component={Link} href='/ncaa'>
+                <ListItem
+                  button
+                  key='home'
+                  component={MuiLink}
+                  href='https://sportgamblingguides.com'>
                   <ListItemIcon>
                     <Icon className='fas fa-home' color='primary' />
                   </ListItemIcon>
@@ -115,13 +128,23 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                 </ListItem>
                 <ListItem
                   button
-                  key='entry'
+                  key='create-entry'
                   component={Link}
-                  href='/ncaa/entry'>
+                  href='/ncaa'>
                   <ListItemIcon>
                     <Icon className='fas fa-ticket-alt fa-xs' color='primary' />
                   </ListItemIcon>
-                  <ListItemText primary='Entry' />
+                  <ListItemText primary='Create Entry' />
+                </ListItem>
+                <ListItem
+                  button
+                  key='sign-in'
+                  component={Link}
+                  href='/ncaa/entry'>
+                  <ListItemIcon>
+                    <Icon className='fas fa-user-lock' color='primary' />
+                  </ListItemIcon>
+                  <ListItemText primary='Sign In' />
                 </ListItem>
                 <ListItem
                   button
@@ -132,16 +155,6 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                     <Icon className='fas fa-tasks fa-xs' color='primary' />
                   </ListItemIcon>
                   <ListItemText primary='Rules / Prizes' />
-                </ListItem>
-                <ListItem
-                  button
-                  key='leaderboard'
-                  component={Link}
-                  href='/ncaa/leaderboard'>
-                  <ListItemIcon>
-                    <Icon className='fas fa-list-ol fa-xs' color='primary' />
-                  </ListItemIcon>
-                  <ListItemText primary='Leaderboard' />
                 </ListItem>
                 <ListItem
                   button
@@ -157,19 +170,26 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
             </Drawer>
           </Hidden>
           <Hidden xsDown implementation='css'>
-            <Link
+            <MuiLink
               key='home'
+              variant='button'
+              href='https://sportsgamblingguides.com'
+              className={classes.link}>
+              Home
+            </MuiLink>
+            <Link
+              key='create-entry'
               variant='button'
               href='/ncaa'
               className={classes.link}>
-              Home
+              Create Entry
             </Link>
             <Link
-              key='entry'
+              key='sing-in'
               variant='button'
               href='/ncaa/entry'
               className={classes.link}>
-              Entry
+              Sign In
             </Link>
             <Link
               key='rules'
@@ -177,13 +197,6 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
               href='/ncaa/rules'
               className={classes.link}>
               Rules / Prizes
-            </Link>
-            <Link
-              key='leaderbaord'
-              variant='button'
-              href='/ncaa/leaderboard'
-              className={classes.link}>
-              Leaderboard
             </Link>
             <Link
               key='winners'
