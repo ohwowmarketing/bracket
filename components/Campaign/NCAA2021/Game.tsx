@@ -8,7 +8,7 @@ import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Championship from './Championship'
 import Radio from './Radio'
-import { getTeamById, TeamProps } from './Seeds'
+import { getGroupSeedById, SeedProps } from './Seeds'
 import { results } from './Results'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -96,19 +96,19 @@ const Game = ({ id, round, home, away }: GameProps) => {
   const { picks, locked } = useSelector((state) => state)
 
   const [selection, setSelection] = React.useState<string>('')
-  const [homeTeam, setHomeTeam] = React.useState<TeamProps | null>(null)
-  const [awayTeam, setAwayTeam] = React.useState<TeamProps | null>(null)
+  const [homeTeam, setHomeTeam] = React.useState<SeedProps | null>(null)
+  const [awayTeam, setAwayTeam] = React.useState<SeedProps | null>(null)
 
   React.useEffect(() => {
     if (round === 'first') {
-      setHomeTeam(getTeamById(home))
-      setAwayTeam(getTeamById(away))
+      setHomeTeam(getGroupSeedById(home))
+      setAwayTeam(getGroupSeedById(away))
     } else {
       if (picks[home]) {
-        setHomeTeam(getTeamById(picks[home]))
+        setHomeTeam(getGroupSeedById(picks[home]))
       }
       if (picks[away]) {
-        setAwayTeam(getTeamById(picks[away]))
+        setAwayTeam(getGroupSeedById(picks[away]))
       }
     }
     if (picks[id]) {
@@ -162,8 +162,8 @@ const Game = ({ id, round, home, away }: GameProps) => {
             {matchLabel()}
           </FormLabel>
           <RadioGroup name={id} value={selection} onChange={handleChange}>
-            <Radio team={homeTeam} />
-            <Radio team={awayTeam} />
+            <Radio groupSeed={homeTeam} />
+            <Radio groupSeed={awayTeam} />
           </RadioGroup>
         </FormControl>
         {round === 'championship' && <Championship />}

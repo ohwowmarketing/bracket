@@ -2,7 +2,7 @@ import Team from './Team'
 import { makeStyles } from '@material-ui/core/styles'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import MuiRadio from '@material-ui/core/Radio'
-import { TeamProps } from './Seeds'
+import { SeedProps } from './Seeds'
 
 const useStyles = makeStyles({
   label: {
@@ -13,12 +13,12 @@ const useStyles = makeStyles({
   }
 })
 
-const Radio = ({ team }: { team: TeamProps | null }) => {
+const Radio = ({ groupSeed }: { groupSeed: SeedProps | null }) => {
   const classes = useStyles()
   return (
     <>
-      {team ? (
-        <Team team={team} />
+      {groupSeed ? (
+        <Team groupSeed={groupSeed} />
       ) : (
         <FormControlLabel
           control={<MuiRadio size='small' disabled />}

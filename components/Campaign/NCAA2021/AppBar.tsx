@@ -138,16 +138,6 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                 </ListItem>
                 <ListItem
                   button
-                  key='sign-in'
-                  component={Link}
-                  href='/ncaa/entry'>
-                  <ListItemIcon>
-                    <Icon className='fas fa-user-lock' color='primary' />
-                  </ListItemIcon>
-                  <ListItemText primary='Sign In' />
-                </ListItem>
-                <ListItem
-                  button
                   key='rules'
                   component={Link}
                   href='/ncaa/rules'>
@@ -165,6 +155,16 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                     <Icon className='fas fa-trophy fa-xs' color='primary' />
                   </ListItemIcon>
                   <ListItemText primary='Past Winners' />
+                </ListItem>
+                <ListItem
+                  button
+                  key='sign-in'
+                  component={Link}
+                  href='/ncaa/entry'>
+                  <ListItemIcon>
+                    <Icon className='fas fa-user-lock' color='primary' />
+                  </ListItemIcon>
+                  <ListItemText primary='Sign In' />
                 </ListItem>
               </List>
             </Drawer>
@@ -185,13 +185,6 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
               Create Entry
             </Link>
             <Link
-              key='sing-in'
-              variant='button'
-              href='/ncaa/entry'
-              className={classes.link}>
-              Sign In
-            </Link>
-            <Link
               key='rules'
               variant='button'
               href='/ncaa/rules'
@@ -204,6 +197,13 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
               href='/ncaa/winners'
               className={classes.link}>
               Past Winners
+            </Link>
+            <Link
+              key='sing-in'
+              variant='button'
+              href='/ncaa/entry'
+              className={classes.link}>
+              Sign In
             </Link>
           </Hidden>
         </nav>

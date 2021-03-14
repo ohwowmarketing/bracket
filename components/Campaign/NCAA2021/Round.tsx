@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box'
 import Link from '@material-ui/core/Link'
 import { getMatchesByRound, MatchParams } from './Seeds'
 import Game from './Game'
+import { uuid } from 'uuidv4'
 
 const useStyles = makeStyles(() => ({
   round: {
@@ -29,7 +30,7 @@ const Round = ({ round, groups }: RoundProps): React.ReactElement => {
   const classes = useStyles()
   return (
     <div
-      key={groups ? `${round}-${groups.join('-')}` : round}
+      key={groups ? `${round}-${groups.join('-')}` : uuid()}
       className={clsx({
         [classes.elite8]: round === 'elite8',
         [classes.round]: round !== 'elite8'
@@ -44,9 +45,8 @@ const Round = ({ round, groups }: RoundProps): React.ReactElement => {
           const uniq = `${group}-${match.home}-${match.away}`
           const showPromo = Boolean(round === 'elite8' && index === 0)
           return (
-            <>
+            <div key={uniq}>
               <Game
-                key={uniq}
                 id={uniq}
                 round={round}
                 home={teamId('home')}
@@ -64,7 +64,7 @@ const Round = ({ round, groups }: RoundProps): React.ReactElement => {
                   </Link>
                 </Box>
               )}
-            </>
+            </div>
           )
         })
       })}

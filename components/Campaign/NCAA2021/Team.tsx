@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Radio from '@material-ui/core/Radio'
-import { TeamProps } from './Seeds'
+import { getTeamByGroupSeed, SeedProps } from './Seeds'
 
 const useStyles = makeStyles((theme: Theme) => ({
   label: {
@@ -32,8 +32,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-const Team = ({ team }: { team: TeamProps }) => {
-  const { id, seed, name, logo } = team
+const Team = ({ groupSeed }: { groupSeed: SeedProps }) => {
+  const { id, group, seed } = groupSeed
+  const { name, logo } = getTeamByGroupSeed(group, seed)
 
   const { locked } = useSelector((state) => state)
   const classes = useStyles()
