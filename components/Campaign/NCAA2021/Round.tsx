@@ -2,8 +2,10 @@ import * as React from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
+import Paper from '@material-ui/core/Paper'
 import Link from '@material-ui/core/Link'
-import { getMatchesByRound, MatchParams } from './Seeds'
+import { H4 } from '@mui/Typography'
+import { getGroupName, getMatchesByRound, MatchParams } from './Seeds'
 import Game from './Game'
 import { uuid } from 'uuidv4'
 
@@ -18,6 +20,10 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  paper: {
+    marginTop: '140px',
+    marginBottom: '-140px'
   }
 }))
 
@@ -37,13 +43,14 @@ const Round = ({ round, groups }: RoundProps): React.ReactElement => {
       })}>
       {groups.map((group, index) => {
         const matches = getMatchesByRound(round)
-        return matches.map((match: MatchParams) => {
+        return matches.map((match: MatchParams, matchIndex) => {
           const teamId = (team: 'home' | 'away') => {
             const dash = round === 'first' ? '' : '-'
             return `${group}${dash}${match[team]}`
           }
           const uniq = `${group}-${match.home}-${match.away}`
           const showPromo = Boolean(round === 'elite8' && index === 0)
+          const showGroup = Boolean(round === 'sweet16' && matchIndex === 0)
           return (
             <div key={uniq}>
               <Game
@@ -63,6 +70,11 @@ const Round = ({ round, groups }: RoundProps): React.ReactElement => {
                     />
                   </Link>
                 </Box>
+              )}
+              {showGroup && (
+                <Paper className={classes.paper}>
+                  <H4 align='center'>{getGroupName(group)}</H4>
+                </Paper>
               )}
             </div>
           )

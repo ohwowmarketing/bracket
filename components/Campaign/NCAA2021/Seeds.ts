@@ -7,8 +7,6 @@ interface SeedProps {
   teamId: number
 }
 
-// A: East, B: West, C: Midwest, D: South
-
 const seeds: SeedProps[] = [
   { id: 'a1', seed: 1, group: 'a', teamId: 27 },
   { id: 'a2', seed: 2, group: 'a', teamId: 2 },
@@ -141,7 +139,21 @@ const getMatchesByRound = (round: string): MatchParams[] | null => {
   }
 }
 
+const getGroupName = (id: string): string => {
+  switch (id) {
+    case 'a':
+      return 'EAST'
+    case 'b':
+      return 'WEST'
+    case 'c':
+      return 'MIDWEST'
+    case 'd':
+      return 'SOUTH'
+  }
+}
+
 export {
+  getGroupName,
   getGroupSeed,
   getGroupSeedById,
   getTeamByGroupSeed,
