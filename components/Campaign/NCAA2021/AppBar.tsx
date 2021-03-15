@@ -126,11 +126,7 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                   </ListItemIcon>
                   <ListItemText primary='Home' />
                 </ListItem>
-                <ListItem
-                  button
-                  key='create-entry'
-                  component={Link}
-                  href='/ncaa'>
+                <ListItem button key='create-entry' component={Link} href='/'>
                   <ListItemIcon>
                     <Icon className='fas fa-ticket-alt fa-xs' color='primary' />
                   </ListItemIcon>
@@ -180,7 +176,7 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
             <Link
               key='create-entry'
               variant='button'
-              href='/ncaa'
+              href='/'
               className={classes.link}>
               Create Entry
             </Link>

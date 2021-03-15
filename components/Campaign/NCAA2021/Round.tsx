@@ -60,7 +60,7 @@ const Round = ({ round, groups }: RoundProps): React.ReactElement => {
                 away={teamId('away')}
               />
               {showPromo && (
-                <Box my={'180px'}>
+                <Box my={'180px'} textAlign='center'>
                   <Link href='http://dkng.co/1000SGG' key={`${uniq}-promo`}>
                     <img
                       src='/promo/draftkings.gif'

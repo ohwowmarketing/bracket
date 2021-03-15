@@ -1,11 +1,10 @@
-// import Home from '@components/Hero'
-import Layout from '@components/Layout/Global'
-import Results from '@components/Results'
+import Layout from '@components/Layout/NCAA'
+import Hero from '@components/Campaign/NCAA2021/Hero'
 
 const Index = () => {
   return (
     <Layout>
-      <Results />
+      <Hero />
     </Layout>
   )
 }

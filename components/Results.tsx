@@ -149,9 +149,9 @@ const Results = () => {
   const classes = useStyles()
   return (
     <SM align='center'>
-      <H3>Results</H3>
-      <H4>NFL Bracket Challenge</H4>
       <TableContainer component={Paper} className={classes.paper}>
+        <H3>Results</H3>
+        <H4>NFL Bracket Challenge</H4>
         <Table aria-label='Results'>
           <TableHead>
             <TableRow>
