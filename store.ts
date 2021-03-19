@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 let store
 
 const initialState = {
-  locked: false,
+  locked: true,
   results: {},
   bracketId: '',
   version: 0,

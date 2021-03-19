@@ -153,9 +153,11 @@ const Game = ({ id, round, home, away }: GameProps) => {
     <div>
       <Box
         className={clsx(classes.paper, {
-          [classes.gold]: !locked,
-          [classes.correctPick]: locked && results[id] === selection,
-          [classes.incorrectPick]: locked && results[id] !== selection
+          [classes.gold]: !locked || results[id] === null,
+          [classes.correctPick]:
+            locked && results[id] && results[id] === selection,
+          [classes.incorrectPick]:
+            locked && results[id] && results[id] !== selection
         })}>
         <FormControl component='fieldset' className={classes.formControl}>
           <FormLabel component='legend' className={classes.legend}>
