@@ -32,7 +32,7 @@ const teams: TeamProps[] = [
   { id: 25, name: 'LSU', logo: 'lsu.svg' },
   { id: 26, name: 'Maryland', logo: 'maryland.svg' },
   { id: 27, name: 'Michigan', logo: 'michigan.svg' },
-  { id: 28, name: 'Michigan State / UCLA' },
+  { id: 28, name: 'UCLA', logo: 'ucla.svg' },
   { id: 29, name: 'Missouri', logo: 'missouri.svg' },
   { id: 30, name: 'Navy', logo: 'navy.svg' },
   { id: 31, name: 'Oklahoma', logo: 'oklahoma.svg' },
@@ -65,7 +65,7 @@ const teams: TeamProps[] = [
   { id: 58, name: 'Virginia', logo: 'virginia.svg' },
   { id: 59, name: 'West Virginia', logo: 'west-virginia.svg' },
   { id: 60, name: 'Western Kentucky', logo: 'western-ky.svg' },
-  { id: 61, name: 'Wichita State / Drake' },
+  { id: 61, name: 'Drake', logo: 'drake.svg' },
   { id: 62, name: 'Winthrop', logo: 'winthrop.svg' },
   { id: 63, name: 'Wisconsin', logo: 'wisconsin.svg' },
   { id: 64, name: 'Xavier', logo: 'xavier.svg' },
@@ -82,8 +82,8 @@ const teams: TeamProps[] = [
   { id: 75, name: 'Drexel', logo: 'drexel.svg' },
   { id: 76, name: 'Georgetown', logo: 'georgetown.svg' },
   { id: 77, name: 'Iona', logo: 'iona.svg' },
-  { id: 78, name: `Mt St Mary's / Texas Southern` },
-  { id: 79, name: 'Norfolk St / Appalachian St' }
+  { id: 78, name: 'Texas Southern', logo: 'texas-southern.svg' },
+  { id: 79, name: 'Norfolk State', logo: 'norfolk-st.svg' }
 ]
 
 export const getTeam = (id: number): TeamProps => {
