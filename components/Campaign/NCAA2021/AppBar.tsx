@@ -126,12 +126,12 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                   </ListItemIcon>
                   <ListItemText primary='Home' />
                 </ListItem>
-                <ListItem button key='create-entry' component={Link} href='/'>
+                {/* <ListItem button key='create-entry' component={Link} href='/'>
                   <ListItemIcon>
                     <Icon className='fas fa-ticket-alt fa-xs' color='primary' />
                   </ListItemIcon>
                   <ListItemText primary='Create Entry' />
-                </ListItem>
+                </ListItem> */}
                 <ListItem
                   button
                   key='rules'
@@ -173,13 +173,13 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
               className={classes.link}>
               Home
             </MuiLink>
-            <Link
+            {/* <Link
               key='create-entry'
               variant='button'
               href='/'
               className={classes.link}>
               Create Entry
-            </Link>
+            </Link> */}
             <Link
               key='rules'
               variant='button'

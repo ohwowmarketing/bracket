@@ -77,37 +77,9 @@ const Hero = () => {
             share of $1,000 in prizes. Compete against your friends and check
             the live leaderboard to see where you stand!
           </H5>
-          <Box mt={2} py={2} textAlign='center'>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={isChecked}
-                  onChange={() => setIsChecked(!isChecked)}
-                  name='agreement'
-                  color='primary'
-                />
-              }
-              label={
-                <Caption align='left'>
-                  I certify that I am 21+. Have you considered making your
-                  sports betting account with one of Sports Gambling Guides list
-                  of Sports Betting Operators?{' '}
-                  <MuiLink href='http://dkng.co/1000SGG'>
-                    CLICK HERE TO SIGN UP
-                  </MuiLink>{' '}
-                  for DraftKings Sportsbook and get 64-1 odds on any underdog in
-                  March Mania (T&C's Apply).
-                </Caption>
-              }
-            />
-          </Box>
           <Box m={2} textAlign='center'>
-            <Contained
-              component={Link}
-              href='/ncaa/entry'
-              color='primary'
-              disabled={!isChecked}>
-              <span className={classes.white}>Create Entry</span>
+            <Contained component={Link} href='/ncaa/entry' color='primary'>
+              <span className={classes.white}>Sign In</span>
             </Contained>
           </Box>
         </Box>
