@@ -111,7 +111,7 @@ export const results: ResultsProps = {
   'c-6-11-3-14-7-10-2-15': null,
   'c-7-10': null,
   'c-7-10-2-15': null,
-  'c-8-9': null,
+  'c-8-9': 'c8',
   'c-d': null,
   championship: null,
   'd-1-16': 'd1',
