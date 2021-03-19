@@ -1,4 +1,4 @@
-interface ResultsProps {
+export interface ResultsProps {
   'a-1-16': string | null
   'a-1-16-8-9': string | null
   'a-1-16-8-9-5-12-4-13': string | null
@@ -97,7 +97,7 @@ export const results: ResultsProps = {
   'b-7-10': null,
   'b-7-10-2-15': null,
   'b-8-9': null,
-  'c-1-16': null,
+  'c-1-16': 'c1',
   'c-1-16-8-9': null,
   'c-1-16-8-9-5-12-4-13': null,
   'c-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15': null,
@@ -119,14 +119,14 @@ export const results: ResultsProps = {
   'd-1-16-8-9-5-12-4-13': null,
   'd-1-16-8-9-5-12-4-13-6-11-3-14-7-10-2-15': null,
   'd-2-15': null,
-  'd-3-14': null,
+  'd-3-14': 'd3',
   'd-4-13': null,
   'd-5-12': null,
   'd-5-12-4-13': null,
   'd-6-11': null,
   'd-6-11-3-14': null,
   'd-6-11-3-14-7-10-2-15': null,
-  'd-7-10': null,
+  'd-7-10': 'd7',
   'd-7-10-2-15': null,
   'd-8-9': null,
   tieBreaker: '0'

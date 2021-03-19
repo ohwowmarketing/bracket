@@ -22,175 +22,95 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Leaderboard = () => {
+export interface LeaderProps {
+  username: string
+  r64?: string
+  r32?: string
+  s16?: string
+  e8?: string
+  f4?: string
+  champ?: string
+  tiebreaker?: string
+  total?: string
+}
+
+const Leaderboard = ({
+  leaders,
+  score
+}: {
+  leaders: LeaderProps[]
+  score?: LeaderProps
+}) => {
   const classes = useStyles()
-  const leaders = [
-    {
-      username: 'Terminatorwil',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'bradygoat',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'Chrisraffone7',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'dimitri',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'Eero',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'Jdietz3',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'Jonasdelo',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'Jonathanh4616',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'Jroode12',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'LeBrows-',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'Ryan_wrld15',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    },
-    {
-      username: 'TimboG@89',
-      r64: '270',
-      r32: '300',
-      s16: '320',
-      e8: '320',
-      f4: '320',
-      champ: '320',
-      total: '1,530'
-    }
-  ]
+
   return (
     <LG>
-      <Box textAlign='center'>
-        <H3>Leaderboard</H3>
-        <H4>NCAA Bracket Challenge</H4>
-        <P>Scores are updated at the end of each day.</P>
-      </Box>
-
       <TableContainer component={Paper} className={classes.paper}>
+        <Box textAlign='center'>
+          <H3>Leaderboard</H3>
+          <H4>NCAA Bracket Challenge</H4>
+          <P>Scores are updated at the end of each day.</P>
+        </Box>
         <Table aria-label='Leaderboard'>
           <TableHead>
             <TableRow>
-              <TableCell>Rank</TableCell>
+              {/* <TableCell>Rank</TableCell> */}
               <TableCell>Username</TableCell>
               <TableCell align='right'>R64</TableCell>
-              <TableCell align='right'>R32</TableCell>
+              {/* <TableCell align='right'>R32</TableCell>
               <TableCell align='right'>S16</TableCell>
               <TableCell align='right'>E8</TableCell>
               <TableCell align='right'>F4</TableCell>
-              <TableCell align='right'>NCG</TableCell>
+              <TableCell align='right'>NCG</TableCell> */}
               <TableCell align='right'>Total</TableCell>
-              <TableCell align='right'>View Picks</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {leaders.map((row, index) => (
+            {leaders.map((row) => (
               <TableRow key={row.username}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{row.username}</TableCell>
+                {/* <TableCell>{index + 1}</TableCell> */}
+                <TableCell>
+                  {row.username}
+                  {/* {`${row.username} (`}
+
+                  <Link href='#'>View Picks</Link>
+                  {')'} */}
+                </TableCell>
                 <TableCell align='right'>{row.r64}</TableCell>
-                <TableCell align='right'>{row.r32}</TableCell>
+                {/* <TableCell align='right'>{row.r32}</TableCell>
                 <TableCell align='right'>{row.s16}</TableCell>
                 <TableCell align='right'>{row.e8}</TableCell>
                 <TableCell align='right'>{row.f4}</TableCell>
-                <TableCell align='right'>{row.champ}</TableCell>
+                <TableCell align='right'>{row.champ}</TableCell> */}
                 <TableCell align='right'>{row.total}</TableCell>
-                <TableCell align='right'>
-                  <Link href='#'>
-                    <Contained color='primary' size='small'>
-                      View Picks
-                    </Contained>
-                  </Link>
-                </TableCell>
               </TableRow>
             ))}
+            <TableRow key='spacer1'>
+              {/* <TableCell></TableCell> */}
+              <TableCell>...</TableCell>
+              <TableCell align='right'></TableCell>
+              {/* <TableCell align='right'></TableCell>
+                    <TableCell align='right'></TableCell>
+                    <TableCell align='right'></TableCell>
+                    <TableCell align='right'></TableCell>
+                    <TableCell align='right'></TableCell> */}
+              <TableCell align='right'></TableCell>
+            </TableRow>
+            {score && (
+              <>
+                <TableRow key='user-score'>
+                  {/* <TableCell></TableCell> */}
+                  <TableCell>{score.username}</TableCell>
+                  <TableCell align='right'>{score.r64}</TableCell>
+                  {/* <TableCell align='right'></TableCell>
+                    <TableCell align='right'></TableCell>
+                    <TableCell align='right'></TableCell>
+                    <TableCell align='right'></TableCell>
+                    <TableCell align='right'></TableCell> */}
+                  <TableCell align='right'>{score.total}</TableCell>
+                </TableRow>
+              </>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

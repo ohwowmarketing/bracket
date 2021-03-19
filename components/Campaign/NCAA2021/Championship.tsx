@@ -30,9 +30,10 @@ const Championship = () => {
     (state) => state
   )
   const [disabled, setDisabled] = React.useState<boolean>(true)
-  const [user, setUser] = React.useState(null)
   const [loading, setLoading] = React.useState<boolean>(false)
   const [alert, setAlert] = React.useState<boolean>(false)
+  const [user, setUser] = React.useState(null)
+  const [isAdmin, setIsAdmin] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     const fetchUser = async () => {
@@ -45,6 +46,20 @@ const Championship = () => {
     }
     fetchUser()
   }, [])
+
+  React.useEffect(() => {
+    if (user) {
+      if (user.signInUserSession.accessToken.payload['cognito:groups']) {
+        user.signInUserSession.accessToken.payload['cognito:groups'].map(
+          (group) => {
+            if (group === 'Admin') {
+              setIsAdmin(true)
+            }
+          }
+        )
+      }
+    }
+  }, [user])
 
   React.useEffect(() => {
     if (picks.championship) {
@@ -133,7 +148,7 @@ const Championship = () => {
           fullWidth
         />
       </Box>
-      {!locked && (
+      {(!locked || isAdmin) && (
         <>
           {alert && (
             <Box my={2} textAlign='center'>

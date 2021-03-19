@@ -147,11 +147,11 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                         </ListItemIcon>
                         <ListItemText primary='Your Entry' />
                       </ListItem>
-                      {/* <ListItem
+                      <ListItem
                         button
                         key='entry'
                         component={Link}
-                        href='/auth/leaderboard'>
+                        href='/ncaa/leaderboard'>
                         <ListItemIcon>
                           <Icon
                             className='fas fa-trophy fa-xs'
@@ -159,7 +159,7 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                           />
                         </ListItemIcon>
                         <ListItemText primary='Leaderboard' />
-                      </ListItem> */}
+                      </ListItem>
                       <ListItem
                         button
                         key='entry'
@@ -230,12 +230,12 @@ const AppBar = ({ user, handleSignOut }: AppBarProps) => {
                     className={classes.link}>
                     Your Entry
                   </Link>
-                  {/* <Link
+                  <Link
                     variant='button'
                     href='/ncaa/leaderboard'
                     className={classes.link}>
                     Leaderboard
-                  </Link> */}
+                  </Link>
                   <Link
                     variant='button'
                     href='/ncaa/prizes'

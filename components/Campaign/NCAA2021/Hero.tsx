@@ -3,11 +3,9 @@ import clsx from 'clsx'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import MuiLink from '@material-ui/core/Link'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 import Link from '@components/Link'
 import { MD, Box } from '@mui/Layout'
-import { H4, H5, Caption } from '@mui/Typography'
+import { H4, H5 } from '@mui/Typography'
 import { Contained } from '@mui/Button'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -37,7 +35,6 @@ const Hero = () => {
   const classes = useStyles()
   const theme = useTheme()
   const verticalPromos = useMediaQuery(theme.breakpoints.up('md'))
-  const [isChecked, setIsChecked] = React.useState<boolean>(false)
 
   return (
     <MD component='main' className={classes.hero}>
