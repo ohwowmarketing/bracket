@@ -128,6 +128,6 @@ export const results: ResultsProps = {
   'd-6-11-3-14-7-10-2-15': null,
   'd-7-10': 'd7',
   'd-7-10-2-15': null,
-  'd-8-9': null,
+  'd-8-9': 'd9',
   tieBreaker: '0'
 }
