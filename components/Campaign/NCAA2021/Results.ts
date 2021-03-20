@@ -121,7 +121,7 @@ export const results: ResultsProps = {
   'd-2-15': 'd15',
   'd-3-14': 'd3',
   'd-4-13': 'd13',
-  'd-5-12': null,
+  'd-5-12': 'd5',
   'd-5-12-4-13': null,
   'd-6-11': 'd6',
   'd-6-11-3-14': null,
