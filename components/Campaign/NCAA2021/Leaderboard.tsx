@@ -1,4 +1,3 @@
-import Link from '@components/Link'
 import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 // import { listScores } from 'src/graphql/queries'
@@ -10,12 +9,10 @@ import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-
-import { Contained } from '@mui/Button'
 import { LG } from '@mui/Layout'
 import { H3, H4, P } from '@mui/Typography'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     margin: theme.spacing(1),
     border: `1px solid ${theme.palette.primary.main}`
@@ -34,13 +31,7 @@ export interface LeaderProps {
   total?: string
 }
 
-const Leaderboard = ({
-  leaders,
-  score
-}: {
-  leaders: LeaderProps[]
-  score?: LeaderProps
-}) => {
+const Leaderboard = ({ leaders, score }: { leaders: LeaderProps[]; score?: LeaderProps }) => {
   const classes = useStyles()
 
   return (
@@ -57,8 +48,8 @@ const Leaderboard = ({
               {/* <TableCell>Rank</TableCell> */}
               <TableCell>Username</TableCell>
               <TableCell align='right'>R64</TableCell>
-              {/* <TableCell align='right'>R32</TableCell>
-              <TableCell align='right'>S16</TableCell>
+              <TableCell align='right'>R32</TableCell>
+              {/*<TableCell align='right'>S16</TableCell>
               <TableCell align='right'>E8</TableCell>
               <TableCell align='right'>F4</TableCell>
               <TableCell align='right'>NCG</TableCell> */}
@@ -66,7 +57,7 @@ const Leaderboard = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {leaders.map((row) => (
+            {leaders.map(row => (
               <TableRow key={row.username}>
                 {/* <TableCell>{index + 1}</TableCell> */}
                 <TableCell>
@@ -77,8 +68,8 @@ const Leaderboard = ({
                   {')'} */}
                 </TableCell>
                 <TableCell align='right'>{row.r64}</TableCell>
-                {/* <TableCell align='right'>{row.r32}</TableCell>
-                <TableCell align='right'>{row.s16}</TableCell>
+                <TableCell align='right'>{row.r32}</TableCell>
+                {/* <TableCell align='right'>{row.s16}</TableCell>
                 <TableCell align='right'>{row.e8}</TableCell>
                 <TableCell align='right'>{row.f4}</TableCell>
                 <TableCell align='right'>{row.champ}</TableCell> */}
@@ -89,11 +80,11 @@ const Leaderboard = ({
               {/* <TableCell></TableCell> */}
               <TableCell>...</TableCell>
               <TableCell align='right'></TableCell>
+              <TableCell align='right'></TableCell>
               {/* <TableCell align='right'></TableCell>
-                    <TableCell align='right'></TableCell>
-                    <TableCell align='right'></TableCell>
-                    <TableCell align='right'></TableCell>
-                    <TableCell align='right'></TableCell> */}
+              <TableCell align='right'></TableCell>
+              <TableCell align='right'></TableCell>
+              <TableCell align='right'></TableCell> */}
               <TableCell align='right'></TableCell>
             </TableRow>
             {score && (
@@ -102,8 +93,8 @@ const Leaderboard = ({
                   {/* <TableCell></TableCell> */}
                   <TableCell>{score.username}</TableCell>
                   <TableCell align='right'>{score.r64}</TableCell>
+                  <TableCell align='right'>{score.r32}</TableCell>
                   {/* <TableCell align='right'></TableCell>
-                    <TableCell align='right'></TableCell>
                     <TableCell align='right'></TableCell>
                     <TableCell align='right'></TableCell>
                     <TableCell align='right'></TableCell> */}
