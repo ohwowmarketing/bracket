@@ -1,15 +1,16 @@
-import * as React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import clsx from 'clsx'
-import { makeStyles, Theme } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup'
+import { makeStyles, Theme } from '@material-ui/core/styles'
+import clsx from 'clsx'
+import * as React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { StateProps } from '../../../store'
 import Championship from './Championship'
 import Radio from './Radio'
-import { getGroupSeedById, SeedProps } from './Seeds'
 import { results } from './Results'
+import { getGroupSeedById, SeedProps } from './Seeds'
 
 const useStyles = makeStyles((theme: Theme) => ({
   formControl: {
@@ -93,7 +94,7 @@ interface GameProps {
 const Game = ({ id, round, home, away }: GameProps) => {
   const classes = useStyles()
   const dispatch = useDispatch()
-  const { picks, locked } = useSelector((state) => state)
+  const { picks, locked } = useSelector((state: StateProps) => state)
 
   const [selection, setSelection] = React.useState<string>('')
   const [homeTeam, setHomeTeam] = React.useState<SeedProps | null>(null)
@@ -154,10 +155,8 @@ const Game = ({ id, round, home, away }: GameProps) => {
       <Box
         className={clsx(classes.paper, {
           [classes.gold]: !locked || results[id] === null,
-          [classes.correctPick]:
-            locked && results[id] && results[id] === selection,
-          [classes.incorrectPick]:
-            locked && results[id] && results[id] !== selection
+          [classes.correctPick]: locked && results[id] && results[id] === selection,
+          [classes.incorrectPick]: locked && results[id] && results[id] !== selection
         })}>
         <FormControl component='fieldset' className={classes.formControl}>
           <FormLabel component='legend' className={classes.legend}>
