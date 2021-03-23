@@ -1,8 +1,23 @@
 import { useMemo } from 'react'
-import { createStore, applyMiddleware } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 let store
+
+export interface StateProps {
+  locked: boolean
+  results: any
+  bracketId: string
+  version: number
+  picks: any
+  tieBreaker: number
+  first: number
+  second: number
+  sweet16: number
+  elite8: number
+  final4: number
+  championship: number
+}
 
 const initialState = {
   locked: true,
@@ -66,14 +81,10 @@ const reducer = (state = initialState, action) => {
 }
 
 function initStore(preloadedState = initialState) {
-  return createStore(
-    reducer,
-    preloadedState,
-    composeWithDevTools(applyMiddleware())
-  )
+  return createStore(reducer, preloadedState, composeWithDevTools(applyMiddleware()))
 }
 
-export const initializeStore = (preloadedState) => {
+export const initializeStore = preloadedState => {
   let _store = store ?? initStore(preloadedState)
 
   // After navigating to a page with an initial Redux state, merge that state

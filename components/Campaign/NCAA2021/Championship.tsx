@@ -1,17 +1,18 @@
-import * as React from 'react'
-import axios from 'axios'
-import { API, Auth } from 'aws-amplify'
 import { GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
-import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
+import Link from '@components/Link'
 import Box from '@material-ui/core/Box'
-import TextField from '@material-ui/core/TextField'
-import FormLabel from '@material-ui/core/FormLabel'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import FormLabel from '@material-ui/core/FormLabel'
+import { makeStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
 import Alert from '@material-ui/lab/Alert'
 import { Contained } from '@mui/Button'
-import Link from '@components/Link'
+import { API, Auth } from 'aws-amplify'
+import axios from 'axios'
+import * as React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { createBracket, updateBracket } from 'src/graphql/mutations'
+import { StateProps } from '../../../store'
 
 const useStyles = makeStyles(() => ({
   totalScore: {
@@ -27,7 +28,7 @@ const Championship = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const { bracketId, picks, tieBreaker, version, locked } = useSelector(
-    (state) => state
+    (state: StateProps) => state
   )
   const [disabled, setDisabled] = React.useState<boolean>(true)
   const [loading, setLoading] = React.useState<boolean>(false)
@@ -50,13 +51,11 @@ const Championship = () => {
   React.useEffect(() => {
     if (user) {
       if (user.signInUserSession.accessToken.payload['cognito:groups']) {
-        user.signInUserSession.accessToken.payload['cognito:groups'].map(
-          (group) => {
-            if (group === 'Admin') {
-              setIsAdmin(true)
-            }
+        user.signInUserSession.accessToken.payload['cognito:groups'].map(group => {
+          if (group === 'Admin') {
+            setIsAdmin(true)
           }
-        )
+        })
       }
     }
   }, [user])
