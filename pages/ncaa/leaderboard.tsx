@@ -1,5 +1,3 @@
-import { withSSRContext } from 'aws-amplify'
-import { NextApiRequest } from 'next'
 import Layout from '@components/Layout/AuthRequired'
 import Leaderboard, {
   LeaderProps
@@ -7,16 +5,10 @@ import Leaderboard, {
 import { picks } from '@components/Campaign/NCAA2021/Picks'
 import { getScore } from '@components/Campaign/NCAA2021/Score'
 
-const Page = ({
-  leaders,
-  score
-}: {
-  leaders: LeaderProps[]
-  score?: LeaderProps
-}) => {
+const Page = ({ leaders }: { leaders: LeaderProps[] }) => {
   return (
     <Layout>
-      <Leaderboard leaders={leaders} score={score} />
+      <Leaderboard leaders={leaders} />
     </Layout>
   )
 }
