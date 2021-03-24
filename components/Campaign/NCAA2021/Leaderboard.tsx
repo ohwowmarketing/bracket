@@ -1,3 +1,5 @@
+import * as React from 'react'
+import { Auth } from 'aws-amplify'
 import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 // import { listScores } from 'src/graphql/queries'
@@ -11,8 +13,11 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import { LG } from '@mui/Layout'
 import { H3, H4, P } from '@mui/Typography'
+import Link from '@components/Link'
+import { picks } from '@components/Campaign/NCAA2021/Picks'
+import { getScore } from '@components/Campaign/NCAA2021/Score'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(1),
     border: `1px solid ${theme.palette.primary.main}`
@@ -31,8 +36,36 @@ export interface LeaderProps {
   total?: string
 }
 
-const Leaderboard = ({ leaders, score }: { leaders: LeaderProps[]; score?: LeaderProps }) => {
+const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
   const classes = useStyles()
+  const [user, setUser] = React.useState<any>(null)
+  const [userScore, setUserScore] = React.useState<any>(null)
+
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userData = await Auth.currentAuthenticatedUser()
+        setUser(userData)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    fetchUser()
+  }, [])
+
+  React.useEffect(() => {
+    const getPicks = () => {
+      const userPicks = picks.find((pick) => pick.username === user.username)
+      if (userPicks) {
+        const tempScore = getScore(userPicks)
+        setUserScore(tempScore)
+      }
+    }
+
+    if (user) {
+      getPicks()
+    }
+  }, [user])
 
   return (
     <LG>
@@ -57,15 +90,17 @@ const Leaderboard = ({ leaders, score }: { leaders: LeaderProps[]; score?: Leade
             </TableRow>
           </TableHead>
           <TableBody>
-            {leaders.map(row => (
+            {leaders.map((row) => (
               <TableRow key={row.username}>
                 {/* <TableCell>{index + 1}</TableCell> */}
                 <TableCell>
-                  {row.username}
-                  {/* {`${row.username} (`}
+                  {/* {row.username} */}
+                  {`${row.username} (`}
 
-                  <Link href='#'>View Picks</Link>
-                  {')'} */}
+                  <Link href={`/ncaa/leaderboard/${row.username}`}>
+                    View Picks
+                  </Link>
+                  {')'}
                 </TableCell>
                 <TableCell align='right'>{row.r64}</TableCell>
                 <TableCell align='right'>{row.r32}</TableCell>
@@ -87,18 +122,18 @@ const Leaderboard = ({ leaders, score }: { leaders: LeaderProps[]; score?: Leade
               <TableCell align='right'></TableCell> */}
               <TableCell align='right'></TableCell>
             </TableRow>
-            {score && (
+            {userScore && (
               <>
                 <TableRow key='user-score'>
                   {/* <TableCell></TableCell> */}
-                  <TableCell>{score.username}</TableCell>
-                  <TableCell align='right'>{score.r64}</TableCell>
-                  <TableCell align='right'>{score.r32}</TableCell>
-                  {/* <TableCell align='right'></TableCell>
-                    <TableCell align='right'></TableCell>
-                    <TableCell align='right'></TableCell>
-                    <TableCell align='right'></TableCell> */}
-                  <TableCell align='right'>{score.total}</TableCell>
+                  <TableCell>{userScore.username}</TableCell>
+                  <TableCell align='right'>{userScore.r64}</TableCell>
+                  <TableCell align='right'>{userScore.r32}</TableCell>
+                  {/* <TableCell align='right'>{userScore.s16}</TableCell>
+                    <TableCell align='right'>{userScore.e8}</TableCell>
+                    <TableCell align='right'>{userScore.f4}</TableCell>
+                    <TableCell align='right'>{userScore.champ}</TableCell> */}
+                  <TableCell align='right'>{userScore.total}</TableCell>
                 </TableRow>
               </>
             )}
