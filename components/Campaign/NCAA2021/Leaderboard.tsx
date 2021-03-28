@@ -82,8 +82,8 @@ const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
               <TableCell>Username</TableCell>
               <TableCell align='right'>R64</TableCell>
               <TableCell align='right'>R32</TableCell>
-              {/*<TableCell align='right'>S16</TableCell>
-              <TableCell align='right'>E8</TableCell>
+              <TableCell align='right'>S16</TableCell>
+              {/*<TableCell align='right'>E8</TableCell>
               <TableCell align='right'>F4</TableCell>
               <TableCell align='right'>NCG</TableCell> */}
               <TableCell align='right'>Total</TableCell>
@@ -104,8 +104,8 @@ const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
                 </TableCell>
                 <TableCell align='right'>{row.r64}</TableCell>
                 <TableCell align='right'>{row.r32}</TableCell>
-                {/* <TableCell align='right'>{row.s16}</TableCell>
-                <TableCell align='right'>{row.e8}</TableCell>
+                <TableCell align='right'>{row.s16}</TableCell>
+                {/* <TableCell align='right'>{row.e8}</TableCell>
                 <TableCell align='right'>{row.f4}</TableCell>
                 <TableCell align='right'>{row.champ}</TableCell> */}
                 <TableCell align='right'>{row.total}</TableCell>
@@ -116,8 +116,8 @@ const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
               <TableCell>...</TableCell>
               <TableCell align='right'></TableCell>
               <TableCell align='right'></TableCell>
-              {/* <TableCell align='right'></TableCell>
               <TableCell align='right'></TableCell>
+              {/* <TableCell align='right'></TableCell>
               <TableCell align='right'></TableCell>
               <TableCell align='right'></TableCell> */}
               <TableCell align='right'></TableCell>
@@ -129,8 +129,8 @@ const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
                   <TableCell>{userScore.username}</TableCell>
                   <TableCell align='right'>{userScore.r64}</TableCell>
                   <TableCell align='right'>{userScore.r32}</TableCell>
-                  {/* <TableCell align='right'>{userScore.s16}</TableCell>
-                    <TableCell align='right'>{userScore.e8}</TableCell>
+                  <TableCell align='right'>{userScore.s16}</TableCell>
+                  {/* <TableCell align='right'>{userScore.e8}</TableCell>
                     <TableCell align='right'>{userScore.f4}</TableCell>
                     <TableCell align='right'>{userScore.champ}</TableCell> */}
                   <TableCell align='right'>{userScore.total}</TableCell>

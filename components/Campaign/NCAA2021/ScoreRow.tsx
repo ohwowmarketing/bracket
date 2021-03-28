@@ -40,8 +40,8 @@ const ScoreRow = ({ score }: { score?: ScoreProps }) => {
               <TableCell>Username</TableCell>
               <TableCell align='right'>R64</TableCell>
               <TableCell align='right'>R32</TableCell>
-              {/*<TableCell align='right'>S16</TableCell>
-              <TableCell align='right'>E8</TableCell>
+              <TableCell align='right'>S16</TableCell>
+              {/*<TableCell align='right'>E8</TableCell>
               <TableCell align='right'>F4</TableCell>
               <TableCell align='right'>NCG</TableCell> */}
               <TableCell align='right'>Total</TableCell>
@@ -55,8 +55,8 @@ const ScoreRow = ({ score }: { score?: ScoreProps }) => {
                   <TableCell>{score.username}</TableCell>
                   <TableCell align='right'>{score.r64}</TableCell>
                   <TableCell align='right'>{score.r32}</TableCell>
+                  <TableCell align='right'>{score.s16}</TableCell>
                   {/* <TableCell align='right'></TableCell>
-                    <TableCell align='right'></TableCell>
                     <TableCell align='right'></TableCell>
                     <TableCell align='right'></TableCell> */}
                   <TableCell align='right'>{score.total}</TableCell>
