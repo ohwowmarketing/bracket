@@ -1,5 +1,6 @@
-import * as React from 'react'
-import { Auth } from 'aws-amplify'
+import { picks } from '@components/Campaign/NCAA2021/Picks'
+import { getScore } from '@components/Campaign/NCAA2021/Score'
+import Link from '@components/Link'
 import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 // import { listScores } from 'src/graphql/queries'
@@ -13,11 +14,10 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import { LG } from '@mui/Layout'
 import { H3, H4, P } from '@mui/Typography'
-import Link from '@components/Link'
-import { picks } from '@components/Campaign/NCAA2021/Picks'
-import { getScore } from '@components/Campaign/NCAA2021/Score'
+import { Auth } from 'aws-amplify'
+import * as React from 'react'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     margin: theme.spacing(1),
     border: `1px solid ${theme.palette.primary.main}`
@@ -55,7 +55,7 @@ const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
 
   React.useEffect(() => {
     const getPicks = () => {
-      const userPicks = picks.find((pick) => pick.username === user.username)
+      const userPicks = picks.find(pick => pick.username === user.username)
       if (userPicks) {
         const tempScore = getScore(userPicks)
         setUserScore(tempScore)
@@ -84,30 +84,28 @@ const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
               <TableCell align='right'>R32</TableCell>
               <TableCell align='right'>S16</TableCell>
               <TableCell align='right'>E8</TableCell>
-              {/*<TableCell align='right'>F4</TableCell>
-              <TableCell align='right'>NCG</TableCell> */}
+              <TableCell align='right'>F4</TableCell>
+              {/*<TableCell align='right'>NCG</TableCell> */}
               <TableCell align='right'>Total</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {leaders.map((row) => (
+            {leaders.map(row => (
               <TableRow key={row.username}>
                 {/* <TableCell>{index + 1}</TableCell> */}
                 <TableCell>
                   {/* {row.username} */}
                   {`${row.username} (`}
 
-                  <Link href={`/ncaa/leaderboard/${row.username}`}>
-                    View Picks
-                  </Link>
+                  <Link href={`/ncaa/leaderboard/${row.username}`}>View Picks</Link>
                   {')'}
                 </TableCell>
                 <TableCell align='right'>{row.r64}</TableCell>
                 <TableCell align='right'>{row.r32}</TableCell>
                 <TableCell align='right'>{row.s16}</TableCell>
                 <TableCell align='right'>{row.e8}</TableCell>
-                {/* <TableCell align='right'>{row.f4}</TableCell>
-                <TableCell align='right'>{row.champ}</TableCell> */}
+                <TableCell align='right'>{row.f4}</TableCell>
+                {/* <TableCell align='right'>{row.champ}</TableCell> */}
                 <TableCell align='right'>{row.total}</TableCell>
               </TableRow>
             ))}
@@ -118,8 +116,8 @@ const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
               <TableCell align='right'></TableCell>
               <TableCell align='right'></TableCell>
               <TableCell align='right'></TableCell>
-              {/* <TableCell align='right'></TableCell>
-              <TableCell align='right'></TableCell> */}
+              <TableCell align='right'></TableCell>
+              {/* <TableCell align='right'></TableCell> */}
               <TableCell align='right'></TableCell>
             </TableRow>
             {userScore && (
@@ -131,8 +129,8 @@ const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
                   <TableCell align='right'>{userScore.r32}</TableCell>
                   <TableCell align='right'>{userScore.s16}</TableCell>
                   <TableCell align='right'>{userScore.e8}</TableCell>
-                  {/* <TableCell align='right'>{userScore.f4}</TableCell>
-                    <TableCell align='right'>{userScore.champ}</TableCell> */}
+                  <TableCell align='right'>{userScore.f4}</TableCell>
+                  {/* <TableCell align='right'>{userScore.champ}</TableCell> */}
                   <TableCell align='right'>{userScore.total}</TableCell>
                 </TableRow>
               </>

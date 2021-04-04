@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import { LG } from '@mui/Layout'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     margin: theme.spacing(1),
     border: `1px solid ${theme.palette.primary.main}`
@@ -42,8 +42,8 @@ const ScoreRow = ({ score }: { score?: ScoreProps }) => {
               <TableCell align='right'>R32</TableCell>
               <TableCell align='right'>S16</TableCell>
               <TableCell align='right'>E8</TableCell>
-              {/*<TableCell align='right'>F4</TableCell>
-              <TableCell align='right'>NCG</TableCell> */}
+              <TableCell align='right'>F4</TableCell>
+              {/*<TableCell align='right'>NCG</TableCell> */}
               <TableCell align='right'>Total</TableCell>
             </TableRow>
           </TableHead>
@@ -57,8 +57,8 @@ const ScoreRow = ({ score }: { score?: ScoreProps }) => {
                   <TableCell align='right'>{score.r32}</TableCell>
                   <TableCell align='right'>{score.s16}</TableCell>
                   <TableCell align='right'>{score.e8}</TableCell>
-                  {/* <TableCell align='right'>{score.f4}</TableCell>
-                    <TableCell align='right'>{score.champ}</TableCell> */}
+                  <TableCell align='right'>{score.f4}</TableCell>
+                  {/* <TableCell align='right'>{score.champ}</TableCell> */}
                   <TableCell align='right'>{score.total}</TableCell>
                 </TableRow>
               </>
