@@ -113,7 +113,7 @@ export const results: ResultsProps = {
   'c-7-10-2-15': 'c2',
   'c-8-9': 'c8',
   'c-d': 'd1',
-  championship: null,
+  championship: 'd1',
   'd-1-16': 'd1',
   'd-1-16-8-9': 'd1',
   'd-1-16-8-9-5-12-4-13': 'd1',

@@ -78,21 +78,22 @@ const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
         <Table aria-label='Leaderboard'>
           <TableHead>
             <TableRow>
-              {/* <TableCell>Rank</TableCell> */}
+              <TableCell>#</TableCell>
               <TableCell>Username</TableCell>
               <TableCell align='right'>R64</TableCell>
               <TableCell align='right'>R32</TableCell>
               <TableCell align='right'>S16</TableCell>
               <TableCell align='right'>E8</TableCell>
               <TableCell align='right'>F4</TableCell>
-              {/*<TableCell align='right'>NCG</TableCell> */}
+              <TableCell align='right'>NCG</TableCell>
               <TableCell align='right'>Total</TableCell>
+              {/* <TableCell align='right'>Tie Breaker</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
-            {leaders.map(row => (
+            {leaders.map((row, index) => (
               <TableRow key={row.username}>
-                {/* <TableCell>{index + 1}</TableCell> */}
+                <TableCell>{index + 1}</TableCell>
                 <TableCell>
                   {/* {row.username} */}
                   {`${row.username} (`}
@@ -105,33 +106,35 @@ const Leaderboard = ({ leaders }: { leaders: LeaderProps[] }) => {
                 <TableCell align='right'>{row.s16}</TableCell>
                 <TableCell align='right'>{row.e8}</TableCell>
                 <TableCell align='right'>{row.f4}</TableCell>
-                {/* <TableCell align='right'>{row.champ}</TableCell> */}
+                <TableCell align='right'>{row.champ}</TableCell>
                 <TableCell align='right'>{row.total}</TableCell>
+                {/* <TableCell align='right'>{row.tiebreaker}</TableCell> */}
               </TableRow>
             ))}
             <TableRow key='spacer1'>
-              {/* <TableCell></TableCell> */}
+              <TableCell></TableCell>
               <TableCell>...</TableCell>
               <TableCell align='right'></TableCell>
               <TableCell align='right'></TableCell>
               <TableCell align='right'></TableCell>
               <TableCell align='right'></TableCell>
               <TableCell align='right'></TableCell>
-              {/* <TableCell align='right'></TableCell> */}
               <TableCell align='right'></TableCell>
+              {/* <TableCell align='right'></TableCell> */}
             </TableRow>
             {userScore && (
               <>
                 <TableRow key='user-score'>
-                  {/* <TableCell></TableCell> */}
+                  <TableCell></TableCell>
                   <TableCell>{userScore.username}</TableCell>
                   <TableCell align='right'>{userScore.r64}</TableCell>
                   <TableCell align='right'>{userScore.r32}</TableCell>
                   <TableCell align='right'>{userScore.s16}</TableCell>
                   <TableCell align='right'>{userScore.e8}</TableCell>
                   <TableCell align='right'>{userScore.f4}</TableCell>
-                  {/* <TableCell align='right'>{userScore.champ}</TableCell> */}
+                  <TableCell align='right'>{userScore.champ}</TableCell>
                   <TableCell align='right'>{userScore.total}</TableCell>
+                  {/* <TableCell align='right'>{userScore.tiebreaker}</TableCell> */}
                 </TableRow>
               </>
             )}

@@ -43,7 +43,7 @@ const ScoreRow = ({ score }: { score?: ScoreProps }) => {
               <TableCell align='right'>S16</TableCell>
               <TableCell align='right'>E8</TableCell>
               <TableCell align='right'>F4</TableCell>
-              {/*<TableCell align='right'>NCG</TableCell> */}
+              <TableCell align='right'>NCG</TableCell>
               <TableCell align='right'>Total</TableCell>
             </TableRow>
           </TableHead>
@@ -58,7 +58,7 @@ const ScoreRow = ({ score }: { score?: ScoreProps }) => {
                   <TableCell align='right'>{score.s16}</TableCell>
                   <TableCell align='right'>{score.e8}</TableCell>
                   <TableCell align='right'>{score.f4}</TableCell>
-                  {/* <TableCell align='right'>{score.champ}</TableCell> */}
+                  <TableCell align='right'>{score.champ}</TableCell>
                   <TableCell align='right'>{score.total}</TableCell>
                 </TableRow>
               </>
